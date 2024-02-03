@@ -2,12 +2,16 @@
 @import "../../styles/animations";
 
 .main-brand-art {
-  position: relative;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 96px;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
-  margin-bottom: 20px;
 
   .logo-canvas-container {
     position: relative;
