@@ -1,0 +1,16 @@
+@import "../../../styles/colors";
+
+.tam-text {
+  font-family: "SigmundPro-Ultralight";
+  position: absolute;
+  font-size: 38px;
+  color: $cream-white;
+  width: 750px;
+  margin-left: 25%;
+  margin-top: 114px;
+  transform-origin: 27px 27px;
+
+  .highlighted {
+    font-family: "SigmundPro-SemiBold";
+  }
+}

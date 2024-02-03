@@ -1,0 +1,23 @@
+@import "../../styles/colors";
+@import "../../styles/animations";
+
+.spinner-container {
+  $spinner-size: 12px;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .spinner {
+    width: $spinner-size;
+    height: $spinner-size;
+    background-color: $dark-grey;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+}

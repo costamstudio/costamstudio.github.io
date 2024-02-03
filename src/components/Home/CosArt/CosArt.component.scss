@@ -1,0 +1,31 @@
+.cos-art {
+  $cos-height: 630px;
+
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .cos-one,
+  .cos-two,
+  .cos-three {
+    height: $cos-height;
+    background-size: contain;
+  }
+
+
+  .cos-one {
+    width: 425px;
+    background-image: url("/assets/images/cos-art-1.png");
+  }
+
+  .cos-two {
+    width: 370px;
+    background-image: url("/assets/images/cos-art-2.png");
+  }
+
+  .cos-three {
+    width: 455px;
+    background-image: url("/assets/images/cos-art-3.png");
+  }
+}

@@ -1,0 +1,20 @@
+@import "../../../styles/colors";
+
+.cos-text {
+  font-family: "SigmundPro-Ultralight";
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 38px;
+  color: $cream-white;
+  margin-right: 10%;
+
+  .line-container {
+    overflow: hidden;
+  }
+
+  .highlighted {
+    font-family: "SigmundPro-SemiBold";
+  }
+}

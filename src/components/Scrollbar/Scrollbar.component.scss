@@ -1,0 +1,24 @@
+@import "../../styles/colors";
+@import "../../styles/animations";
+@import "../../styles/z-indexes";
+
+
+.scrollbar-container {
+  animation: fadein 1s forwards;
+  opacity: 0;
+  animation-delay: 2s;
+
+  .scrollbar {
+    $scrollbar-size: 22px;
+
+    width: $scrollbar-size;
+    height: $scrollbar-size;
+    background-color: $lite-grey;
+    position: fixed;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    transition: top 0.3s ease-out;
+    z-index: $scroll-z-index;
+  }
+}

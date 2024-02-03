@@ -1,0 +1,12 @@
+@import "../../../styles/colors";
+
+.tam-art {
+  position: absolute;
+  width: 1243px;
+  height: 521px;
+  margin-top: 96px;
+  background-image: url("/assets/images/tam-art.png");
+  background-size: contain;
+  image-rendering: pixelated;
+  transform-origin: 480px 180px;
+}

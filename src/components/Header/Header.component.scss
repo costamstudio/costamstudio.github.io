@@ -1,0 +1,48 @@
+@import "../../styles/colors";
+@import "../../styles/animations";
+@import "../../styles/z-indexes";
+
+.header {
+  $header-height: 80px;
+  $logo-width: 81px;
+  $logo-height: 61px;
+  $border: 2px solid $cream-white;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: $header-height;
+  border-top: $border;
+  border-bottom: $border;
+  padding-left: 60px;
+  animation: fadein 1s forwards;
+  opacity: 0;
+  animation-delay: 2s;
+  z-index: $header-z-index;
+  mix-blend-mode: difference;
+
+  .logo {
+    width: $logo-width;
+    height: $logo-height;
+    background-image: url("/assets/images/logo.png");
+  }
+
+  .menu-items {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 70px;
+    border-left: 2px solid $cream-white;
+    color: $cream-white;
+    font-family: "Inter";
+    font-size: 24px;
+  }
+}

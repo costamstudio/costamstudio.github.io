@@ -1,0 +1,19 @@
+@import "../../../styles/colors";
+
+.about-text {
+  position: absolute;
+  color: $dark-grey;
+  width: 460px;
+  right: 60px;
+  top: 220px;
+
+  .about-title {
+    font-family: "SigmundPro-SemiBold";
+    font-size: 38px;
+  }
+
+  .about-value {
+    font-family: "SigmundPro-Ultralight";
+    font-size: 24px;
+  }
+}

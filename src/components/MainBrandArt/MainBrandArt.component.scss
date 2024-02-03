@@ -1,0 +1,34 @@
+@import "src/styles/colors";
+@import "../../styles/animations";
+
+.main-brand-art {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 20px;
+
+  .logo-canvas-container {
+    position: relative;
+    padding-bottom: 40px;
+
+    .logo-canvas {
+      animation: fadein 1s forwards;
+      cursor: none;
+    }
+
+    .logo-canvas-postfix {
+      position: absolute;
+      bottom: 0;
+      right: 54px;
+      color: $cream-white;
+      font-family: "Syne";
+      font-size: 85px;
+      font-weight: bold;
+      animation: fadein 1s forwards;
+      opacity: 0;
+      animation-delay: 1s;
+    }
+  }
+}

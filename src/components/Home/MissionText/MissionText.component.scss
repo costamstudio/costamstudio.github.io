@@ -1,0 +1,19 @@
+@import "../../../styles/colors";
+
+.mission-text {
+  position: absolute;
+  color: $dark-grey;
+  width: 455px;
+  left: 60px;
+  bottom: 180px;
+
+  .mission-title {
+    font-family: "SigmundPro-SemiBold";
+    font-size: 38px;
+  }
+
+  .mission-value {
+    font-family: "SigmundPro-Ultralight";
+    font-size: 24px;
+  }
+}
