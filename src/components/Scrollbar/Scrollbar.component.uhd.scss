@@ -1,0 +1,12 @@
+@import "../../styles/mixins";
+
+@include uhd {
+  .scrollbar-container {
+    .scrollbar {
+      $scrollbar-size: 42px;
+
+      width: $scrollbar-size;
+      height: $scrollbar-size;
+    }
+  }
+}

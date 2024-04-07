@@ -2,8 +2,9 @@ import * as React from "react";
 import { animated, useSpring } from "react-spring";
 import { useEffect, useMemo, useState } from "react";
 
-import { SCROLL_SIZE } from "./constants";
+import { SCROLL_SIZE_FHD, SCROLL_SIZE_HD, SCROLL_SIZE_UHD } from "./constants";
 import { MAX_SCROLL_POSITION } from "../../constants/common";
+import { useResponsiveVariable } from "../../hooks/useResponsiveVariable";
 
 import "./Scrollbar.component.scss";
 
@@ -14,10 +15,12 @@ interface Props {
 }
 
 export const Scrollbar = ({ scrollPosition, appHeight, onScrollBarRendered }: Props) => {
+    const scrollSize = useResponsiveVariable(SCROLL_SIZE_HD, SCROLL_SIZE_FHD, SCROLL_SIZE_UHD);
+
     const [opacity, setOpacity] = useState(1);
 
     const top = useMemo(() => {
-        return ((appHeight - SCROLL_SIZE) / 100) * (scrollPosition / MAX_SCROLL_POSITION * 100);
+        return ((appHeight - scrollSize) / 100) * (scrollPosition / MAX_SCROLL_POSITION * 100);
     }, [appHeight, scrollPosition]);
 
     const styles = useSpring({

@@ -3,10 +3,19 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useIntl } from "react-intl";
 import { animated, useSpring } from "react-spring";
 
-import { BRUSH_RADIUS, CANVAS_HEIGHT, CANVAS_WIDTH } from "./constants";
+import {
+    BRUSH_RADIUS_FULL_HD,
+    BRUSH_RADIUS_HD, BRUSH_RADIUS_ULTRA_HD,
+    CANVAS_HEIGHT_FULL_HD, CANVAS_HEIGHT_HD,
+    CANVAS_HEIGHT_ULTRA_HD,
+    CANVAS_WIDTH_FULL_HD,
+    CANVAS_WIDTH_HD,
+    CANVAS_WIDTH_ULTRA_HD,
+} from "./constants";
 import { getRandomNumberInRange } from "../../utils/common";
 import { useScrollState } from "../../hooks/useScrollState";
 import { SectionIds } from "../../types/section-ids.enum";
+import { useResponsiveVariable } from "../../hooks/useResponsiveVariable";
 
 import "./MainBrandArt.component.scss";
 
@@ -16,6 +25,10 @@ interface Props {
 }
 
 export const MainBrandArt = ({ logoImages, scrollPosition }: Props) => {
+    const brashRadius = useResponsiveVariable(BRUSH_RADIUS_HD, BRUSH_RADIUS_FULL_HD, BRUSH_RADIUS_ULTRA_HD);
+    const canvasWidth = useResponsiveVariable(CANVAS_WIDTH_HD, CANVAS_WIDTH_FULL_HD, CANVAS_WIDTH_ULTRA_HD);
+    const canvasHeight = useResponsiveVariable(CANVAS_HEIGHT_HD, CANVAS_HEIGHT_FULL_HD, CANVAS_HEIGHT_ULTRA_HD);
+
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -54,8 +67,8 @@ export const MainBrandArt = ({ logoImages, scrollPosition }: Props) => {
             const y = event.clientY - canvasRect.top;
             canvasContext.fillStyle = fillStylePattern;
             canvasContext.beginPath();
-            canvasContext.moveTo(x + BRUSH_RADIUS, y);
-            canvasContext.arc(x, y, BRUSH_RADIUS, 0, 2 * Math.PI);
+            canvasContext.moveTo(x + brashRadius, y);
+            canvasContext.arc(x, y, brashRadius, 0, 2 * Math.PI);
             canvasContext.fill();
         }
     }, [canvas, canvasContext, fillStylePattern]);
@@ -64,9 +77,9 @@ export const MainBrandArt = ({ logoImages, scrollPosition }: Props) => {
         if (logoImages.length && canvasContext) {
             const imageIndex = getRandomNumberInRange(0, logoImages.length - 1, currentImageIndex);
             const pattern = document.createElement('canvas');
-            pattern.width = CANVAS_WIDTH;
-            pattern.height = CANVAS_HEIGHT;
-            pattern.getContext('2d')?.drawImage(logoImages[imageIndex], 0,0, CANVAS_WIDTH, CANVAS_HEIGHT);
+            pattern.width = canvasWidth;
+            pattern.height = canvasHeight;
+            pattern.getContext('2d')?.drawImage(logoImages[imageIndex], 0,0, canvasWidth, canvasHeight);
             setFillStylePattern(canvasContext.createPattern(pattern, "no-repeat"));
             setBrushImageIndex(imageIndex);
         }
@@ -84,7 +97,7 @@ export const MainBrandArt = ({ logoImages, scrollPosition }: Props) => {
     useEffect(() => {
         if (canvasContext && logoImages.length) {
             const backgroundLogoIndex = getRandomNumberInRange(0, logoImages.length - 1);
-            canvasContext.drawImage(logoImages[backgroundLogoIndex], 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+            canvasContext.drawImage(logoImages[backgroundLogoIndex], 0, 0, canvasWidth, canvasHeight);
             updateFillStylePattern(backgroundLogoIndex);
         }
     }, [canvasContext, logoImages.length]);
@@ -99,8 +112,8 @@ export const MainBrandArt = ({ logoImages, scrollPosition }: Props) => {
                 <canvas
                     ref={canvasRef}
                     className="logo-canvas"
-                    width={CANVAS_WIDTH}
-                    height={CANVAS_HEIGHT}
+                    width={canvasWidth}
+                    height={canvasHeight}
                     onMouseMove={onMouseMove}
                     onMouseLeave={onMouseLeave}
                 />

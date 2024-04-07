@@ -4,11 +4,12 @@ import { animated, useSpring } from "react-spring";
 import { FormattedMessage, useIntl } from "react-intl";
 
 import { useScrollState } from "../../../hooks/useScrollState";
-import { SCROLL_SIZE } from "../../Scrollbar/constants";
 import { SectionIds } from "../../../types/section-ids.enum";
 import { MAX_SCROLL_POSITION } from "../../../constants/common";
 import { Point } from "../../../types/point.interface";
 import { HEADER_SIZE, ROUTE_POINTS_LENGTH, SCROLL_ROUTE_SMOOTHNESS } from "./constants";
+import { useResponsiveVariable } from "../../../hooks/useResponsiveVariable";
+import { SCROLL_SIZE_FHD, SCROLL_SIZE_HD, SCROLL_SIZE_UHD } from "../../Scrollbar/constants";
 
 import "./Contact.component.scss";
 
@@ -19,6 +20,7 @@ interface Props {
 }
 
 export const Contact = ({ scrollPosition, appHeight, appWidth }: Props) => {
+    const scrollSize = useResponsiveVariable(SCROLL_SIZE_HD, SCROLL_SIZE_FHD, SCROLL_SIZE_UHD);
     const canvasCircleRef = useRef<HTMLCanvasElement>(null);
     const canvasLinesRef = useRef<HTMLCanvasElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
@@ -109,7 +111,7 @@ export const Contact = ({ scrollPosition, appHeight, appWidth }: Props) => {
         if (appWidth && appHeight && contentRef.current && scrollPosition === MAX_SCROLL_POSITION) {
             setTimeout(() => {
                 const { right } = contentRef.current!.getBoundingClientRect();
-                const currentScrollCoordinates = { x: appWidth - SCROLL_SIZE / 2, y: appHeight - SCROLL_SIZE / 2 };
+                const currentScrollCoordinates = { x: appWidth - scrollSize / 2, y: appHeight - scrollSize / 2 };
                 const scrollRoutePoints = [
                     currentScrollCoordinates,
                     ...generateRandomCoordinates(right, HEADER_SIZE, appWidth, appHeight - HEADER_SIZE),

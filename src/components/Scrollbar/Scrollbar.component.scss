@@ -2,6 +2,9 @@
 @import "../../styles/animations";
 @import "../../styles/z-indexes";
 
+@import "Scrollbar.component.hd";
+@import "Scrollbar.component.fhd";
+@import "Scrollbar.component.uhd";
 
 .scrollbar-container {
   animation: fadein 1s forwards;
@@ -9,10 +12,6 @@
   animation-delay: 2s;
 
   .scrollbar {
-    $scrollbar-size: 22px;
-
-    width: $scrollbar-size;
-    height: $scrollbar-size;
     background-color: $lite-grey;
     position: fixed;
     top: 0;

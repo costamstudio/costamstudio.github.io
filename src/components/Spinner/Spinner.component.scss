@@ -1,9 +1,11 @@
 @import "../../styles/colors";
 @import "../../styles/animations";
 
-.spinner-container {
-  $spinner-size: 12px;
+@import "Spinner.component.hd";
+@import "Spinner.component.fhd";
+@import "Spinner.component.uhd";
 
+.spinner-container {
   position: fixed;
   top: 0;
   right: 0;
@@ -14,8 +16,6 @@
   justify-content: center;
 
   .spinner {
-    width: $spinner-size;
-    height: $spinner-size;
     background-color: $dark-grey;
     border-radius: 50%;
     animation: pulse 2s infinite;

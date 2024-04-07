@@ -1,0 +1,17 @@
+@mixin hd {
+ @media (min-width: 0) or (min-width: 1280px) {
+   @content;
+ }
+}
+
+@mixin fhd {
+ @media (min-width: 1920px) {
+   @content;
+ }
+}
+
+@mixin uhd {
+  @media (min-width: 3840px) {
+    @content;
+  }
+}

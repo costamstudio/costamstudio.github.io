@@ -1,0 +1,12 @@
+@import "../../styles/mixins";
+
+@include fhd {
+  .scrollbar-container {
+    .scrollbar {
+      $scrollbar-size: 22px;
+
+      width: $scrollbar-size;
+      height: $scrollbar-size;
+    }
+  }
+}
