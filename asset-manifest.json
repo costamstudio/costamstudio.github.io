@@ -1,9 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.0674cd33.css",
-    "main.js": "/static/js/main.198abd99.js",
+    "main.css": "/static/css/main.d5fa53be.css",
+    "main.js": "/static/js/main.d3cd79df.js",
     "static/js/787.e88504ec.chunk.js": "/static/js/787.e88504ec.chunk.js",
     "static/media/cos-tam-video.mp4": "/static/media/cos-tam-video.520cff56320f85048eec.mp4",
+    "static/media/cos-video.mp4": "/static/media/cos-video.c410593ccac0f34d1be5.mp4",
     "static/media/logo-crystal.png": "/static/media/logo-crystal.c1ce2f5a6d6f18321092.png",
     "static/media/logo-grass.png": "/static/media/logo-grass.e46e66f0dee59da96794.png",
     "static/media/logo-salmon.png": "/static/media/logo-salmon.482df325f5e9d9ada64f.png",
@@ -22,12 +23,12 @@
     "static/media/SigmundPRO-Light.woff2": "/static/media/SigmundPRO-Light.cbfc01990c443498742b.woff2",
     "static/media/cursor.svg": "/static/media/cursor.761fbd3b2cdfe2b14cc0791a424a6204.svg",
     "index.html": "/index.html",
-    "main.0674cd33.css.map": "/static/css/main.0674cd33.css.map",
-    "main.198abd99.js.map": "/static/js/main.198abd99.js.map",
+    "main.d5fa53be.css.map": "/static/css/main.d5fa53be.css.map",
+    "main.d3cd79df.js.map": "/static/js/main.d3cd79df.js.map",
     "787.e88504ec.chunk.js.map": "/static/js/787.e88504ec.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0674cd33.css",
-    "static/js/main.198abd99.js"
+    "static/css/main.d5fa53be.css",
+    "static/js/main.d3cd79df.js"
   ]
 }
