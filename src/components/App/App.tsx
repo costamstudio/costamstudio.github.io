@@ -65,6 +65,7 @@ export const App = () => {
     }, [scrollPosition, isScrollBarRendered]);
 
     useEffect(() => {
+        document.title = "COŚ TAM";
         loadAssets();
     }, []);
 
