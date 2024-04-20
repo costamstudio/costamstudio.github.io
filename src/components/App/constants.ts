@@ -14,8 +14,9 @@ import cosArtThree from "../../assets/images/cos-art-3.png"
 import tamArt from "../../assets/images/tam-art.png"
 
 import cosTamVideo from "../../assets/videos/cos-tam-video.mp4"
+import cosVideo from "../../assets/videos/cos-video.mp4"
 
 export const LOGO_IMAGES = [drinks, yellow, blue, salmon, grass, crystal, meat];
 export const OTHER_IMAGES = [cursor, logo, cosArtOne, cosArtTwo, cosArtThree, tamArt];
-export const VIDEOS = [cosTamVideo];
+export const VIDEOS = [cosTamVideo, cosVideo];
 export const FONTS = ["Syne", "Inter", "SigmundPro-Ultralight", "SigmundPro-Light", "SigmundPro-Semibold", "SigmundPro-Bold"];

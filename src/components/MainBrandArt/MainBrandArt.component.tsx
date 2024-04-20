@@ -12,7 +12,7 @@ import {
     CANVAS_WIDTH_HD,
     CANVAS_WIDTH_ULTRA_HD,
 } from "./constants";
-import { getRandomNumberInRange } from "../../utils/common";
+import { getRandomNumberInRange, nullifyTransforms } from "../../utils/common";
 import { useScrollState } from "../../hooks/useScrollState";
 import { SectionIds } from "../../types/section-ids.enum";
 import { useResponsiveVariable } from "../../hooks/useResponsiveVariable";
@@ -20,11 +20,13 @@ import { useResponsiveVariable } from "../../hooks/useResponsiveVariable";
 import "./MainBrandArt.component.scss";
 
 interface Props {
+    appHeight: number;
+    appWidth: number;
     logoImages: HTMLImageElement[];
     scrollPosition: number;
 }
 
-export const MainBrandArt = ({ logoImages, scrollPosition }: Props) => {
+export const MainBrandArt = ({ logoImages, scrollPosition, appHeight, appWidth }: Props) => {
     const brashRadius = useResponsiveVariable(BRUSH_RADIUS_HD, BRUSH_RADIUS_FULL_HD, BRUSH_RADIUS_ULTRA_HD);
     const canvasWidth = useResponsiveVariable(CANVAS_WIDTH_HD, CANVAS_WIDTH_FULL_HD, CANVAS_WIDTH_ULTRA_HD);
     const canvasHeight = useResponsiveVariable(CANVAS_HEIGHT_HD, CANVAS_HEIGHT_FULL_HD, CANVAS_HEIGHT_ULTRA_HD);
@@ -45,10 +47,11 @@ export const MainBrandArt = ({ logoImages, scrollPosition }: Props) => {
 
     const endDisappearanceY = useMemo(() => {
         if (containerRef.current) {
-            return -containerRef.current.getBoundingClientRect().bottom;
+            const { top, height} = nullifyTransforms(containerRef.current);
+            return -(top + height);
         }
         return 0;
-    }, [containerRef.current]);
+    }, [containerRef.current, appHeight, appWidth]);
 
     const y = useMemo(() => {
         if (isDisappearanceActive) {
@@ -83,7 +86,7 @@ export const MainBrandArt = ({ logoImages, scrollPosition }: Props) => {
             setFillStylePattern(canvasContext.createPattern(pattern, "no-repeat"));
             setBrushImageIndex(imageIndex);
         }
-    }, [logoImages.length, canvasContext])
+    }, [logoImages.length, canvasContext, canvasWidth, canvasHeight]);
 
     const onMouseLeave = useCallback(() => {
         updateFillStylePattern(brushImageIndex);
@@ -100,7 +103,7 @@ export const MainBrandArt = ({ logoImages, scrollPosition }: Props) => {
             canvasContext.drawImage(logoImages[backgroundLogoIndex], 0, 0, canvasWidth, canvasHeight);
             updateFillStylePattern(backgroundLogoIndex);
         }
-    }, [canvasContext, logoImages.length]);
+    }, [canvasContext, logoImages.length, canvasHeight, canvasWidth]);
 
     const styles = useSpring({
         transform: `translateY(${y}px)`,

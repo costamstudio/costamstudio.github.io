@@ -1,0 +1,17 @@
+@import "../../../styles/mixins";
+
+@include hd {
+  .about-text {
+    width: 307px;
+    right: 40px;
+    top: 147px;
+
+    .about-title {
+      font-size: 26px;
+    }
+
+    .about-value {
+      font-size: 16px;
+    }
+  }
+}

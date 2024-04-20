@@ -1,0 +1,10 @@
+@import "../../../styles/mixins";
+
+@include fhd {
+  .tam-text {
+    font-size: 38px;
+    width: 750px;
+    margin-top: 114px;
+    transform-origin: 27px 27px;
+  }
+}

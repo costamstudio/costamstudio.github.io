@@ -3,6 +3,7 @@ export enum SectionIds {
   HEADER = "HEADER",
   COS_ART = "COS_ART",
   COS_TEXT = "COS_TEXT",
+  COS_VIDEO = "COS_VIDEO",
   TAM_ART = "TAM_ART",
   TAM_TEXT = "TAM_TEXT",
   COS_TAM_VIDEO = "COS_TAM_VIDEO",

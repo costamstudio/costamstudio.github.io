@@ -6,14 +6,17 @@ import { animated, useSpring } from "react-spring";
 import { useScrollState } from "../../../hooks/useScrollState";
 import { LINE_ANIMATION_OFFSET } from "./constants";
 import { SectionIds } from "../../../types/section-ids.enum";
+import { nullifyTransforms } from "../../../utils/common";
 
 import "./CosText.component.scss";
 
 interface Props {
     scrollPosition: number;
+    appHeight: number;
+    appWidth: number;
 }
 
-export const CosText = ({ scrollPosition }: Props) => {
+export const CosText = ({ scrollPosition, appHeight, appWidth }: Props) => {
     const { formatMessage } = useIntl();
 
     const firstLineRef = useRef<HTMLDivElement>(null);
@@ -29,10 +32,10 @@ export const CosText = ({ scrollPosition }: Props) => {
 
     const firstLineStartY = useMemo(() => {
         if (firstLineRef.current) {
-            return firstLineRef.current.getBoundingClientRect().height;
+            return nullifyTransforms(firstLineRef.current).height;
         }
         return 0;
-    }, [firstLineRef.current]);
+    }, [firstLineRef.current, appHeight, appWidth]);
 
     const firstLineEndY = useMemo(() => {
         return -firstLineStartY;

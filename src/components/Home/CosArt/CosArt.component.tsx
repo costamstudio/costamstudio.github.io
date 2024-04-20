@@ -4,6 +4,7 @@ import { animated, useSpring } from "react-spring";
 
 import { useScrollState } from "../../../hooks/useScrollState";
 import { SectionIds } from "../../../types/section-ids.enum";
+import { nullifyTransforms } from "../../../utils/common";
 
 import "./CosArt.component.scss";
 
@@ -26,43 +27,44 @@ export const CosArt = ({ scrollPosition, appHeight, appWidth }: Props) => {
 
     const centerStartAppearanceY = useMemo(() => {
         if (appHeight && containerRef.current) {
-            const { top } = containerRef.current.getBoundingClientRect();
+            const { top} = nullifyTransforms(containerRef.current);
             return appHeight - top;
         }
         return 0;
-    }, [appHeight, containerRef.current]);
+    }, [appHeight, appWidth, containerRef.current]);
 
     const sideStartAppearanceY = useMemo(() => {
         if (appHeight && containerRef.current && leftItemRef.current) {
-            const { top } = containerRef.current.getBoundingClientRect();
-            const { height } = leftItemRef.current.getBoundingClientRect();
+            const { top} = nullifyTransforms(containerRef.current);
+            const { height} = nullifyTransforms(leftItemRef.current);
             return appHeight - top - (height / 2);
         }
         return 0;
-    }, [appHeight, containerRef.current, leftItemRef.current]);
+    }, [appHeight, appWidth, containerRef.current, leftItemRef.current]);
 
     const endDisappearanceY = useMemo(() => {
         if (containerRef.current) {
-            return -containerRef.current.getBoundingClientRect().bottom;
+            const { top, height} = nullifyTransforms(containerRef.current);
+            return -(top + height);
         }
         return 0;
-    }, [containerRef.current]);
+    }, [appHeight, appWidth, containerRef.current]);
 
     const leftStartAppearanceX = useMemo(() => {
         if (leftItemRef.current) {
-            const { left, width } = leftItemRef.current.getBoundingClientRect();
+            const { left, width } = nullifyTransforms(leftItemRef.current);
             return -(left + width);
         }
         return 0;
-    }, [leftItemRef.current]);
+    }, [appHeight, appWidth, leftItemRef.current]);
 
     const rightStartAppearanceX = useMemo(() => {
         if (appWidth && rightItemRef.current) {
-            const { left } = rightItemRef.current.getBoundingClientRect();
+            const { left } = nullifyTransforms(rightItemRef.current);
             return appWidth - left;
         }
         return 0;
-    }, [appWidth, rightItemRef.current]);
+    }, [appHeight, appWidth, rightItemRef.current]);
 
     const getY = useCallback((startY: number) => {
         if (!isStarted) {

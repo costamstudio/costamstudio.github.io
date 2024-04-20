@@ -1,0 +1,40 @@
+@import "../../../styles/mixins";
+
+@include fhd {
+  .contact {
+    .contact-content {
+      font-size: 48px;
+      gap: 15px;
+      margin-bottom: 200px;
+
+      .title {
+        font-size: 20px;
+        margin-bottom: 0;
+      }
+    }
+
+    .contact-title {
+      bottom: 80px;
+      left: -10px;
+      right: 0;
+      font-size: 300px;
+      line-height: 228px;
+    }
+
+    .footer {
+      height: 80px;
+      padding: 0 70px;
+      border-top-width: 2px;
+      font-size: 14px;
+
+      & > div {
+        max-width: 700px;
+      }
+
+      .logo {
+        width: 81px;
+        height: 61px;
+      }
+    }
+  }
+}

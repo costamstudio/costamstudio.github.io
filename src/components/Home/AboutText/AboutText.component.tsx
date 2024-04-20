@@ -10,6 +10,8 @@ import "./AboutText.component.scss";
 
 interface Props {
     scrollPosition: number;
+    appHeight: number;
+    appWidth: number;
 }
 
 export const AboutText = ({ scrollPosition }: Props) => {

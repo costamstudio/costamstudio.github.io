@@ -7,9 +7,15 @@ import { useScrollState } from "../../../hooks/useScrollState";
 import { SectionIds } from "../../../types/section-ids.enum";
 import { MAX_SCROLL_POSITION } from "../../../constants/common";
 import { Point } from "../../../types/point.interface";
-import { HEADER_SIZE, ROUTE_POINTS_LENGTH, SCROLL_ROUTE_SMOOTHNESS } from "./constants";
+import {
+    HEADER_SIZE_FHD,
+    HEADER_SIZE_HD, HEADER_SIZE_UHD, LINE_WIDTH_FHD, LINE_WIDTH_HD, LINE_WIDTH_UHD,
+    ROUTE_POINTS_LENGTH,
+    SCROLL_ROUTE_SMOOTHNESS
+} from "./constants";
 import { useResponsiveVariable } from "../../../hooks/useResponsiveVariable";
 import { SCROLL_SIZE_FHD, SCROLL_SIZE_HD, SCROLL_SIZE_UHD } from "../../Scrollbar/constants";
+import { nullifyTransforms } from "../../../utils/common";
 
 import "./Contact.component.scss";
 
@@ -21,6 +27,9 @@ interface Props {
 
 export const Contact = ({ scrollPosition, appHeight, appWidth }: Props) => {
     const scrollSize = useResponsiveVariable(SCROLL_SIZE_HD, SCROLL_SIZE_FHD, SCROLL_SIZE_UHD);
+    const headerSize = useResponsiveVariable(HEADER_SIZE_HD, HEADER_SIZE_FHD, HEADER_SIZE_UHD);
+    const lineWidth = useResponsiveVariable(LINE_WIDTH_HD, LINE_WIDTH_FHD, LINE_WIDTH_UHD);
+
     const canvasCircleRef = useRef<HTMLCanvasElement>(null);
     const canvasLinesRef = useRef<HTMLCanvasElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
@@ -87,14 +96,15 @@ export const Contact = ({ scrollPosition, appHeight, appWidth }: Props) => {
         const context2 = canvasLinesRef.current?.getContext("2d");
         if (context && context2) {
             const prevIndex = index === 0 ? 0 : index - 1;
-            context.fillStyle = '#D9D9D9';
-            context2.strokeStyle = '#D9D9D9';
-            context2.lineWidth = 4
+            const color = '#D9D9D9';
+            context.fillStyle = color;
+            context2.strokeStyle = color;
+            context2.lineWidth = lineWidth;
             context.clearRect(0, 0, appWidth, appHeight);
             context.beginPath();
             context2.beginPath();
             context2.moveTo(route[prevIndex].x, route[prevIndex].y);
-            context.arc(route[index].x, route[index].y, 11, 0, 2 * Math.PI);
+            context.arc(route[index].x, route[index].y, scrollSize / 2, 0, 2 * Math.PI);
             context2.lineTo(route[index].x, route[index].y)
             context2.stroke();
             context.fill();
@@ -103,18 +113,19 @@ export const Contact = ({ scrollPosition, appHeight, appWidth }: Props) => {
                 setRequestAnimationFrame(requestAnimationFrame(() => draw(route, index + 1)));
             }
         }
-    }, [canvasCircleRef.current, canvasLinesRef.current, appWidth, appHeight])
+    }, [canvasCircleRef.current, canvasLinesRef.current, appWidth, appHeight, scrollSize])
 
     useEffect(() => {
         const canvasCircleContext = canvasCircleRef.current?.getContext("2d");
         const canvasLinesContext = canvasLinesRef.current?.getContext("2d");
         if (appWidth && appHeight && contentRef.current && scrollPosition === MAX_SCROLL_POSITION) {
             setTimeout(() => {
-                const { right } = contentRef.current!.getBoundingClientRect();
+                const { left, width } = nullifyTransforms(contentRef.current!);
+                const right = left + width;
                 const currentScrollCoordinates = { x: appWidth - scrollSize / 2, y: appHeight - scrollSize / 2 };
                 const scrollRoutePoints = [
                     currentScrollCoordinates,
-                    ...generateRandomCoordinates(right, HEADER_SIZE, appWidth, appHeight - HEADER_SIZE),
+                    ...generateRandomCoordinates(right, headerSize, appWidth, appHeight - headerSize),
                 ];
                 const route = generateIntermediatePoints(scrollRoutePoints, SCROLL_ROUTE_SMOOTHNESS);
                 draw(route, 1);

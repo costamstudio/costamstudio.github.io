@@ -13,7 +13,7 @@ export const useResponsiveVariable = (hd: number, fhd: number, uhd: number) => {
       return fhd;
     }
     return hd;
-  }, [hd, fhd, uhd]);
+  }, [hd, fhd, uhd, isFullHDScreen, isUltraHDScreen]);
 
   return responsiveVariable;
 };

@@ -20,6 +20,7 @@ export const App = () => {
 
     const [logoImages, setLogoImages] = useState<HTMLImageElement[]>([]);
     const [cosTamVideo, setCosTamVideo] = useState<HTMLVideoElement | null>(null);
+    const [cosVideo, setCosVideo] = useState<HTMLVideoElement | null>(null);
 
     const [isContentVisible, setIsContentVisible] = useState(false);
 
@@ -35,14 +36,15 @@ export const App = () => {
             custom: { families: FONTS },
             active: () => setIsFontsLoaded(true),
         });
-        const [logoArtImages, otherImages, [cosVideo]] = await Promise.all([
+        const [logoArtImages, otherImages, [cosTamVideoElement, cosVideosElement]] = await Promise.all([
             loadImages(LOGO_IMAGES),
             loadImages(OTHER_IMAGES),
             loadVideos(VIDEOS),
         ]);
         setIsMediaLoaded(true);
         setLogoImages(logoArtImages);
-        setCosTamVideo(cosVideo);
+        setCosTamVideo(cosTamVideoElement);
+        setCosVideo(cosVideosElement);
     }, [])
 
     const onWheel = useCallback((event: React.WheelEvent) => {
@@ -81,13 +83,24 @@ export const App = () => {
                         appHeight={appHeight ?? 0}
                         onScrollBarRendered={() => setIsScrollBarRendered(true)}
                     />
-                    <MainBrandArt logoImages={logoImages} scrollPosition={scrollPosition}/>
-                    <Header scrollPosition={scrollPosition} setScrollPosition={setScrollPosition}/>
+                    <MainBrandArt
+                        logoImages={logoImages}
+                        scrollPosition={scrollPosition}
+                        appHeight={appHeight ?? 0}
+                        appWidth={appWidth ?? 0}
+                    />
+                    <Header
+                        scrollPosition={scrollPosition}
+                        setScrollPosition={setScrollPosition}
+                        appHeight={appHeight ?? 0}
+                        appWidth={appWidth ?? 0}
+                    />
                     <Home
                         scrollPosition={scrollPosition}
                         appHeight={appHeight ?? 0}
                         appWidth={appWidth ?? 0}
                         cosTamVideo={cosTamVideo}
+                        cosVideo={cosVideo}
                     />
                 </IntlProvider>
             </div>

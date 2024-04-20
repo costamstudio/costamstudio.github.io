@@ -1,0 +1,26 @@
+@import "../../../styles/mixins";
+
+@include uhd {
+  .cos-art {
+    $cos-height: 1260px;
+
+    .cos-one,
+    .cos-two,
+    .cos-three {
+      height: $cos-height;
+    }
+
+
+    .cos-one {
+      width: 850px;
+    }
+
+    .cos-two {
+      width: 740px;
+    }
+
+    .cos-three {
+      width: 910px;
+    }
+  }
+}

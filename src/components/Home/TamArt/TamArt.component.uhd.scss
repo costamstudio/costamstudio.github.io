@@ -1,0 +1,10 @@
+@import "../../../styles/mixins";
+
+@include uhd {
+  .tam-art {
+    width: 2486px;
+    height: 1042px;
+    margin-top: 192px;
+    transform-origin: 960px 360px;
+  }
+}

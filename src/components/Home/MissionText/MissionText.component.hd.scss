@@ -1,0 +1,17 @@
+@import "../../../styles/mixins";
+
+@include hd {
+  .mission-text {
+    width: 304px;
+    left: 40px;
+    bottom: 120px;
+
+    .mission-title {
+      font-size: 26px;
+    }
+
+    .mission-value {
+      font-size: 16px;
+    }
+  }
+}

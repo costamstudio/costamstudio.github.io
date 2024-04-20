@@ -10,6 +10,8 @@ import "./MissionText.component.scss";
 
 interface Props {
     scrollPosition: number;
+    appHeight: number;
+    appWidth: number;
 }
 
 export const MissionText = ({ scrollPosition }: Props) => {

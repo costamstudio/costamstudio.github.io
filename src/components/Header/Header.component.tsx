@@ -6,15 +6,18 @@ import { animated, useSpring } from "react-spring";
 import { useScrollState } from "../../hooks/useScrollState";
 import { SectionIds } from "../../types/section-ids.enum";
 import { MAX_SCROLL_POSITION, SECTION_BREAKPOINTS } from "../../constants/common";
+import { nullifyTransforms } from "../../utils/common";
 
 import "./Header.component.scss";
 
 interface Props {
+    appHeight: number;
+    appWidth: number;
     scrollPosition: number;
     setScrollPosition: (scrollPosition: number) => void;
 }
 
-export const Header = ({ scrollPosition, setScrollPosition }: Props) => {
+export const Header = ({ scrollPosition, setScrollPosition, appHeight, appWidth }: Props) => {
     const { formatMessage } = useIntl();
     const ref = useRef<HTMLDivElement>(null);
 
@@ -43,10 +46,11 @@ export const Header = ({ scrollPosition, setScrollPosition }: Props) => {
 
     const endDisappearanceY = useMemo(() => {
         if (ref.current) {
-            return -ref.current.getBoundingClientRect().top;
+            const { top} = nullifyTransforms(ref.current);
+            return -top;
         }
         return 0;
-    }, [ref.current]);
+    }, [ref.current, appHeight, appWidth]);
 
     const y = useMemo(() => {
         if (isDisappearanceActive) {

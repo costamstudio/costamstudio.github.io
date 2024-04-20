@@ -1,0 +1,17 @@
+@import "../../../styles/mixins";
+
+@include uhd {
+  .about-text {
+    width: 920px;
+    right: 120px;
+    top: 440px;
+
+    .about-title {
+      font-size: 76px;
+    }
+
+    .about-value {
+      font-size: 48px;
+    }
+  }
+}

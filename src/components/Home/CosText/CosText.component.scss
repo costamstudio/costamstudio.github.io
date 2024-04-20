@@ -1,13 +1,16 @@
 @import "../../../styles/colors";
 
+@import "CosText.component.hd";
+@import "CosText.component.fhd";
+@import "CosText.component.uhd";
+
 .cos-text {
   font-family: "SigmundPro-Ultralight";
   position: absolute;
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  font-size: 38px;
   color: $cream-white;
+  gap: 5px;
   margin-right: 10%;
 
   .line-container {

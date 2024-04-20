@@ -1,7 +1,7 @@
 import { SectionIds } from '../types/section-ids.enum';
 import { Breakpoint } from '../types/breakpoint.interface';
 
-export const MAX_SCROLL_POSITION = 160;
+export const MAX_SCROLL_POSITION = 145;
 
 export const SECTION_BREAKPOINTS: Record<SectionIds, Breakpoint> = {
   [SectionIds.MAIN_BRAND_ART]: {
@@ -28,6 +28,12 @@ export const SECTION_BREAKPOINTS: Record<SectionIds, Breakpoint> = {
     startDisappearance: 30,
     endDisappearance: 40,
   },
+  [SectionIds.COS_VIDEO]: {
+    startAppearance: 10,
+    endAppearance: 20,
+    startDisappearance: 30,
+    endDisappearance: 40,
+  },
   [SectionIds.TAM_ART]: {
     startAppearance: 40,
     endAppearance: 50,
@@ -43,24 +49,24 @@ export const SECTION_BREAKPOINTS: Record<SectionIds, Breakpoint> = {
   [SectionIds.COS_TAM_VIDEO]: {
     startAppearance: 80,
     endAppearance: 90,
-    startDisappearance: 150,
-    endDisappearance: 160,
+    startDisappearance: 135,
+    endDisappearance: 145,
   },
   [SectionIds.MISSION_TEXT]: {
     startAppearance: 90,
-    endAppearance: 100,
-    startDisappearance: 110,
-    endDisappearance: 120,
+    endAppearance: 95,
+    startDisappearance: 105,
+    endDisappearance: 115,
   },
   [SectionIds.ABOUT_TEXT]: {
-    startAppearance: 120,
-    endAppearance: 130,
-    startDisappearance: 140,
-    endDisappearance: 150,
+    startAppearance: 115,
+    endAppearance: 120,
+    startDisappearance: 130,
+    endDisappearance: 135,
   },
   [SectionIds.CONTACT]: {
-    startAppearance: 150,
-    endAppearance: 160,
+    startAppearance: 135,
+    endAppearance: 145,
     startDisappearance: 0,
     endDisappearance: 0,
   },
