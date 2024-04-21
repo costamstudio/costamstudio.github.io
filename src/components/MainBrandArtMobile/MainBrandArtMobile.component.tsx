@@ -1,0 +1,134 @@
+import * as React from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useIntl } from "react-intl";
+import { animated, useSpring } from "react-spring";
+
+import {
+    BRUSH_RADIUS,
+} from "./constants";
+import { getRandomNumberInRange, nullifyTransforms } from "../../utils/common";
+import { useScrollState } from "../../hooks/useScrollState";
+import { SectionIds } from "../../types/section-ids.enum";
+
+import "./MainBrandArtMobile.component.scss";
+
+interface Props {
+    appHeight: number;
+    appWidth: number;
+    logoImages: HTMLImageElement[];
+    scrollPosition: number;
+}
+
+export const MainBrandArtMobile = ({ logoImages, scrollPosition, appHeight, appWidth }: Props) => {
+    const canvasWidth = appWidth - 20;
+    const canvasHeight = canvasWidth / 1.25;
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
+    const [canvasContext, setCanvasContext] = useState<CanvasRenderingContext2D | null>(null);
+    const [fillStylePattern, setFillStylePattern] = useState<CanvasPattern | null>(null);
+    const [brushImageIndex, setBrushImageIndex] = useState(0);
+    const { formatMessage } = useIntl();
+
+    const [drawInterval, setDrawInterval] = useState<ReturnType<typeof setInterval> | null>(null);
+
+    const {
+        isEnded, isDisappearanceActive,
+        disappearancePercentage, getCurrentPropertyValue
+    } = useScrollState(SectionIds.MAIN_BRAND_ART, scrollPosition);
+
+    const endDisappearanceY = useMemo(() => {
+        if (containerRef.current) {
+            const { top, height} = nullifyTransforms(containerRef.current);
+            return -(top + height);
+        }
+        return 0;
+    }, [containerRef.current, appHeight, appWidth]);
+
+    const y = useMemo(() => {
+        if (isDisappearanceActive) {
+            return getCurrentPropertyValue(0, endDisappearanceY, disappearancePercentage);
+        }
+        if (isEnded) {
+            return endDisappearanceY;
+        }
+        return 0;
+    }, [isDisappearanceActive, isEnded, endDisappearanceY, disappearancePercentage]);
+
+    const draw = useCallback((event: React.TouchEvent, offset: number) => {
+        if (canvas && canvasContext && fillStylePattern) {
+            const canvasRect = canvas.getBoundingClientRect();
+
+            const clientX = event.touches[0].clientX;
+            const clientY = event.touches[0].clientY;
+            const x = clientX - canvasRect.left;
+            const y = clientY - canvasRect.top;
+            canvasContext.fillStyle = fillStylePattern;
+            canvasContext.beginPath();
+            canvasContext.moveTo(x + BRUSH_RADIUS, y);
+            canvasContext.arc(x, y, BRUSH_RADIUS + offset, 0, 2 * Math.PI);
+            canvasContext.fill();
+        }
+    }, [canvas, canvasContext, fillStylePattern]);
+
+    const onTouchStart = useCallback((event: React.TouchEvent) => {
+        let offset = 0
+        draw(event, offset);
+        setDrawInterval(setInterval(() => {
+            offset = offset + 2;
+            draw(event, offset);
+        }, 10));
+    }, [draw]);
+
+    const onTouchEnd = useCallback(() => {
+        if (drawInterval) {
+            clearInterval(drawInterval);
+        }
+        updateFillStylePattern(brushImageIndex);
+    }, [brushImageIndex, drawInterval]);
+
+    const updateFillStylePattern = useCallback((currentImageIndex: number) => {
+        if (logoImages.length && canvasContext) {
+            const imageIndex = getRandomNumberInRange(0, logoImages.length - 1, currentImageIndex);
+            const pattern = document.createElement('canvas');
+            pattern.width = canvasWidth;
+            pattern.height = canvasHeight;
+            pattern.getContext('2d')?.drawImage(logoImages[imageIndex], 0,0, canvasWidth, canvasHeight);
+            setFillStylePattern(canvasContext.createPattern(pattern, "no-repeat"));
+            setBrushImageIndex(imageIndex);
+        }
+    }, [logoImages.length, canvasContext, canvasWidth, canvasHeight]);
+
+    useEffect(() => {
+        setCanvas(canvasRef.current);
+        setCanvasContext(canvasRef.current?.getContext("2d") || null);
+    }, [canvas, canvasContext]);
+
+    useEffect(() => {
+        if (canvasContext && logoImages.length) {
+            const backgroundLogoIndex = getRandomNumberInRange(0, logoImages.length - 1);
+            canvasContext.drawImage(logoImages[backgroundLogoIndex], 0, 0, canvasWidth, canvasHeight);
+            updateFillStylePattern(backgroundLogoIndex);
+        }
+    }, [canvasContext, logoImages.length, canvasHeight, canvasWidth]);
+
+    const styles = useSpring({
+        transform: `translateY(${y}px)`,
+    });
+
+    return (
+        <animated.div ref={containerRef} className="main-brand-art" style={styles}>
+            <div className="logo-canvas-container">
+                <canvas
+                    ref={canvasRef}
+                    className="logo-canvas"
+                    width={canvasWidth}
+                    height={canvasHeight}
+                    onTouchStart={onTouchStart}
+                    onTouchEnd={onTouchEnd}
+                />
+            </div>
+        </animated.div>
+    );
+};

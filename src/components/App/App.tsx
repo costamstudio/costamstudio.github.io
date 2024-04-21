@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import WebFont from "webfontloader";
 import { useResizeDetector } from "react-resize-detector";
 import { IntlProvider } from "react-intl";
+import { isMobile } from "react-device-detect";
 
 import { Spinner } from "../Spinner/Spinner.component";
 import { MainBrandArt } from "../MainBrandArt/MainBrandArt.component";
@@ -12,6 +13,7 @@ import { FONTS, LOGO_IMAGES, OTHER_IMAGES, VIDEOS } from "./constants";
 import { pl } from "../../translations/pl";
 import { MAX_SCROLL_POSITION } from "../../constants/common";
 import { loadImages, loadVideos } from "../../utils/common";
+import { MainBrandArtMobile } from "../MainBrandArtMobile/MainBrandArtMobile.component";
 
 import './App.scss';
 
@@ -79,30 +81,44 @@ export const App = () => {
         ? (
             <div ref={ref} className="app" onWheel={onWheel}>
                 <IntlProvider messages={pl} locale="pl" defaultLocale="pl">
-                    <Scrollbar
-                        scrollPosition={scrollPosition}
-                        appHeight={appHeight ?? 0}
-                        onScrollBarRendered={() => setIsScrollBarRendered(true)}
-                    />
-                    <MainBrandArt
-                        logoImages={logoImages}
-                        scrollPosition={scrollPosition}
-                        appHeight={appHeight ?? 0}
-                        appWidth={appWidth ?? 0}
-                    />
-                    <Header
-                        scrollPosition={scrollPosition}
-                        setScrollPosition={setScrollPosition}
-                        appHeight={appHeight ?? 0}
-                        appWidth={appWidth ?? 0}
-                    />
-                    <Home
-                        scrollPosition={scrollPosition}
-                        appHeight={appHeight ?? 0}
-                        appWidth={appWidth ?? 0}
-                        cosTamVideo={cosTamVideo}
-                        cosVideo={cosVideo}
-                    />
+                    {isMobile ? (
+                        <>
+                            <MainBrandArtMobile
+                                logoImages={logoImages}
+                                scrollPosition={scrollPosition}
+                                appHeight={appHeight ?? 0}
+                                appWidth={appWidth ?? 0}
+                            />
+                        </>
+                    ) : (
+                        <>
+                            <Scrollbar
+                                scrollPosition={scrollPosition}
+                                appHeight={appHeight ?? 0}
+                                onScrollBarRendered={() => setIsScrollBarRendered(true)}
+                            />
+                            <MainBrandArt
+                                logoImages={logoImages}
+                                scrollPosition={scrollPosition}
+                                appHeight={appHeight ?? 0}
+                                appWidth={appWidth ?? 0}
+                            />
+                            <Header
+                                scrollPosition={scrollPosition}
+                                setScrollPosition={setScrollPosition}
+                                appHeight={appHeight ?? 0}
+                                appWidth={appWidth ?? 0}
+                            />
+                            <Home
+                                scrollPosition={scrollPosition}
+                                appHeight={appHeight ?? 0}
+                                appWidth={appWidth ?? 0}
+                                cosTamVideo={cosTamVideo}
+                                cosVideo={cosVideo}
+                            />
+                        </>
+                    )}
+
                 </IntlProvider>
             </div>
         )
