@@ -1,1 +1,0 @@
-export const BRUSH_RADIUS = 20;

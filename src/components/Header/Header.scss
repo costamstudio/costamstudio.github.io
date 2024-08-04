@@ -1,0 +1,58 @@
+.header {
+  position: fixed;
+  top: 20px;
+  right: 0;
+  left: 0;
+  height: 68px;
+  padding: 0 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+}
+
+.header-logo {
+  width: 270px;
+  height: 68px;
+  background-image: url("/assets/images/logo.svg");
+  cursor: pointer;
+}
+
+.header-menu {
+  display: flex;
+  justify-content: space-between;
+  font-family: "SigmundPro-Light";
+  color: white;
+
+  &:hover .menu-item {
+    opacity: 0.4;
+  }
+
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 16px;
+    text-transform: uppercase;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:last-of-type .menu-content-container {
+      padding: 0 0 0 85px;
+    }
+  }
+
+  .menu-content-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 85px;
+  }
+
+  .menu-item-divider {
+    display: flex;
+    align-items: center;
+  }
+}

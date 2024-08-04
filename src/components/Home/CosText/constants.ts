@@ -1,1 +1,0 @@
-export const LINE_ANIMATION_OFFSET = 15;

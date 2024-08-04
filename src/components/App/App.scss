@@ -1,7 +1,7 @@
-@import "src/styles/colors";
-
 .app {
-  height: 100vh;
-  background-color: $dark-grey;
-  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }

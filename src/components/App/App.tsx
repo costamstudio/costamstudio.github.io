@@ -1,37 +1,37 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import WebFont from "webfontloader";
-import { useResizeDetector } from "react-resize-detector";
 import { IntlProvider } from "react-intl";
-import { isMobile } from "react-device-detect";
 
-import { Spinner } from "../Spinner/Spinner.component";
-import { MainBrandArt } from "../MainBrandArt/MainBrandArt.component";
-import { Header } from "../Header/Header.component";
-import { Scrollbar } from "../Scrollbar/Scrollbar.component";
-import { Home } from "../Home/Home.component";
+import { Home } from "../Home/Home";
+import { Header } from "../Header/Header";
+import { MenuItemsEnum } from "../../types/menu-items.enum";
 import { FONTS, LOGO_IMAGES, OTHER_IMAGES, VIDEOS } from "./constants";
-import { pl } from "../../translations/pl";
-import { MAX_SCROLL_POSITION } from "../../constants/common";
 import { loadImages, loadVideos } from "../../utils/common";
-import { MainBrandArtMobile } from "../MainBrandArtMobile/MainBrandArtMobile.component";
+import { LanguagesEnum } from "../../types/languges.enum";
+import { pl } from "../../translations/pl";
+import { en } from "../../translations/en";
 
 import './App.scss';
 
 export const App = () => {
-    const { width: appWidth, height: appHeight, ref } = useResizeDetector();
+    const [locale, setLocale] = useState(LanguagesEnum.PL);
+    const [clickedMenuItem, setClickedMenuItem] = useState<MenuItemsEnum | null>(null);
 
     const [logoImages, setLogoImages] = useState<HTMLImageElement[]>([]);
-    const [cosTamVideo, setCosTamVideo] = useState<HTMLVideoElement | null>(null);
-    const [cosVideo, setCosVideo] = useState<HTMLVideoElement | null>(null);
-
-    const [isContentVisible, setIsContentVisible] = useState(false);
+    const [logoArtBackground, setLogoArtBackground] = useState<HTMLVideoElement | null>(null);
 
     const [isLoading, setIsLoading] = useState(true);
     const [isFontsLoaded, setIsFontsLoaded] = useState(false);
     const [isMediaLoaded, setIsMediaLoaded] = useState(false);
-    const [isScrollBarRendered, setIsScrollBarRendered] = useState(false);
 
-    const [scrollPosition, setScrollPosition] = useState(0);
+    const appRef = useRef<HTMLDivElement | null>(null);
+
+    const messages = useMemo(() => {
+        if (locale === LanguagesEnum.PL) {
+            return pl;
+        }
+        return en;
+    }, [locale]);
 
     const loadAssets = useCallback(async () => {
         WebFont.load({
@@ -45,26 +45,8 @@ export const App = () => {
         ]);
         setIsMediaLoaded(true);
         setLogoImages(logoArtImages);
-        setCosTamVideo(cosTamVideoElement);
-        setCosVideo(cosVideosElement);
-    }, [])
-
-    const onWheel = useCallback((event: React.WheelEvent) => {
-        if (!isScrollBarRendered) {
-            return;
-        }
-
-        const newScrollPosition = scrollPosition + event.deltaY / 100;
-        if (newScrollPosition >= 0 && newScrollPosition <= MAX_SCROLL_POSITION) {
-            setScrollPosition(newScrollPosition);
-        }
-        if (newScrollPosition < 0) {
-            setScrollPosition(0);
-        }
-        if (newScrollPosition > MAX_SCROLL_POSITION) {
-            setScrollPosition(MAX_SCROLL_POSITION);
-        }
-    }, [scrollPosition, isScrollBarRendered]);
+        setLogoArtBackground(cosTamVideoElement);
+    }, []);
 
     useEffect(() => {
         document.title = "COŚ TAM";
@@ -77,52 +59,21 @@ export const App = () => {
         }
     }, [isFontsLoaded, isMediaLoaded]);
 
-    return isContentVisible
+    return !isLoading
         ? (
-            <div ref={ref} className="app" onWheel={onWheel}>
-                <IntlProvider messages={pl} locale="pl" defaultLocale="pl">
-                    {isMobile ? (
-                        <>
-                            <MainBrandArtMobile
-                                logoImages={logoImages}
-                                scrollPosition={scrollPosition}
-                                appHeight={appHeight ?? 0}
-                                appWidth={appWidth ?? 0}
-                            />
-                        </>
-                    ) : (
-                        <>
-                            <Scrollbar
-                                scrollPosition={scrollPosition}
-                                appHeight={appHeight ?? 0}
-                                onScrollBarRendered={() => setIsScrollBarRendered(true)}
-                            />
-                            <MainBrandArt
-                                logoImages={logoImages}
-                                scrollPosition={scrollPosition}
-                                appHeight={appHeight ?? 0}
-                                appWidth={appWidth ?? 0}
-                            />
-                            <Header
-                                scrollPosition={scrollPosition}
-                                setScrollPosition={setScrollPosition}
-                                appHeight={appHeight ?? 0}
-                                appWidth={appWidth ?? 0}
-                            />
-                            <Home
-                                scrollPosition={scrollPosition}
-                                appHeight={appHeight ?? 0}
-                                appWidth={appWidth ?? 0}
-                                cosTamVideo={cosTamVideo}
-                                cosVideo={cosVideo}
-                            />
-                        </>
-                    )}
-
+            <div ref={appRef} className="app">
+                <IntlProvider messages={messages} locale={locale} defaultLocale={LanguagesEnum.PL}>
+                    <Header locale={locale} setClickedMenuItem={setClickedMenuItem} setLocale={setLocale}/>
+                    <Home
+                        clickedMenuItem={clickedMenuItem}
+                        setClickedMenuItem={setClickedMenuItem}
+                        logoImages={logoImages}
+                        logoArtBackground={logoArtBackground}
+                    />
                 </IntlProvider>
             </div>
         )
         : (
-            <Spinner isLoading={isLoading} hideSpinner={() => setIsContentVisible(true)}/>
+            <></>
         );
 }
