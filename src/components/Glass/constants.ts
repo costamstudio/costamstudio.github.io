@@ -1,0 +1,1 @@
+export const GLASS_ITEM_WIDTH = 30;

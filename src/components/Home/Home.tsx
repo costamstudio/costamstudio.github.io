@@ -7,6 +7,7 @@ import { Projects } from "./Projects/Projects";
 import { MenuItemsEnum } from "../../types/menu-items.enum";
 
 import "./Home.scss";
+import { Contact } from "./Contact/Contact";
 
 
 interface Props {
@@ -14,9 +15,10 @@ interface Props {
     setClickedMenuItem: (item: MenuItemsEnum | null) => void;
     logoImages: HTMLImageElement[];
     logoArtBackground: HTMLVideoElement | null;
+    contactBackground: HTMLVideoElement | null;
 }
 
-export const Home = ({ clickedMenuItem, setClickedMenuItem, logoImages, logoArtBackground }: Props) => {
+export const Home = ({ clickedMenuItem, setClickedMenuItem, logoImages, logoArtBackground, contactBackground }: Props) => {
     const [isRightContainerOpened, setIsRightContainerOpened] = useState(false);
     const [isBottomContainerOpened, setIsBottomContainerOpened] = useState(false);
     const [isOnWheelDisabled, setIsOnWheelDisabled] = useState(false);
@@ -32,7 +34,7 @@ export const Home = ({ clickedMenuItem, setClickedMenuItem, logoImages, logoArtB
     });
 
     const bottomContainerStyles = useSpring({
-        transform: `translateY(${isBottomContainerOpened ? "0" : "100"}%)`,
+        marginTop: `${isBottomContainerOpened ? "0" : "100"}%`,
     });
 
     const setOnWheelDelay = useCallback(() => {
@@ -107,6 +109,7 @@ export const Home = ({ clickedMenuItem, setClickedMenuItem, logoImages, logoArtB
             </animated.div>
             <animated.div className="bottom-container" style={bottomContainerStyles}>
                 <Projects/>
+                <Contact contactBackground={contactBackground}/>
             </animated.div>
         </animated.div>
     );

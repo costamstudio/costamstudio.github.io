@@ -19,6 +19,7 @@ export const App = () => {
 
     const [logoImages, setLogoImages] = useState<HTMLImageElement[]>([]);
     const [logoArtBackground, setLogoArtBackground] = useState<HTMLVideoElement | null>(null);
+    const [contactBackground, setContactBackground] = useState<HTMLVideoElement | null>(null);
 
     const [isLoading, setIsLoading] = useState(true);
     const [isFontsLoaded, setIsFontsLoaded] = useState(false);
@@ -38,14 +39,15 @@ export const App = () => {
             custom: { families: FONTS },
             active: () => setIsFontsLoaded(true),
         });
-        const [logoArtImages, otherImages, [cosTamVideoElement, cosVideosElement]] = await Promise.all([
+        const [logoArtImages, otherImages, [logoArtBackground, contactBackground]] = await Promise.all([
             loadImages(LOGO_IMAGES),
             loadImages(OTHER_IMAGES),
             loadVideos(VIDEOS),
         ]);
         setIsMediaLoaded(true);
         setLogoImages(logoArtImages);
-        setLogoArtBackground(cosTamVideoElement);
+        setLogoArtBackground(logoArtBackground);
+        setContactBackground(contactBackground);
     }, []);
 
     useEffect(() => {
@@ -69,6 +71,7 @@ export const App = () => {
                         setClickedMenuItem={setClickedMenuItem}
                         logoImages={logoImages}
                         logoArtBackground={logoArtBackground}
+                        contactBackground={contactBackground}
                     />
                 </IntlProvider>
             </div>

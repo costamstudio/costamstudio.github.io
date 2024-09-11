@@ -11,4 +11,13 @@ export const pl = {
   missionContentTwo: "Nasza praca jest odzwierciedleniem przekonania, że te trzy dyscypliny nie są od \n siebie oddzielone, ale wzajemnie się uzupełniają, oferując nowe sposoby \n postrzegania i doświadczania świata wokół nas.",
   whatDoTags: "design, scenografię, set design, web design, instalacje artystyczne, komunikacje wizualne",
   whatDoContent: "Nasze działania odważnie przekraczają granice konwencjonalnego projektowania,\n łącząc sztukę z nowoczesnymi technologiami, \nby kreować przełomowe projekty, które definiują nowe standardy wizualne i\n przestrzenne.",
+  somethingInspiring: "COŚ TAM Inspirującego",
+  ourCreativeProjects: "- Nasze Kreatywne Projekty",
+  footerContent: "tam - zaimek nieokreślony, zastępujący nazwę dowolnego przedmiotu lub faktu bądź takiego, którego mówiący nie\nchce lub nie umie określić",
+  policy: "2024\nPolityka prywatności",
+  address: "adres",
+  addressValue: "Wilcza 29A, \n00-544 Warszawa",
+  email: "email",
+  emailValue: "costamcostamstudio@gmail.com",
+  socialMedia: "media społecznościowe",
 }

@@ -1,0 +1,121 @@
+.contact-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  .background-video {
+    filter: invert(1);
+    object-fit: cover;
+  }
+
+  .contact-content-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .contact-vector {
+    width: 100%;
+  }
+
+  .footer {
+    height: 72px;
+    border-top: 1px solid #232323;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 80px;
+    font-family: "SigmundPro-Light";
+    font-size: 16px;
+    line-height: 20px;
+    color: rgba(#232323, 0.6);
+    white-space: pre-line;
+    box-sizing: border-box;
+  }
+
+  .logo {
+    width: 190px;
+    height: 48px;
+    background-image: url("/assets/images/logo-footer.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .footer-content {
+    text-align: center;
+  }
+
+  .footer-policy {
+    text-align: right;
+  }
+
+  .contact-content {
+    position: absolute;
+    bottom: 180px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 80px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .contact-content-text {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .contact-content-image-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .contact-content-image-title {
+    font-family: "SigmundPro-Light";
+    font-size: 16px;
+    line-height: 20px;
+    color: #232323;
+  }
+
+  .contact-content-image {
+    width: 870px;
+    height: 132px;
+    background-image: url("/assets/images/qr.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .contact-content-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    white-space: pre-line;
+  }
+
+  .contact-content-title {
+    font-family: "SigmundPro-Light";
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 20px;
+    color: #232323;
+  }
+
+  .contact-content-value {
+    font-family: "SigmundPro-Regular";
+    font-size: 44px;
+    line-height: 52px;
+    color: #232323;
+    letter-spacing: -0.04em;
+  }
+}

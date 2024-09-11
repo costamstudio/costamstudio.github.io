@@ -11,4 +11,13 @@ export const en = {
   missionContentTwo: "Our work reflects the belief that these three disciplines are not separate \n from each other but complement one another, offering new ways\n of perceiving and experiencing the world around us.",
   whatDoTags: "design, scenography, set design, web design, art installations, visual communications",
   whatDoContent: "Our actions boldly transcend the boundaries of conventional design, \n combining art with modern technologies \n to create groundbreaking projects that define new visual \n and spatial standards.",
+  somethingInspiring: "COŚ TAM Inspiring",
+  ourCreativeProjects: "- Our Creative Projects",
+  footerContent: "tam – an indefinite pronoun, replacing the name of any object or fact, or one that the speaker\ndoes not want or is unable to specify.",
+  policy: "2024\nPrivacy Policy",
+  address: "address",
+  addressValue: "Wilcza 29A, \n00-544 Warsaw",
+  email: "email",
+  emailValue: "costamcostamstudio@gmail.com",
+  socialMedia: "social media",
 }

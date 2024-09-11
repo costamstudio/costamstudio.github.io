@@ -1,8 +1,7 @@
 import { useIntl } from "react-intl";
 import { useResizeDetector } from "react-resize-detector";
-import { useMemo } from "react";
 
-import { GLASS_ITEM_WIDTH } from "./constants";
+import { Glass } from "../../Glass/Glass";
 
 import "./About.scss";
 
@@ -14,16 +13,9 @@ export const About = ({ isVisible }: Props) => {
     const { width, ref } = useResizeDetector();
     const { formatMessage } = useIntl();
 
-    const glassItemsCount = useMemo(() => {
-        width && console.log(width / GLASS_ITEM_WIDTH);
-        return width ? Math.ceil(width / GLASS_ITEM_WIDTH) : 0;
-    }, [width]);
-
     return (
         <div ref={ref} className="about">
-            {Array.from({length: glassItemsCount}).map((item, index) => (
-                <div key={`glass-${index}`} className="about-item"/>
-            ))}
+            <Glass width={width ?? 0}/>
             <div className="about-content-container">
                 <div className="about-content-item">
                     <div className="about-title">{formatMessage({ id: "mission" })}</div>
@@ -33,8 +25,8 @@ export const About = ({ isVisible }: Props) => {
                 <div className="about-content-item">
                     <div className="about-title">{formatMessage({ id: "whatDo" })}</div>
                     <div className="about-tags">
-                        {formatMessage({ id: "whatDoTags" }).split(",").map(item => (
-                            <div className="about-tag">
+                        {formatMessage({ id: "whatDoTags" }).split(",").map((item, index) => (
+                            <div key={`tag-${index}`} className="about-tag">
                                 {`/ ${item}`}
                             </div>
                         ))}
