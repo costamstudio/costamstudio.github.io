@@ -25,6 +25,10 @@ export const App = () => {
     const [isFontsLoaded, setIsFontsLoaded] = useState(false);
     const [isMediaLoaded, setIsMediaLoaded] = useState(false);
 
+    const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+    const [hasHeaderBackground, setHasHeaderBackground] = useState(false);
+    const [hasHeaderBigLogo, setHasHeaderBigLogo] = useState(true);
+
     const appRef = useRef<HTMLDivElement | null>(null);
 
     const messages = useMemo(() => {
@@ -65,10 +69,20 @@ export const App = () => {
         ? (
             <div ref={appRef} className="app">
                 <IntlProvider messages={messages} locale={locale} defaultLocale={LanguagesEnum.PL}>
-                    <Header locale={locale} setClickedMenuItem={setClickedMenuItem} setLocale={setLocale}/>
+                    <Header
+                        locale={locale}
+                        setClickedMenuItem={setClickedMenuItem}
+                        setLocale={setLocale}
+                        isVisible={isHeaderVisible}
+                        hasBackground={hasHeaderBackground}
+                        hasBigLogo={hasHeaderBigLogo}
+                    />
                     <Home
                         clickedMenuItem={clickedMenuItem}
                         setClickedMenuItem={setClickedMenuItem}
+                        setIsHeaderVisible={setIsHeaderVisible}
+                        setHasHeaderBackground={setHasHeaderBackground}
+                        setHasHeaderBigLogo={setHasHeaderBigLogo}
                         logoImages={logoImages}
                         logoArtBackground={logoArtBackground}
                         contactBackground={contactBackground}

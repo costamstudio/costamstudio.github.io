@@ -13,12 +13,24 @@ import { Contact } from "./Contact/Contact";
 interface Props {
     clickedMenuItem: MenuItemsEnum | null;
     setClickedMenuItem: (item: MenuItemsEnum | null) => void;
+    setIsHeaderVisible: (isHeaderVisible: boolean) => void;
+    setHasHeaderBackground: (hasHeaderBackground: boolean) => void;
+    setHasHeaderBigLogo: (hasHeaderBigLogo: boolean) => void;
     logoImages: HTMLImageElement[];
     logoArtBackground: HTMLVideoElement | null;
     contactBackground: HTMLVideoElement | null;
 }
 
-export const Home = ({ clickedMenuItem, setClickedMenuItem, logoImages, logoArtBackground, contactBackground }: Props) => {
+export const Home = ({
+                         clickedMenuItem,
+                         setClickedMenuItem,
+                         logoImages,
+                         logoArtBackground,
+                         contactBackground,
+                         setIsHeaderVisible,
+                         setHasHeaderBackground,
+                         setHasHeaderBigLogo
+}: Props) => {
     const [isRightContainerOpened, setIsRightContainerOpened] = useState(false);
     const [isBottomContainerOpened, setIsBottomContainerOpened] = useState(false);
     const [isOnWheelDisabled, setIsOnWheelDisabled] = useState(false);
@@ -46,6 +58,7 @@ export const Home = ({ clickedMenuItem, setClickedMenuItem, logoImages, logoArtB
         if (!isOnWheelDisabled && event.deltaY > 0 && !isRightContainerOpened) {
             setOnWheelDelay();
             setIsRightContainerOpened(true);
+            setHasHeaderBigLogo(false);
         }
         if (!isOnWheelDisabled && event.deltaY > 0 && isRightContainerOpened && !isBottomContainerOpened) {
             setOnWheelDelay();
@@ -58,15 +71,19 @@ export const Home = ({ clickedMenuItem, setClickedMenuItem, logoImages, logoArtB
         if (!isOnWheelDisabled && scrollTop === 0 && event.deltaY < 0 && !isBottomContainerOpened) {
             setOnWheelDelay();
             setIsRightContainerOpened(false);
+            setHasHeaderBigLogo(true);
         }
     }, [isRightContainerOpened, isBottomContainerOpened, scrollTop, isOnWheelDisabled]);
 
     const onScroll = useCallback(() => {
         if (homeRef.current) {
-            const { scrollTop } = homeRef.current;
-            setScrollTop(scrollTop);
+            const { scrollTop: newScrollTop } = homeRef.current;
+            const isHeaderVisible = newScrollTop === 0 || scrollTop - newScrollTop > 0;
+            setScrollTop(newScrollTop);
+            setIsHeaderVisible(isHeaderVisible);
+            setHasHeaderBackground(newScrollTop !== 0);
         }
-    }, [homeRef]);
+    }, [homeRef, scrollTop]);
 
     useEffect(() => {
         if (clickedMenuItem && homeRef.current) {

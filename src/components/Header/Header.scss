@@ -1,6 +1,5 @@
 .header {
   position: fixed;
-  top: 20px;
   right: 0;
   left: 0;
   height: 68px;
@@ -12,9 +11,9 @@
 }
 
 .header-logo {
-  width: 270px;
-  height: 68px;
   background-image: url("/assets/images/logo.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
   cursor: pointer;
 }
 
@@ -23,6 +22,7 @@
   justify-content: space-between;
   font-family: "SigmundPro-Light";
   color: white;
+  filter: invert(1);
 
   &:hover .menu-item {
     opacity: 0.4;
