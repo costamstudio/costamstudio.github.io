@@ -1,7 +1,7 @@
 import { useIntl } from "react-intl";
 import { useResizeDetector } from "react-resize-detector";
 
-import { Glass } from "../../Glass/Glass";
+import { Glass } from "../../components/Glass/Glass";
 
 import "./About.scss";
 

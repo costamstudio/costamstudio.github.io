@@ -1,27 +1,27 @@
 import { useCallback } from "react";
 import { useIntl } from "react-intl";
 
-import { LanguagesEnum } from "../../../types/languges.enum";
+import { Language } from "../../../enums/Language";
 import { Languages } from "./constants";
 
 import "./LocaleToggle.scss";
 
 interface Props {
-    locale: LanguagesEnum;
-    setLocale: (locale: LanguagesEnum) => void;
+    locale: Language;
+    setLocale: (locale: Language) => void;
 }
 
 export const LocaleToggle = ({ locale, setLocale }: Props) => {
     const { formatMessage } = useIntl();
 
-    const isSelected = useCallback((id: LanguagesEnum) => {
+    const isSelected = useCallback((id: Language) => {
         return locale === id;
     }, [locale]);
 
     return (
         <div
             className="locale-toggle"
-            onClick={() => setLocale(locale === LanguagesEnum.PL ? LanguagesEnum.EN : LanguagesEnum.PL)}
+            onClick={() => setLocale(locale === Language.PL ? Language.EN : Language.PL)}
         >
             {Languages.map(language => (
                 <div key={language.id} className={`locale-toggle-item${isSelected(language.id) ? " selected" : ""}`}>

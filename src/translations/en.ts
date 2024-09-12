@@ -20,4 +20,26 @@ export const en = {
   email: "email",
   emailValue: "costamcostamstudio@gmail.com",
   socialMedia: "social media",
+  projectContent: {
+    "a79a22a4-5d13-448b-9f71-585146b6a368": {
+      title: "Topielec",
+      description: "Ta rzeźba przedstawia abstrakcyjne wyobrażenie skał, jakby wyrzeźbionych z cienia. Symbolizuje wieczność i nieustanny ruch czasu, tworząc atmosferę tajemnicy i starożytności.",
+      tags: "szklo, woda, 50x50x50cm, 2022"
+    },
+    "613e6f66-34be-468f-9da4-4ee387aaf7e4": {
+      title: "Raj Utracony",
+      description: "Rysunek w technice węgla przedstawia zamglone obrazy ludzi i budynków, tworząc efekt mrocznej i zamglonej pamięci. Dzieło to odzwierciedla kruchość ludzkiej pamięci i jej skłonność do zniekształceń z biegiem czasu.",
+      tags: "węgiel, papier, 70x50cm, 2021"
+    },
+    "cac17a19-de9c-43a7-903e-75319560726d": {
+      title: "Zamglona Pamięć",
+      description: "Rysunek w technice węgla przedstawia zamglone obrazy ludzi i budynków, tworząc efekt mrocznej i zamglonej pamięci. Dzieło to odzwierciedla kruchość ludzkiej pamięci i jej skłonność do zniekształceń z biegiem czasu.",
+      tags: "węgiel, papier, 70x50cm, 2021"
+    },
+    "38178337-c403-49bd-b848-316eee8a4727": {
+      title: "Cienie Skał",
+      description: "Ta rzeźba przedstawia abstrakcyjne wyobrażenie skał, jakby wyrzeźbionych z cienia. Symbolizuje wieczność i nieustanny ruch czasu, tworząc atmosferę tajemnicy i starożytności.",
+      tags: "ceramica, 60x40x30cm, 2023"
+    },
+  },
 }

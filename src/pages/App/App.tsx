@@ -4,18 +4,18 @@ import { IntlProvider } from "react-intl";
 
 import { Home } from "../Home/Home";
 import { Header } from "../Header/Header";
-import { MenuItemsEnum } from "../../types/menu-items.enum";
+import { MenuItem } from "../../enums/MenuItem";
 import { FONTS, LOGO_IMAGES, OTHER_IMAGES, VIDEOS } from "./constants";
-import { loadImages, loadVideos } from "../../utils/common";
-import { LanguagesEnum } from "../../types/languges.enum";
+import { flattenMessages, loadImages, loadVideos } from "../../utils/common";
+import { Language } from "../../enums/Language";
 import { pl } from "../../translations/pl";
 import { en } from "../../translations/en";
 
 import './App.scss';
 
 export const App = () => {
-    const [locale, setLocale] = useState(LanguagesEnum.PL);
-    const [clickedMenuItem, setClickedMenuItem] = useState<MenuItemsEnum | null>(null);
+    const [locale, setLocale] = useState(Language.PL);
+    const [clickedMenuItem, setClickedMenuItem] = useState<MenuItem | null>(null);
 
     const [logoImages, setLogoImages] = useState<HTMLImageElement[]>([]);
     const [logoArtBackground, setLogoArtBackground] = useState<HTMLVideoElement | null>(null);
@@ -32,7 +32,7 @@ export const App = () => {
     const appRef = useRef<HTMLDivElement | null>(null);
 
     const messages = useMemo(() => {
-        if (locale === LanguagesEnum.PL) {
+        if (locale === Language.PL) {
             return pl;
         }
         return en;
@@ -68,7 +68,7 @@ export const App = () => {
     return !isLoading
         ? (
             <div ref={appRef} className="app">
-                <IntlProvider messages={messages} locale={locale} defaultLocale={LanguagesEnum.PL}>
+                <IntlProvider messages={flattenMessages(messages)} locale={locale} defaultLocale={Language.PL}>
                     <Header
                         locale={locale}
                         setClickedMenuItem={setClickedMenuItem}

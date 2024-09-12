@@ -2,8 +2,8 @@ import { useResizeDetector } from "react-resize-detector";
 import { useIntl } from "react-intl";
 import { useCallback } from "react";
 
-import { Glass } from "../../Glass/Glass";
-import contactVector from "../../../assets/images/contact-vector.png";
+import { Glass } from "../../components/Glass/Glass";
+import contactVector from "../../assets/images/contact-vector.png";
 import { EMAIL_LINK, FACEBOOK_LINK, LINKEDIN_LINK } from "./constants";
 
 import "./Contact.scss";

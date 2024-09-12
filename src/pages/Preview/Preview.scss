@@ -1,0 +1,88 @@
+.preview-container {
+  display: flex;
+
+  .preview-image {
+    cursor: pointer;
+  }
+
+  .preview-text-container {
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    color: #ffffff;
+  }
+
+  .preview-title {
+    font-family: "T1Korium";
+    font-size: 56px;
+    line-height: 56px;
+  }
+
+  .preview-description {
+    font-family: "SigmundPro-Light";
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 20px;
+  }
+
+  .preview-tags {
+    display: flex;
+    gap: 4px;
+    max-width: 585px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .preview-tag {
+    font-family: "SigmundPro-Light";
+    font-size: 16px;
+    line-height: 20px;
+    display: flex;
+    padding: 6px 20px 10px 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    white-space: nowrap;
+  }
+
+  &.preview-1 {
+    align-items: flex-end;
+    gap: 20px;
+
+    .preview-image {
+      width: 802px;
+    }
+  }
+
+  &.preview-2 {
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    gap: 20px;
+
+    .preview-image {
+      width: 1098px;
+    }
+  }
+
+  &.preview-3 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+
+    .preview-image {
+      width: 1840px;
+    }
+
+    .preview-text-container {
+      margin-left: 80px;
+    }
+  }
+
+  &.preview-4 {
+    align-items: flex-end;
+    gap: 20px;
+
+    .preview-image {
+      width: 1098px;
+    }
+  }
+}

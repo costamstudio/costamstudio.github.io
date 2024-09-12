@@ -1,18 +1,18 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { animated, useSpring } from "react-spring";
 
-import { LogoArt } from "./LogoArt/LogoArt";
-import { About } from "./About/About";
-import { Projects } from "./Projects/Projects";
-import { MenuItemsEnum } from "../../types/menu-items.enum";
+import { LogoArt } from "../LogoArt/LogoArt";
+import { About } from "../About/About";
+import { Projects } from "../Projects/Projects";
+import { MenuItem } from "../../enums/MenuItem";
 
 import "./Home.scss";
-import { Contact } from "./Contact/Contact";
+import { Contact } from "../Contact/Contact";
 
 
 interface Props {
-    clickedMenuItem: MenuItemsEnum | null;
-    setClickedMenuItem: (item: MenuItemsEnum | null) => void;
+    clickedMenuItem: MenuItem | null;
+    setClickedMenuItem: (item: MenuItem | null) => void;
     setIsHeaderVisible: (isHeaderVisible: boolean) => void;
     setHasHeaderBackground: (hasHeaderBackground: boolean) => void;
     setHasHeaderBigLogo: (hasHeaderBigLogo: boolean) => void;
@@ -88,25 +88,25 @@ export const Home = ({
     useEffect(() => {
         if (clickedMenuItem && homeRef.current) {
             switch (clickedMenuItem) {
-                case MenuItemsEnum.HOME:
+                case MenuItem.HOME:
                     homeRef.current.scrollTo({top: 0, behavior: 'smooth'});
                     setIsBottomContainerOpened(false);
                     setIsRightContainerOpened(false);
                     setClickedMenuItem(null);
                     return;
-                case MenuItemsEnum.ABOUT:
+                case MenuItem.ABOUT:
                     homeRef.current.scrollTo({top: 0, behavior: 'smooth'});
                     setIsBottomContainerOpened(false);
                     setIsRightContainerOpened(true);
                     setClickedMenuItem(null);
                     return;
-                case MenuItemsEnum.PROJECTS:
+                case MenuItem.PROJECTS:
                     homeRef.current.scrollTo({ top: 0, behavior: 'smooth' });
                     setIsBottomContainerOpened(true);
                     setIsRightContainerOpened(true);
                     setClickedMenuItem(null);
                     return;
-                case MenuItemsEnum.CONTACTS:
+                case MenuItem.CONTACTS:
                     homeRef.current.scrollTo({ top: homeRef.current.scrollHeight, behavior: 'smooth' });
                     setIsBottomContainerOpened(true);
                     setIsRightContainerOpened(true);

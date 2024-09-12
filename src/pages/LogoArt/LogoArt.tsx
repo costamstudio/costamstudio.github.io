@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { getRandomNumberInRange } from "../../../utils/common";
+import { getRandomNumberInRange } from "../../utils/common";
 
 import "./LogoArt.scss";
 import { useIntl } from "react-intl";

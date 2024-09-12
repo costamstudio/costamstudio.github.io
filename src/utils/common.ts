@@ -19,6 +19,25 @@ export const loadVideos = async (videos: string[]): Promise<HTMLVideoElement[]> 
   return Promise.all(videos.map(src => preloadVideo(src)));
 };
 
+export const flattenMessages = ((nestedMessages: any, prefix = '') => {
+  if (nestedMessages === null) {
+    return {};
+  }
+
+  return Object.keys(nestedMessages).reduce((messages, key) => {
+    const value       = nestedMessages[key]
+    const prefixedKey = prefix ? `${prefix}.${key}` : key
+
+    if (typeof value === 'string') {
+      Object.assign(messages, { [prefixedKey]: value })
+    } else {
+      Object.assign(messages, flattenMessages(value, prefixedKey))
+    }
+
+    return messages
+  }, {});
+});
+
 const preloadVideo = async (src: string): Promise<HTMLVideoElement> => {
   const res = await fetch(src);
   const blob = await res.blob();
