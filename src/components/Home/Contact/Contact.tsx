@@ -1,10 +1,12 @@
 import { useResizeDetector } from "react-resize-detector";
+import { useIntl } from "react-intl";
+import { useCallback } from "react";
 
 import { Glass } from "../../Glass/Glass";
 import contactVector from "../../../assets/images/contact-vector.png";
+import { EMAIL_LINK, FACEBOOK_LINK, LINKEDIN_LINK } from "./constants";
 
 import "./Contact.scss";
-import { FormattedMessage, useIntl } from "react-intl";
 
 interface Props {
     contactBackground: HTMLVideoElement | null;
@@ -13,6 +15,10 @@ interface Props {
 export const Contact = ({ contactBackground }: Props) => {
     const { formatMessage } = useIntl();
     const { width, ref } = useResizeDetector();
+
+    const openNewTabLink = useCallback((link: string) => {
+        window.open(link, "_blank");
+    }, []);
 
     return (
         <div ref={ref} className="contact-container">
@@ -44,7 +50,23 @@ export const Contact = ({ contactBackground }: Props) => {
                     </div>
                     <div  className="contact-content-image-container">
                         <div className="contact-content-image-title">/ {formatMessage({ id: "socialMedia" })}</div>
-                        <div className="contact-content-image"/>
+                        <div className="contact-content-image-socials">
+                            <div className="contact-content-instagram"/>
+                            <div className="contact-content-social-links">
+                                <div
+                                    className="contact-content-facebook social-link-icon"
+                                    onClick={() => openNewTabLink(FACEBOOK_LINK)}
+                                />
+                                <div
+                                    className="contact-content-linkedin social-link-icon"
+                                    onClick={() => openNewTabLink(LINKEDIN_LINK)}
+                                />
+                                <div
+                                    className="contact-content-email social-link-icon"
+                                    onClick={() => openNewTabLink(EMAIL_LINK)}
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

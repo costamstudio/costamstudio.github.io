@@ -58,11 +58,11 @@
   }
 
   .contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: flex-end;
     position: absolute;
     bottom: 180px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
     padding: 0 80px;
     width: 100%;
     box-sizing: border-box;
@@ -87,12 +87,44 @@
     color: #232323;
   }
 
-  .contact-content-image {
-    width: 870px;
+  .contact-content-image-socials {
+    display: flex;
+    gap: 12px;
+  }
+
+  .contact-content-instagram {
+    width: 132px;
     height: 132px;
-    background-image: url("/assets/images/qr.png");
+    background-image: url("/assets/images/instagram-qr.png");
     background-repeat: no-repeat;
     background-size: contain;
+  }
+
+  .contact-content-social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .social-link-icon {
+    $social-link-size: 36px;
+    width: $social-link-size;
+    height: $social-link-size;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+  }
+
+  .contact-content-facebook {
+    background-image: url("/assets/images/facebook-icon.png");
+  }
+
+  .contact-content-linkedin {
+    background-image: url("/assets/images/linkedin-icon.png");
+  }
+
+  .contact-content-email {
+    background-image: url("/assets/images/email-icon.png");
   }
 
   .contact-content-item {
