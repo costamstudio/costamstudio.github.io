@@ -1,4 +1,5 @@
 import { useIntl } from "react-intl";
+import { useMemo } from "react";
 
 import { Project } from "../../types/Project";
 import { GlitchContainer } from "../../components/GlitchContainer/GlitchContainer";
@@ -7,14 +8,19 @@ import "./Preview.scss";
 
 interface Props {
     project: Project
+    isCarouselPreview?: boolean;
 }
 
-export const Preview = ({ project }: Props) => {
+export const Preview = ({ project, isCarouselPreview }: Props) => {
     const { formatMessage } = useIntl();
     const projects = require.context('../../assets/images/projects', true);
 
+    const templateClass = useMemo(() => {
+        return isCarouselPreview ? "carousel-preview" : project.previewType.toLowerCase().replace("_", "-");
+    }, [isCarouselPreview, project]);
+
     return (
-        <div className={`preview-container ${project.previewType.toLowerCase().replace("_", "-")}`}>
+        <div className={`preview-container ${templateClass}`}>
             <GlitchContainer>
                 <img className="preview-image" src={projects(`./${project.id}/preview.png`)}/>
             </GlitchContainer>

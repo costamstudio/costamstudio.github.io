@@ -5,4 +5,5 @@ export interface Project {
   id: string;
   previewType: PreviewTemplateId;
   sections: Section[];
+  isShownInMainPreviews?: boolean;
 }

@@ -41,5 +41,25 @@ export const en = {
       description: "Ta rzeźba przedstawia abstrakcyjne wyobrażenie skał, jakby wyrzeźbionych z cienia. Symbolizuje wieczność i nieustanny ruch czasu, tworząc atmosferę tajemnicy i starożytności.",
       tags: "ceramica, 60x40x30cm, 2023"
     },
+    "6824cc6b-ef17-45a5-be24-b9547312b8ac": {
+      title: "Topielec",
+      description: "Ta rzeźba przedstawia abstrakcyjne wyobrażenie skał, jakby wyrzeźbionych z cienia. Symbolizuje wieczność i nieustanny ruch czasu, tworząc atmosferę tajemnicy i starożytności.",
+      tags: "szklo, woda, 50x50x50cm, 2022"
+    },
+    "7fe36b44-a1af-446b-abe2-d2ad2ccef992": {
+      title: "Raj Utracony",
+      description: "Rysunek w technice węgla przedstawia zamglone obrazy ludzi i budynków, tworząc efekt mrocznej i zamglonej pamięci. Dzieło to odzwierciedla kruchość ludzkiej pamięci i jej skłonność do zniekształceń z biegiem czasu.",
+      tags: "węgiel, papier, 70x50cm, 2021"
+    },
+    "24de7f54-66a4-4ef5-b0c7-2763662fd3e6": {
+      title: "Zamglona Pamięć",
+      description: "Rysunek w technice węgla przedstawia zamglone obrazy ludzi i budynków, tworząc efekt mrocznej i zamglonej pamięci. Dzieło to odzwierciedla kruchość ludzkiej pamięci i jej skłonność do zniekształceń z biegiem czasu.",
+      tags: "węgiel, papier, 70x50cm, 2021"
+    },
+    "f8550e11-c724-4a45-9335-3a70e069aab6": {
+      title: "Cienie Skał",
+      description: "Ta rzeźba przedstawia abstrakcyjne wyobrażenie skał, jakby wyrzeźbionych z cienia. Symbolizuje wieczność i nieustanny ruch czasu, tworząc atmosferę tajemnicy i starożytności.",
+      tags: "ceramica, 60x40x30cm, 2023"
+    },
   },
 }

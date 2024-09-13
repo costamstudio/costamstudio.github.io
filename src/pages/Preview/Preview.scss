@@ -85,4 +85,17 @@
       width: 1098px;
     }
   }
+
+  &.carousel-preview {
+    flex-direction: column;
+    gap: 20px;
+
+    .preview-image {
+      width: 100%;
+    }
+
+    .preview-text-container {
+      width: 100%;
+    }
+  }
 }
