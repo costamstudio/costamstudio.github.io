@@ -1,6 +1,7 @@
 import { useIntl } from "react-intl";
 
 import { Project } from "../../types/Project";
+import { GlitchContainer } from "../../components/GlitchContainer/GlitchContainer";
 
 import "./Preview.scss";
 
@@ -14,7 +15,9 @@ export const Preview = ({ project }: Props) => {
 
     return (
         <div className={`preview-container ${project.previewType.toLowerCase().replace("_", "-")}`}>
-            <img className="preview-image" src={projects(`./${project.id}/preview.png`)}/>
+            <GlitchContainer>
+                <img className="preview-image" src={projects(`./${project.id}/preview.png`)}/>
+            </GlitchContainer>
             <div className="preview-text-container">
                 <div className="preview-title">{formatMessage({ id: `projectContent.${project.id}.title` })}</div>
                 <div className="preview-description">{formatMessage({ id: `projectContent.${project.id}.description` })}</div>
