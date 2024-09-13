@@ -93,24 +93,28 @@ export const Home = ({
                     setIsBottomContainerOpened(false);
                     setIsRightContainerOpened(false);
                     setClickedMenuItem(null);
+                    setHasHeaderBigLogo(true);
                     return;
                 case MenuItem.ABOUT:
                     homeRef.current.scrollTo({top: 0, behavior: 'smooth'});
                     setIsBottomContainerOpened(false);
                     setIsRightContainerOpened(true);
                     setClickedMenuItem(null);
+                    setHasHeaderBigLogo(false);
                     return;
                 case MenuItem.PROJECTS:
                     homeRef.current.scrollTo({ top: 0, behavior: 'smooth' });
                     setIsBottomContainerOpened(true);
                     setIsRightContainerOpened(true);
                     setClickedMenuItem(null);
+                    setHasHeaderBigLogo(false);
                     return;
                 case MenuItem.CONTACTS:
                     homeRef.current.scrollTo({ top: homeRef.current.scrollHeight, behavior: 'smooth' });
                     setIsBottomContainerOpened(true);
                     setIsRightContainerOpened(true);
                     setClickedMenuItem(null);
+                    setHasHeaderBigLogo(false);
                     return;
                 default:
                     return;
