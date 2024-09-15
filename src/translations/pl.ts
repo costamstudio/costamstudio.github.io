@@ -24,7 +24,25 @@ export const pl = {
     "a79a22a4-5d13-448b-9f71-585146b6a368": {
       title: "Topielec",
       description: "Ta rzeźba przedstawia abstrakcyjne wyobrażenie skał, jakby wyrzeźbionych z cienia. Symbolizuje wieczność i nieustanny ruch czasu, tworząc atmosferę tajemnicy i starożytności.",
-      tags: "szklo, woda, 50x50x50cm, 2022"
+      tags: "szklo, woda, 50x50x50cm, 2022",
+      sections: {
+        0: {
+          title: "Interpretacja Artystyczna",
+          description: "Topielec, nawiązujący do postaci utopca, bawi się dualnościami światła i cienia, materii i pustki. Górna część rzeźby, wyłaniająca się z wody, przypomina ciemną, skomplikowaną formację, nawiązującą do starożytnych reliktów. Ten zaciemniony wierzch kontrastuje ostro z zanurzoną, jaśniejszą częścią, sugerując ukryty świat pod powierzchnią, dostępny jedynie poprzez introspekcję i wyobraźnię."
+        },
+        1: {
+          title: "Interpretacja Artystyczna",
+          description: "Topielec, nawiązujący do postaci utopca, bawi się dualnościami światła i cienia, materii i pustki. Górna część rzeźby, wyłaniająca się z wody, przypomina ciemną, skomplikowaną formację, nawiązującą do starożytnych reliktów. Ten zaciemniony wierzch kontrastuje ostro z zanurzoną, jaśniejszą częścią, sugerując ukryty świat pod powierzchnią, dostępny jedynie poprzez introspekcję i wyobraźnię."
+        },
+        2: {
+          title: "Interpretacja Artystyczna",
+          description: "Topielec, nawiązujący do postaci utopca, bawi się dualnościami światła i cienia, materii i pustki. Górna część rzeźby, wyłaniająca się z wody, przypomina ciemną, skomplikowaną formację, nawiązującą do starożytnych reliktów. Ten zaciemniony wierzch kontrastuje ostro z zanurzoną, jaśniejszą częścią, sugerując ukryty świat pod powierzchnią, dostępny jedynie poprzez introspekcję i wyobraźnię."
+        },
+        3: {
+          title: "Interpretacja Artystyczna",
+          description: "Topielec, nawiązujący do postaci utopca, bawi się dualnościami światła i cienia, materii i pustki. Górna część rzeźby, wyłaniająca się z wody, przypomina ciemną, skomplikowaną formację, nawiązującą do starożytnych reliktów. Ten zaciemniony wierzch kontrastuje ostro z zanurzoną, jaśniejszą częścią, sugerując ukryty świat pod powierzchnią, dostępny jedynie poprzez introspekcję i wyobraźnię."
+        },
+      },
     },
     "613e6f66-34be-468f-9da4-4ee387aaf7e4": {
       title: "Raj Utracony",

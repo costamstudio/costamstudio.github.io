@@ -4,6 +4,4 @@ import { SectionType } from '../enums/SectionType';
 export interface Section {
   type: SectionType;
   templateId: SectionTemplateId;
-  description?: string;
-  title?: string;
 }

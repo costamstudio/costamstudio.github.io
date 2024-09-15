@@ -12,6 +12,8 @@ import { pl } from "../../translations/pl";
 import { en } from "../../translations/en";
 
 import './App.scss';
+import { Navigate, Route, Routes } from "react-router-dom";
+import { Project } from "../Project/Project";
 
 export const App = () => {
     const [locale, setLocale] = useState(Language.PL);
@@ -77,16 +79,30 @@ export const App = () => {
                         hasBackground={hasHeaderBackground}
                         hasBigLogo={hasHeaderBigLogo}
                     />
-                    <Home
-                        clickedMenuItem={clickedMenuItem}
-                        setClickedMenuItem={setClickedMenuItem}
-                        setIsHeaderVisible={setIsHeaderVisible}
-                        setHasHeaderBackground={setHasHeaderBackground}
-                        setHasHeaderBigLogo={setHasHeaderBigLogo}
-                        logoImages={logoImages}
-                        logoArtBackground={logoArtBackground}
-                        contactBackground={contactBackground}
-                    />
+                    <Routes>
+                        <Route path="/" element={
+                            <Home
+                                clickedMenuItem={clickedMenuItem}
+                                setClickedMenuItem={setClickedMenuItem}
+                                setIsHeaderVisible={setIsHeaderVisible}
+                                setHasHeaderBackground={setHasHeaderBackground}
+                                setHasHeaderBigLogo={setHasHeaderBigLogo}
+                                logoImages={logoImages}
+                                logoArtBackground={logoArtBackground}
+                                contactBackground={contactBackground}
+                            />
+                        }/>
+                        <Route path="/project/:id" element={
+                            <Project
+                                setIsHeaderVisible={setIsHeaderVisible}
+                                setHasHeaderBackground={setHasHeaderBackground}
+                                setHasHeaderBigLogo={setHasHeaderBigLogo}
+                            />
+                        }/>
+                        <Route path='*' element={<Navigate to="/"/>} />
+                    </Routes>
+
+
                 </IntlProvider>
             </div>
         )

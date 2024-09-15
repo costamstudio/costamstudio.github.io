@@ -10,7 +10,7 @@ export const en = {
   missionContent: "At coś tam studio , we strive to transcend the boundaries between art,\n  science, and design, creating spaces that inspire and provoke thought.",
   missionContentTwo: "Our work reflects the belief that these three disciplines are not separate \n from each other but complement one another, offering new ways\n of perceiving and experiencing the world around us.",
   whatDoTags: "design, scenography, set design, web design, art installations, visual communications",
-  whatDoContent: "Our actions boldly transcend the boundaries of conventional design, \n combining art with modern technologies \n to create groundbreaking projects that define new visual \n and spatial standards.",
+  whatDoContent: "Our actions boldly transcend the boundaries of conventional design, \n combining art with modern technologies \n to create groundbreaking project-media that define new visual \n and spatial standards.",
   somethingInspiring: "COŚ TAM Inspiring",
   ourCreativeProjects: "- Our Creative Projects",
   footerContent: "tam – an indefinite pronoun, replacing the name of any object or fact, or one that the speaker\ndoes not want or is unable to specify.",
@@ -24,7 +24,25 @@ export const en = {
     "a79a22a4-5d13-448b-9f71-585146b6a368": {
       title: "Topielec",
       description: "Ta rzeźba przedstawia abstrakcyjne wyobrażenie skał, jakby wyrzeźbionych z cienia. Symbolizuje wieczność i nieustanny ruch czasu, tworząc atmosferę tajemnicy i starożytności.",
-      tags: "szklo, woda, 50x50x50cm, 2022"
+      tags: "szklo, woda, 50x50x50cm, 2022",
+      sections: {
+        0: {
+          title: 'Interpretacja Artystyczna',
+          description: 'Topielec, nawiązujący do postaci utopca, bawi się dualnościami światła i cienia, materii i pustki. Górna część rzeźby, wyłaniająca się z wody, przypomina ciemną, skomplikowaną formację, nawiązującą do starożytnych reliktów. Ten zaciemniony wierzch kontrastuje ostro z zanurzoną, jaśniejszą częścią, sugerując ukryty świat pod powierzchnią, dostępny jedynie poprzez introspekcję i wyobraźnię.',
+        },
+        1: {
+          title: 'Interpretacja Artystyczna',
+          description: 'Topielec, nawiązujący do postaci utopca, bawi się dualnościami światła i cienia, materii i pustki. Górna część rzeźby, wyłaniająca się z wody, przypomina ciemną, skomplikowaną formację, nawiązującą do starożytnych reliktów. Ten zaciemniony wierzch kontrastuje ostro z zanurzoną, jaśniejszą częścią, sugerując ukryty świat pod powierzchnią, dostępny jedynie poprzez introspekcję i wyobraźnię.',
+        },
+        2: {
+          title: 'Interpretacja Artystyczna',
+          description: 'Topielec, nawiązujący do postaci utopca, bawi się dualnościami światła i cienia, materii i pustki. Górna część rzeźby, wyłaniająca się z wody, przypomina ciemną, skomplikowaną formację, nawiązującą do starożytnych reliktów. Ten zaciemniony wierzch kontrastuje ostro z zanurzoną, jaśniejszą częścią, sugerując ukryty świat pod powierzchnią, dostępny jedynie poprzez introspekcję i wyobraźnię.',
+        },
+        3: {
+          title: 'Interpretacja Artystyczna',
+          description: 'Topielec, nawiązujący do postaci utopca, bawi się dualnościami światła i cienia, materii i pustki. Górna część rzeźby, wyłaniająca się z wody, przypomina ciemną, skomplikowaną formację, nawiązującą do starożytnych reliktów. Ten zaciemniony wierzch kontrastuje ostro z zanurzoną, jaśniejszą częścią, sugerując ukryty świat pod powierzchnią, dostępny jedynie poprzez introspekcję i wyobraźnię.',
+        },
+      },
     },
     "613e6f66-34be-468f-9da4-4ee387aaf7e4": {
       title: "Raj Utracony",

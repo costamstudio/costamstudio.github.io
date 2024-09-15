@@ -18,6 +18,7 @@
     "react-powerglitch": "^1.0.3",
     "react-resize-detector": "^10.0.1",
     "react-responsive": "^10.0.0",
+    "react-router-dom": "^6.26.2",
     "react-scripts": "5.0.1",
     "react-spring": "^9.7.3",
     "react-use-scroll-direction": "^0.1.0",

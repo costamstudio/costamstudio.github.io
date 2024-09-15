@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { animated, useSpring } from "react-spring";
+import { useNavigate } from "react-router-dom";
 
 import { LogoArt } from "../LogoArt/LogoArt";
 import { About } from "../About/About";
 import { Projects } from "../Projects/Projects";
 import { MenuItem } from "../../enums/MenuItem";
+import { Contact } from "../Contact/Contact";
 
 import "./Home.scss";
-import { Contact } from "../Contact/Contact";
 
 
 interface Props {
@@ -30,7 +31,7 @@ export const Home = ({
                          setIsHeaderVisible,
                          setHasHeaderBackground,
                          setHasHeaderBigLogo
-}: Props) => {
+                     }: Props) => {
     const [isRightContainerOpened, setIsRightContainerOpened] = useState(false);
     const [isBottomContainerOpened, setIsBottomContainerOpened] = useState(false);
     const [isOnWheelDisabled, setIsOnWheelDisabled] = useState(false);
@@ -89,14 +90,14 @@ export const Home = ({
         if (clickedMenuItem && homeRef.current) {
             switch (clickedMenuItem) {
                 case MenuItem.HOME:
-                    homeRef.current.scrollTo({top: 0, behavior: 'smooth'});
+                    homeRef.current.scrollTo({ top: 0, behavior: 'smooth' });
                     setIsBottomContainerOpened(false);
                     setIsRightContainerOpened(false);
                     setClickedMenuItem(null);
                     setHasHeaderBigLogo(true);
                     return;
                 case MenuItem.ABOUT:
-                    homeRef.current.scrollTo({top: 0, behavior: 'smooth'});
+                    homeRef.current.scrollTo({ top: 0, behavior: 'smooth' });
                     setIsBottomContainerOpened(false);
                     setIsRightContainerOpened(true);
                     setClickedMenuItem(null);

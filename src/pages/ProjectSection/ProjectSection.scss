@@ -1,0 +1,153 @@
+.section-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: flex-end;
+  column-gap: 20px;
+  row-gap: 40px;
+
+  .section-media {
+    overflow: hidden;
+
+    img, video {
+      width: 100%;
+    }
+  }
+
+  .section-text-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: #ffffff;
+  }
+
+  .section-title {
+    font-family: "SigmundPro-Regular";
+    font-size: 28px;
+    line-height: 32px;
+    letter-spacing: -0.04em;
+  }
+
+  .section-description {
+    font-family: "SigmundPro-Light";
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  &.section-1 {
+    .section-media {
+      grid-column: 1/6;
+    }
+
+    .section-text-container {
+      grid-column: 7/12;
+    }
+  }
+
+  &.section-2 {
+    .section-media {
+      grid-column: 1/7;
+    }
+
+    .section-text-container {
+      grid-column: 8/13;
+    }
+  }
+
+  &.section-3 {
+    .section-media {
+      grid-column: 1/8;
+    }
+
+    .section-text-container {
+      grid-column: 9/13;
+    }
+  }
+
+  &.section-4 {
+    .section-text-container {
+      grid-row: 1;
+      grid-column: 2/7;
+    }
+
+    .section-media {
+      grid-row: 1;
+      grid-column: 8/13;
+    }
+  }
+
+  &.section-5 {
+    .section-text-container {
+      grid-row: 1;
+      grid-column: 1/6;
+    }
+
+    .section-media {
+      grid-row: 1;
+      grid-column: 7/13;
+    }
+  }
+
+  &.section-6 {
+    .section-text-container {
+      grid-row: 1;
+      grid-column: 1/5;
+    }
+
+    .section-media {
+      grid-row: 1;
+      grid-column: 6/13;
+    }
+  }
+
+  &.section-7 {
+    .section-media {
+      grid-column: 1/6;
+    }
+
+    .section-text-container {
+      grid-column: 1/6;
+    }
+  }
+
+  &.section-8 {
+    .section-media {
+      grid-column: 1/7;
+    }
+
+    .section-text-container {
+      grid-column: 1/6;
+    }
+  }
+
+  &.section-9 {
+    .section-media {
+      grid-column: 1/8;
+    }
+
+    .section-text-container {
+      grid-column: 1/6;
+    }
+  }
+
+  &.section-9 {
+    .section-media {
+      grid-column: 1/8;
+    }
+
+    .section-text-container {
+      grid-column: 1/6;
+    }
+  }
+
+  &.section-10 {
+    grid-template-columns: repeat(13, 1fr);
+
+    .section-media {
+      grid-column: 4/9;
+    }
+
+    .section-text-container {
+      grid-column: 4/9;
+    }
+  }
+}

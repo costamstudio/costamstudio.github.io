@@ -1,11 +1,30 @@
 import { Project } from '../types/Project';
 import { PreviewTemplateId } from '../enums/PreviewTemplateId';
+import { SectionTemplateId } from '../enums/SectionTemplateId';
+import { SectionType } from '../enums/SectionType';
 
 export const PROJECTS: Project[] = [
   {
     id: "a79a22a4-5d13-448b-9f71-585146b6a368",
     previewType: PreviewTemplateId.PREVIEW_1,
-    sections: [],
+    sections: [
+      {
+        templateId: SectionTemplateId.SECTION_8,
+        type: SectionType.IMAGE,
+      },
+      {
+        templateId: SectionTemplateId.SECTION_3,
+        type: SectionType.IMAGE,
+      },
+      {
+        templateId: SectionTemplateId.SECTION_9,
+        type: SectionType.IMAGE,
+      },
+      {
+        templateId: SectionTemplateId.SECTION_1,
+        type: SectionType.IMAGE,
+      },
+    ],
     isShownInMainPreviews: true,
   },
   {

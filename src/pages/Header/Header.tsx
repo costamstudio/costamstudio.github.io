@@ -7,6 +7,7 @@ import { LocaleToggle } from "./LocaleToggle/LocaleToggle";
 import { Language } from "../../enums/Language";
 
 import "./Header.scss";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
     locale: Language;
@@ -19,6 +20,8 @@ interface Props {
 
 export const Header = ({ locale, setLocale, setClickedMenuItem, isVisible, hasBackground, hasBigLogo }: Props) => {
     const { formatMessage } = useIntl();
+    const navigate = useNavigate();
+
     const getMenuItem = useCallback((content: ReactNode) => {
         return (
             <div className="menu-item">
@@ -28,6 +31,11 @@ export const Header = ({ locale, setLocale, setClickedMenuItem, isVisible, hasBa
                 </div>
             </div>
         )
+    }, []);
+
+    const onMenuItemClicked = useCallback((menuItem: MenuItem) => {
+        navigate("/");
+        setTimeout(() => setClickedMenuItem(menuItem), 300);
     }, []);
 
     const styles = useSpring({
@@ -52,11 +60,11 @@ export const Header = ({ locale, setLocale, setClickedMenuItem, isVisible, hasBa
 
     return (
         <animated.div className="header" style={{...styles, ...backgroundStyles}}>
-            <animated.div style={{...stylesHeaderContent, ...logoStyles}} className="header-logo" onClick={() => setClickedMenuItem(MenuItem.HOME)}/>
+            <animated.div style={{...stylesHeaderContent, ...logoStyles}} className="header-logo" onClick={() => onMenuItemClicked(MenuItem.HOME)}/>
             <animated.div style={stylesHeaderContent} className="header-menu">
-                {getMenuItem(<div onClick={() => setClickedMenuItem(MenuItem.ABOUT)}>{formatMessage({ id: "about" })}</div>)}
-                {getMenuItem(<div onClick={() => setClickedMenuItem(MenuItem.PROJECTS)}>{formatMessage({ id: "projects" })}</div>)}
-                {getMenuItem(<div onClick={() => setClickedMenuItem(MenuItem.CONTACTS)}>{formatMessage({ id: "contacts" })}</div>)}
+                {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.ABOUT)}>{formatMessage({ id: "about" })}</div>)}
+                {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.PROJECTS)}>{formatMessage({ id: "projects" })}</div>)}
+                {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.CONTACTS)}>{formatMessage({ id: "contacts" })}</div>)}
                 {getMenuItem(<LocaleToggle locale={locale} setLocale={setLocale}/>)}
             </animated.div>
         </animated.div>
