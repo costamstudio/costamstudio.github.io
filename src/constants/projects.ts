@@ -9,19 +9,19 @@ export const PROJECTS: Project[] = [
     previewType: PreviewTemplateId.PREVIEW_1,
     sections: [
       {
-        templateId: SectionTemplateId.SECTION_8,
+        templateId: SectionTemplateId.FULL_S_IC_TB,
         type: SectionType.IMAGE,
       },
       {
-        templateId: SectionTemplateId.SECTION_3,
+        templateId: SectionTemplateId.FULL_M_IC_TB,
         type: SectionType.IMAGE,
       },
       {
-        templateId: SectionTemplateId.SECTION_9,
+        templateId: SectionTemplateId.FULL_L_IC_TB,
         type: SectionType.IMAGE,
       },
       {
-        templateId: SectionTemplateId.SECTION_1,
+        templateId: SectionTemplateId.FULL_XXL_IC_TB,
         type: SectionType.IMAGE,
       },
     ],

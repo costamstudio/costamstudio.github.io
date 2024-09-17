@@ -30,7 +30,7 @@ export const ProjectSection = ({ projectId, sectionIndex, section }: Props) => {
     }, [sectionPath, intl]);
 
     return (
-        <div className={`section-container ${section.templateId.toLowerCase().replace("_", "-")}`}>
+        <div className={`section-container ${section.templateId.toLowerCase().replaceAll("_", "-")}`}>
             <div className="section-media">
                 {section.type === SectionType.IMAGE ? (
                     <img className="section-media" src={projectMedia(`./${projectId}/${sectionIndex}.png`)}/>
