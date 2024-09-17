@@ -4,6 +4,7 @@ import { useIntl } from "react-intl";
 
 import { PROJECTS } from "../../constants/projects";
 import { ProjectSection } from "../ProjectSection/ProjectSection";
+import { Contact } from "../Contact/Contact";
 
 import "./Project.scss";
 
@@ -11,9 +12,10 @@ interface Props {
     setIsHeaderVisible: (isHeaderVisible: boolean) => void;
     setHasHeaderBackground: (hasHeaderBackground: boolean) => void;
     setHasHeaderBigLogo: (hasHeaderBigLogo: boolean) => void;
+    contactBackground: HTMLVideoElement | null;
 }
 
-export const Project = ({ setIsHeaderVisible, setHasHeaderBackground, setHasHeaderBigLogo }: Props) => {
+export const Project = ({ setIsHeaderVisible, setHasHeaderBackground, setHasHeaderBigLogo, contactBackground }: Props) => {
     const { id } = useParams();
     const { formatMessage } = useIntl();
     const projectRef = useRef<HTMLDivElement>(null);
@@ -45,7 +47,6 @@ export const Project = ({ setIsHeaderVisible, setHasHeaderBackground, setHasHead
 
     return (
         <div ref={projectRef} className="project-container" onScroll={onScroll}>
-            <div>
                 <div className="project-header-container">
                     <img className="project-thumbnail" src={projectMedia(`./${id}/preview.png`)}/>
                     <div className="project-header-content">
@@ -69,7 +70,7 @@ export const Project = ({ setIsHeaderVisible, setHasHeaderBackground, setHasHead
                         />
                     ))}
                 </div>
-            </div>
+                <Contact contactBackground={contactBackground}/>
         </div>
     );
 };

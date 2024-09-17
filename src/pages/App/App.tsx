@@ -97,6 +97,7 @@ export const App = () => {
                                 setIsHeaderVisible={setIsHeaderVisible}
                                 setHasHeaderBackground={setHasHeaderBackground}
                                 setHasHeaderBigLogo={setHasHeaderBigLogo}
+                                contactBackground={contactBackground}
                             />
                         }/>
                         <Route path='*' element={<Navigate to="/"/>} />

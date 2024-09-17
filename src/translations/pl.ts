@@ -42,6 +42,14 @@ export const pl = {
           title: "Interpretacja Artystyczna",
           description: "Topielec, nawiązujący do postaci utopca, bawi się dualnościami światła i cienia, materii i pustki. Górna część rzeźby, wyłaniająca się z wody, przypomina ciemną, skomplikowaną formację, nawiązującą do starożytnych reliktów. Ten zaciemniony wierzch kontrastuje ostro z zanurzoną, jaśniejszą częścią, sugerując ukryty świat pod powierzchnią, dostępny jedynie poprzez introspekcję i wyobraźnię."
         },
+        4: {
+          title: "Interpretacja Artystyczna",
+          description: "Topielec, nawiązujący do postaci utopca, bawi się dualnościami światła i cienia, materii i pustki. Górna część rzeźby, wyłaniająca się z wody, przypomina ciemną, skomplikowaną formację, nawiązującą do starożytnych reliktów. Ten zaciemniony wierzch kontrastuje ostro z zanurzoną, jaśniejszą częścią, sugerując ukryty świat pod powierzchnią, dostępny jedynie poprzez introspekcję i wyobraźnię."
+        },
+        5: {
+          title: "Interpretacja Artystyczna",
+          description: "Topielec, nawiązujący do postaci utopca, bawi się dualnościami światła i cienia, materii i pustki. Górna część rzeźby, wyłaniająca się z wody, przypomina ciemną, skomplikowaną formację, nawiązującą do starożytnych reliktów. Ten zaciemniony wierzch kontrastuje ostro z zanurzoną, jaśniejszą częścią, sugerując ukryty świat pod powierzchnią, dostępny jedynie poprzez introspekcję i wyobraźnię."
+        },
       },
     },
     "613e6f66-34be-468f-9da4-4ee387aaf7e4": {
