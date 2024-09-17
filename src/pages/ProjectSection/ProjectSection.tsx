@@ -46,10 +46,13 @@ export const ProjectSection = ({ projectId, sectionIndex, section }: Props) => {
             </div>
             {(hasTitle || hasDescription) && (
                 <div className="section-text-container">
-                    {hasTitle && <div className="section-title">{formatMessage({ id: `${sectionPath}.title` })}</div>}
-                    {hasDescription && <div className="section-description">{formatMessage({ id: `${sectionPath}.description` })}</div>}
+                    {hasTitle &&
+                        <div className="section-title">{formatMessage({ id: `${sectionPath}.title` })}</div>}
+                    {hasDescription && <div
+                        className="section-description">{formatMessage({ id: `${sectionPath}.description` })}</div>}
                 </div>
             )}
+
         </div>
     );
 };
