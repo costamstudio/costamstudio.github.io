@@ -54,8 +54,7 @@ export const Header = ({ locale, setLocale, setClickedMenuItem, isVisible, hasBa
     });
 
     const logoStyles = useSpring({
-        width: hasBigLogo ? "270px" : "190px",
-        height: hasBigLogo ? "68px" : "48px",
+        transform: `scale(${hasBigLogo ? 1.4 : 1})`,
     });
 
     return (
