@@ -1,1 +1,1 @@
-export const GLASS_ITEM_WIDTH = 30;
+export const GLASS_ITEM_LENGTH = 60;

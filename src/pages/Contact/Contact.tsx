@@ -1,4 +1,3 @@
-import { useResizeDetector } from "react-resize-detector";
 import { useIntl } from "react-intl";
 import { useCallback } from "react";
 
@@ -14,14 +13,13 @@ interface Props {
 
 export const Contact = ({ contactBackground }: Props) => {
     const { formatMessage } = useIntl();
-    const { width, ref } = useResizeDetector();
 
     const openNewTabLink = useCallback((link: string) => {
         window.open(link, "_blank");
     }, []);
 
     return (
-        <div ref={ref} className="contact-container">
+        <div className="contact-container">
             <video
                 className="background-video"
                 src={contactBackground?.src ?? ""}
@@ -31,7 +29,7 @@ export const Contact = ({ contactBackground }: Props) => {
             />
             <div className="contact-content-container">
                 <img className="contact-vector" src={contactVector}/>
-                <Glass width={width ?? 0}/>
+                <Glass/>
                 <div className="footer">
                     <div className="logo"/>
                     <div className="footer-content">{formatMessage({ id: "footerContent" })}</div>
