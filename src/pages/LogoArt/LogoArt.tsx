@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useIntl } from "react-intl";
+import { useResizeDetector } from "react-resize-detector";
 
 import { getRandomNumberInRange } from "../../utils/common";
 
 import "./LogoArt.scss";
-import { useIntl } from "react-intl";
 
 interface Props {
     logoImages: HTMLImageElement[];
@@ -12,8 +13,7 @@ interface Props {
 
 export const LogoArt = ({ logoArtBackground, logoImages }: Props) => {
     const brashRadius = 40;
-    const canvasWidth = 870;
-    const canvasHeight = 688;
+    const { width: canvasWidth = 1, height: canvasHeight = 1, ref } = useResizeDetector();
 
     const { formatMessage } = useIntl();
 
@@ -68,7 +68,9 @@ export const LogoArt = ({ logoArtBackground, logoImages }: Props) => {
 
     useEffect(() => {
         if (canvasContext && logoImages.length) {
+            console.log(canvasWidth, canvasHeight);
             const backgroundLogoIndex = getRandomNumberInRange(0, logoImages.length - 1);
+            canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
             canvasContext.drawImage(logoImages[backgroundLogoIndex], 0, 0, canvasWidth, canvasHeight);
             updateFillStylePattern(backgroundLogoIndex);
         }
@@ -83,17 +85,15 @@ export const LogoArt = ({ logoArtBackground, logoImages }: Props) => {
               autoPlay={true}
               muted={true}
           />
-          <div className="logo-canvas-container">
-              <div className="logo-canvas">
-                  <canvas
-                      ref={canvasRef}
-                      width={canvasWidth}
-                      height={canvasHeight}
-                      onMouseMove={onMouseMove}
-                      onMouseLeave={onMouseLeave}
-                  />
-                  <div className="logo-postfix"/>
-              </div>
+          <div ref={ref} className="logo-canvas-container">
+              <canvas
+                  ref={canvasRef}
+                  width={canvasWidth}
+                  height={canvasHeight}
+                  onMouseMove={onMouseMove}
+                  onMouseLeave={onMouseLeave}
+              />
+              <div className="logo-postfix"/>
           </div>
           <div className="logo-art-hint">{formatMessage({ id: "scrollToExplore" })}</div>
       </div>
