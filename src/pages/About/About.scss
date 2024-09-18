@@ -18,12 +18,19 @@
     right: 80px;
     bottom: 120px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(12, 1fr);
   }
 
   .about-content-item {
-    width: 722px;
     color: white;
+
+    &.left {
+      grid-column: 1/6;
+    }
+
+    &.right {
+      grid-column: 7/12;
+    }
   }
 
   .about-title {

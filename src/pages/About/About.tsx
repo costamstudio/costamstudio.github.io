@@ -17,12 +17,12 @@ export const About = ({ isVisible }: Props) => {
         <div ref={ref} className="about">
             <Glass width={width ?? 0}/>
             <div className="about-content-container">
-                <div className="about-content-item">
+                <div className="about-content-item left">
                     <div className="about-title">{formatMessage({ id: "mission" })}</div>
                     <div className="about-text">{formatMessage({ id: "missionContent" })}</div>
                     <div className="about-text">{formatMessage({ id: "missionContentTwo" })}</div>
                 </div>
-                <div className="about-content-item">
+                <div className="about-content-item right">
                     <div className="about-title">{formatMessage({ id: "whatDo" })}</div>
                     <div className="about-tags">
                         {formatMessage({ id: "whatDoTags" }).split(",").map((item, index) => (

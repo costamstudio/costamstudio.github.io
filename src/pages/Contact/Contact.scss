@@ -60,7 +60,7 @@
 
   .contact-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(12, 1fr);
     align-items: flex-end;
     position: absolute;
     bottom: 180px;
@@ -70,12 +70,14 @@
   }
 
   .contact-content-text {
+    grid-column: 1/7;
     display: flex;
     flex-direction: column;
     gap: 40px;
   }
 
   .contact-content-image-container {
+    grid-column: 7/13;
     display: flex;
     flex-direction: column;
     gap: 8px;

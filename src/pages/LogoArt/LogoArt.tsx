@@ -68,7 +68,6 @@ export const LogoArt = ({ logoArtBackground, logoImages }: Props) => {
 
     useEffect(() => {
         if (canvasContext && logoImages.length) {
-            console.log(canvasWidth, canvasHeight);
             const backgroundLogoIndex = getRandomNumberInRange(0, logoImages.length - 1);
             canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
             canvasContext.drawImage(logoImages[backgroundLogoIndex], 0, 0, canvasWidth, canvasHeight);
