@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useIntl } from "react-intl";
 import { useResizeDetector } from "react-resize-detector";
+import { isMobile } from "react-device-detect";
 
 import { getRandomNumberInRange } from "../../utils/common";
 
@@ -24,6 +25,8 @@ export const LogoArt = ({ logoArtBackground, logoImages }: Props) => {
     const [fillStylePattern, setFillStylePattern] = useState<CanvasPattern | null>(null);
     const [brushImageIndex, setBrushImageIndex] = useState(0);
 
+    const [drawInterval, setDrawInterval] = useState<ReturnType<typeof setInterval> | null>(null);
+
     const clearCircle = useCallback((x: number, y: number , radius: number, canvasContext: CanvasRenderingContext2D) => {
         for (let i = 0 ; i < Math.round(Math.PI * radius); i++) {
             const angle = (i / Math.round(Math.PI * radius)) * 360;
@@ -31,8 +34,41 @@ export const LogoArt = ({ logoArtBackground, logoImages }: Props) => {
         }
     }, []);
 
-    const onMouseMove = useCallback((event: React.MouseEvent) => {
+    const draw = useCallback((event: React.TouchEvent, offset: number) => {
         if (canvas && canvasContext && fillStylePattern) {
+            const canvasRect = canvas.getBoundingClientRect();
+
+            const clientX = event.touches[0].clientX;
+            const clientY = event.touches[0].clientY;
+            const x = clientX - canvasRect.left;
+            const y = clientY - canvasRect.top;
+            clearCircle(x, y, brashRadius + offset, canvasContext);
+            canvasContext.fillStyle = fillStylePattern;
+            canvasContext.beginPath();
+            canvasContext.moveTo(x + brashRadius, y);
+            canvasContext.arc(x, y, brashRadius + offset, 0, 2 * Math.PI);
+            canvasContext.fill();
+        }
+    }, [canvas, canvasContext, fillStylePattern]);
+
+    const onTouchStart = useCallback((event: React.TouchEvent) => {
+        let offset = 0
+        draw(event, offset);
+        setDrawInterval(setInterval(() => {
+            offset = offset + 2;
+            draw(event, offset);
+        }, 10));
+    }, [draw]);
+
+    const onTouchEnd = useCallback(() => {
+        if (drawInterval) {
+            clearInterval(drawInterval);
+        }
+        updateFillStylePattern(brushImageIndex);
+    }, [brushImageIndex, drawInterval]);
+
+    const onMouseMove = useCallback((event: React.MouseEvent) => {
+        if (!isMobile && canvas && canvasContext && fillStylePattern) {
             const canvasRect = canvas.getBoundingClientRect();
             const x = event.clientX - canvasRect.left;
             const y = event.clientY - canvasRect.top;
@@ -76,7 +112,7 @@ export const LogoArt = ({ logoArtBackground, logoImages }: Props) => {
     }, [canvasContext, logoImages.length, canvasHeight, canvasWidth]);
 
   return (
-      <div className="logo-art">
+      <div className={`logo-art${isMobile ? " mobile" : ""}`}>
           <video
               className="background-video"
               src={logoArtBackground?.src ?? ""}
@@ -91,6 +127,8 @@ export const LogoArt = ({ logoArtBackground, logoImages }: Props) => {
                   height={canvasHeight}
                   onMouseMove={onMouseMove}
                   onMouseLeave={onMouseLeave}
+                  onTouchStart={onTouchStart}
+                  onTouchEnd={onTouchEnd}
               />
               <div className="logo-postfix"/>
           </div>

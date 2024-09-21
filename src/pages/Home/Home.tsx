@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { animated, useSpring } from "react-spring";
-import { useNavigate } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 
 import { LogoArt } from "../LogoArt/LogoArt";
 import { About } from "../About/About";
@@ -124,7 +124,7 @@ export const Home = ({
     }, [clickedMenuItem, homeRef.current?.scrollHeight]);
 
     return (
-        <animated.div ref={homeRef} className="home" style={styles} onWheel={onWheel} onScroll={onScroll}>
+        <animated.div ref={homeRef} className={`home${isMobile ? " mobile" : ""}`} style={styles} onWheel={onWheel} onScroll={onScroll}>
             <LogoArt logoImages={logoImages} logoArtBackground={logoArtBackground}/>
             <animated.div className="right-container" style={rightContainerStyles}>
                 <About isVisible={isRightContainerOpened}/>

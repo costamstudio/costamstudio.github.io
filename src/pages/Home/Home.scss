@@ -8,6 +8,10 @@
 
 .home {
   overflow: hidden;
+
+  &.mobile {
+    padding: 0 12px;
+  }
 }
 
 .home::-webkit-scrollbar {
