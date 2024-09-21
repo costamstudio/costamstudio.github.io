@@ -18,7 +18,7 @@ export const Preview = ({ project, isCarouselPreview }: Props) => {
     const projectMedia = require.context('../../assets/project-media', true);
 
     const templateClass = useMemo(() => {
-        return isCarouselPreview ? "carousel-preview" : project.previewType.toLowerCase().replace("_", "-");
+        return isCarouselPreview ? "carousel-preview" : project.previewType.toLowerCase().replaceAll("_", "-");
     }, [isCarouselPreview, project]);
 
     return (

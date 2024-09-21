@@ -1,15 +1,20 @@
 .preview-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(24, 1fr);
+  align-items: flex-end;
+  column-gap: 20px;
+  row-gap: 20px;
 
   .preview-image {
+    width: 100%;
     cursor: pointer;
   }
 
   .preview-text-container {
     display: flex;
     flex-direction: column;
-    width: 700px;
     color: #ffffff;
+    width: 100%;
   }
 
   .preview-title {
@@ -28,7 +33,6 @@
   .preview-tags {
     display: flex;
     gap: 4px;
-    max-width: 585px;
     flex-wrap: wrap;
     margin-bottom: 20px;
   }
@@ -43,59 +47,219 @@
     border: 1px solid rgba(255, 255, 255, 0.4);
     white-space: nowrap;
   }
-
-  &.preview-1 {
-    align-items: flex-end;
-    gap: 20px;
-
-    .preview-image {
-      width: 802px;
-    }
+  .glitch-container {
+    width: 100%;
   }
 
-  &.preview-2 {
-    flex-direction: row-reverse;
-    align-items: flex-end;
-    gap: 20px;
-
-    .preview-image {
-      width: 1098px;
-    }
-  }
-
-  &.preview-3 {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-
-    .preview-image {
-      width: 1840px;
+  &.full-s-il-tr {
+    .glitch-container {
+      grid-column: 1/11;
     }
 
     .preview-text-container {
-      margin-left: 80px;
+      grid-column: 13/23;
     }
   }
 
-  &.preview-4 {
-    align-items: flex-end;
-    gap: 20px;
+  &.full-m-il-tr {
+    .glitch-container {
+      grid-column: 1/13;
+    }
 
-    .preview-image {
-      width: 1098px;
+    .preview-text-container {
+      grid-column: 15/25;
+    }
+  }
+
+  &.full-l-il-tr {
+    .glitch-container {
+      grid-column: 1/15;
+    }
+
+    .preview-text-container {
+      grid-column: 17/25;
+    }
+  }
+
+  &.full-s-ir-tl {
+    .preview-text-container {
+      grid-row: 1;
+      grid-column: 3/13;
+    }
+
+    .glitch-container {
+      grid-row: 1;
+      grid-column: 15/25;
+    }
+  }
+
+  &.full-m-ir-tl {
+    .preview-text-container {
+      grid-row: 1;
+      grid-column: 1/11;
+    }
+
+    .glitch-container {
+      grid-row: 1;
+      grid-column: 13/25;
+    }
+  }
+
+  &.full-l-ir-tl {
+    .preview-text-container {
+      grid-row: 1;
+      grid-column: 1/9;
+    }
+
+    .glitch-container {
+      grid-row: 1;
+      grid-column: 11/25;
+    }
+  }
+
+  &.full-s-il-tb {
+    .glitch-container {
+      grid-column: 1/11;
+    }
+
+    .preview-text-container {
+      grid-column: 1/11;
+    }
+  }
+
+  &.full-m-il-tb {
+    .glitch-container {
+      grid-column: 1/13;
+    }
+
+    .preview-text-container {
+      grid-column: 1/11;
+    }
+  }
+
+  &.full-l-il-tb {
+    .glitch-container {
+      grid-column: 1/15;
+    }
+
+    .preview-text-container {
+      grid-column: 1/11;
+    }
+  }
+
+  &.full-xl-il-tb {
+    .glitch-container {
+      grid-column: 1/21;
+    }
+
+    .preview-text-container {
+      grid-column: 1/11;
+    }
+  }
+
+  &.full-s-ir-tb {
+    .glitch-container {
+      grid-column: 15/25;
+    }
+
+    .preview-text-container {
+      text-align: right;
+      grid-column: 15/25;
+    }
+  }
+
+  &.full-m-ir-tb {
+    .glitch-container {
+      grid-column: 13/25;
+    }
+
+    .preview-text-container {
+      text-align: right;
+      grid-column: 15/25;
+    }
+  }
+
+  &.full-l-ir-tb {
+    .glitch-container {
+      grid-column: 11/25;
+    }
+
+    .preview-text-container {
+      text-align: right;
+      grid-column: 15/25;
+    }
+  }
+
+  &.full-xl-ir-tb {
+    .glitch-container {
+      grid-column: 5/25;
+    }
+
+    .preview-text-container {
+      text-align: right;
+      grid-column: 15/25;
+    }
+  }
+
+  &.full-s-ic-tb {
+    .glitch-container {
+      grid-column: 8/18;
+    }
+
+    .preview-text-container {
+      grid-column: 8/18;
+    }
+  }
+
+  &.full-m-ic-tb {
+    .glitch-container {
+      grid-column: 7/19;
+    }
+
+    .preview-text-container {
+      grid-column: 7/17;
+    }
+  }
+
+  &.full-l-ic-tb {
+    .glitch-container {
+      grid-column: 6/20;
+    }
+
+    .preview-text-container {
+      grid-column: 6/16;
+    }
+  }
+
+  &.full-xl-ic-tb {
+    .glitch-container {
+      grid-column: 3/23;
+    }
+
+    .preview-text-container {
+      grid-column: 3/13;
+    }
+  }
+
+  &.full-xxl-ic-tb {
+    .glitch-container {
+      grid-column: 1/25;
+    }
+
+    .preview-text-container {
+      grid-column: 1/11;
     }
   }
 
   &.carousel-preview {
-    flex-direction: column;
-    gap: 20px;
+    align-items: flex-start;
 
-    .preview-image {
-      width: 100%;
+    .glitch-container {
+      grid-column: 1/25;
     }
 
     .preview-text-container {
-      width: 100%;
+      grid-column: 1/25;
     }
   }
 }
