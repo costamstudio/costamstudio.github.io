@@ -9,6 +9,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
   user-select: none;
+  overscroll-behavior: contain;
 }
 
 code {

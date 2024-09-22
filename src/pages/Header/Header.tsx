@@ -1,13 +1,14 @@
 import { animated, useSpring } from "react-spring";
 import { ReactNode, useCallback } from "react";
 import { useIntl } from "react-intl";
+import { useNavigate } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 
 import { MenuItem } from "../../enums/MenuItem";
 import { LocaleToggle } from "./LocaleToggle/LocaleToggle";
 import { Language } from "../../enums/Language";
 
 import "./Header.scss";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
     locale: Language;
@@ -44,7 +45,7 @@ export const Header = ({ locale, setLocale, setClickedMenuItem, isVisible, hasBa
 
     const backgroundStyles = useSpring({
         delay: 200,
-        top: hasBackground ? "0px" : "20px",
+        top: hasBackground || isMobile ? "0px" : "20px",
         background: hasBackground ? "rgba(255, 255, 255, 0.8)" : "transparent",
         backdropFilter: hasBackground ? "blur(10px)" : "blur(0px)",
     });
@@ -54,17 +55,19 @@ export const Header = ({ locale, setLocale, setClickedMenuItem, isVisible, hasBa
     });
 
     const logoStyles = useSpring({
-        transform: `scale(${hasBigLogo ? 1.4 : 1})`,
+        transform: `scale(${hasBigLogo && !isMobile ? 1.4 : 1})`,
     });
 
     return (
-        <animated.div className="header" style={{...styles, ...backgroundStyles}}>
+        <animated.div className={`header${isMobile ? " mobile" : ""}`} style={{...styles, ...backgroundStyles}}>
             <animated.div style={{...stylesHeaderContent, ...logoStyles}} className="header-logo" onClick={() => onMenuItemClicked(MenuItem.HOME)}/>
             <animated.div style={stylesHeaderContent} className="header-menu">
                 {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.ABOUT)}>{formatMessage({ id: "about" })}</div>)}
                 {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.PROJECTS)}>{formatMessage({ id: "projects" })}</div>)}
                 {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.CONTACTS)}>{formatMessage({ id: "contacts" })}</div>)}
                 {getMenuItem(<LocaleToggle locale={locale} setLocale={setLocale}/>)}
+            </animated.div>
+            <animated.div style={stylesHeaderContent} className="header-burger-menu">
             </animated.div>
         </animated.div>
     )

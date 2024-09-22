@@ -6,12 +6,12 @@
   left: 0;
 }
 
-.home {
+.home, .right-container {
   overflow: hidden;
+}
 
-  &.mobile {
-    padding: 0 12px;
-  }
+.home.mobile {
+  padding: 0 12px;
 }
 
 .home::-webkit-scrollbar {

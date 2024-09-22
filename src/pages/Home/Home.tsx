@@ -34,8 +34,9 @@ export const Home = ({
                      }: Props) => {
     const [isRightContainerOpened, setIsRightContainerOpened] = useState(false);
     const [isBottomContainerOpened, setIsBottomContainerOpened] = useState(false);
-    const [isOnWheelDisabled, setIsOnWheelDisabled] = useState(false);
+    const [isScrollAbsoluteContainersDisabled, setIsScrollAbsoluteContainersDisabled] = useState(false);
     const [scrollTop, setScrollTop] = useState(0);
+    const [toucheStartY, setTouchStartY] = useState(0);
     const homeRef = useRef<HTMLDivElement>(null);
 
     const styles = useSpring({
@@ -43,38 +44,51 @@ export const Home = ({
     });
 
     const rightContainerStyles = useSpring({
-        transform: `translateX(${isRightContainerOpened ? "0" : "80"}%)`,
+        transform: isMobile ? `translateY(${isRightContainerOpened ? "0" : "85"}%)` : `translateX(${isRightContainerOpened ? "0" : "80"}%)`,
     });
 
     const bottomContainerStyles = useSpring({
-        marginTop: `${isBottomContainerOpened ? "0" : "100"}%`,
+        marginTop: `${isBottomContainerOpened ? "0" : "100vh"}`,
     });
 
-    const setOnWheelDelay = useCallback(() => {
-        setIsOnWheelDisabled(true);
-        setTimeout(() => setIsOnWheelDisabled(false), 500);
+    const setScrollAbsoluteContainersDelay = useCallback(() => {
+        setIsScrollAbsoluteContainersDisabled(true);
+        setTimeout(() => setIsScrollAbsoluteContainersDisabled(false), 500);
     }, []);
 
-    const onWheel = useCallback((event: React.WheelEvent) => {
-        if (!isOnWheelDisabled && event.deltaY > 0 && !isRightContainerOpened) {
-            setOnWheelDelay();
+    const onScrollAbsoluteContainers = useCallback((deltaY: number) => {
+        if (!isScrollAbsoluteContainersDisabled && deltaY > 0 && !isRightContainerOpened) {
+            setScrollAbsoluteContainersDelay();
             setIsRightContainerOpened(true);
             setHasHeaderBigLogo(false);
         }
-        if (!isOnWheelDisabled && event.deltaY > 0 && isRightContainerOpened && !isBottomContainerOpened) {
-            setOnWheelDelay();
+        if (!isScrollAbsoluteContainersDisabled && deltaY > 0 && isRightContainerOpened && !isBottomContainerOpened) {
+            setScrollAbsoluteContainersDelay();
             setIsBottomContainerOpened(true);
         }
-        if (!isOnWheelDisabled && scrollTop === 0 && event.deltaY < 0 && isBottomContainerOpened) {
-            setOnWheelDelay();
+        if (!isScrollAbsoluteContainersDisabled && scrollTop === 0 && deltaY < 0 && isBottomContainerOpened) {
+            setScrollAbsoluteContainersDelay();
             setIsBottomContainerOpened(false);
         }
-        if (!isOnWheelDisabled && scrollTop === 0 && event.deltaY < 0 && !isBottomContainerOpened) {
-            setOnWheelDelay();
+        if (!isScrollAbsoluteContainersDisabled && scrollTop === 0 && deltaY < 0 && !isBottomContainerOpened) {
+            setScrollAbsoluteContainersDelay();
             setIsRightContainerOpened(false);
             setHasHeaderBigLogo(true);
         }
-    }, [isRightContainerOpened, isBottomContainerOpened, scrollTop, isOnWheelDisabled]);
+    }, [isRightContainerOpened, isBottomContainerOpened, scrollTop, isScrollAbsoluteContainersDisabled]);
+
+    const onTouchStart = useCallback((event: React.TouchEvent) => {
+        setTouchStartY(event.touches[0].pageY);
+    }, [setTouchStartY]);
+
+    const onTouchMove = useCallback((event: React.TouchEvent) => {
+        const deltaY = toucheStartY - event.touches[0].pageY;
+        onScrollAbsoluteContainers(deltaY);
+    }, [toucheStartY, onScrollAbsoluteContainers]);
+
+    const onWheel = useCallback((event: React.WheelEvent) => {
+        onScrollAbsoluteContainers(event.deltaY);
+    }, [onScrollAbsoluteContainers]);
 
     const onScroll = useCallback(() => {
         if (homeRef.current) {
@@ -124,7 +138,7 @@ export const Home = ({
     }, [clickedMenuItem, homeRef.current?.scrollHeight]);
 
     return (
-        <animated.div ref={homeRef} className={`home${isMobile ? " mobile" : ""}`} style={styles} onWheel={onWheel} onScroll={onScroll}>
+        <animated.div ref={homeRef} className={`home${isMobile ? " mobile" : ""}`} style={styles} onWheel={onWheel} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onScroll={onScroll}>
             <LogoArt logoImages={logoImages} logoArtBackground={logoArtBackground}/>
             <animated.div className="right-container" style={rightContainerStyles}>
                 <About isVisible={isRightContainerOpened}/>

@@ -7,8 +7,17 @@
   .glass-item {
     background: linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.15) 82.15%, rgba(255, 255, 255, 0.05) 99.58%);
     backdrop-filter: blur(30px);
-    //width: 30px;
     height: 100%;
     flex-shrink: 0;
+  }
+
+  &.mobile {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(30, 1fr);
+
+    .glass-item {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0.15) 80.66%, rgba(255, 255, 255, 0.03) 99.58%);
+      width: 100%;
+    }
   }
 }

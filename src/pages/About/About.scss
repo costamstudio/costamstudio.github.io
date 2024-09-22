@@ -44,8 +44,11 @@
     font-family: "SigmundPro-Light";
     font-size: 20px;
     line-height: 24px;
-    margin-bottom: 20px;
     white-space: pre-line;
+
+    &:not(:last-of-type) {
+      margin-bottom: 20px;
+    }
   }
 
   .about-tags {
@@ -65,5 +68,25 @@
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     white-space: nowrap;
+  }
+
+  &.mobile {
+    .about-content-container {
+      position: absolute;
+      top: 50%;
+      bottom: 0;
+      left: 12px;
+      right: 12px;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .about-content-item {
+      height: 100%;
+      grid-column: 1/2;
+    }
   }
 }

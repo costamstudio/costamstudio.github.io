@@ -56,13 +56,22 @@
   &.mobile {
     grid-template-columns: repeat(4, 1fr);
     column-gap: 12px;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-content: center;
 
     .logo-canvas-container {
       grid-column: 1/5;
+      grid-row: 1;
     }
 
     .logo-art-hint {
-      grid-column: 2/4;
+      position: absolute;
+      margin: auto auto 12px auto;
+      left: 0;
+      right: 0;
+      text-align: center;
+      bottom: 15%;
     }
   }
 }
