@@ -325,4 +325,13 @@
       grid-column: 5/15;
     }
   }
+
+  &.mobile {
+    display: flex;
+    flex-direction: column;
+
+    .section-text-container {
+      text-align: left;
+    }
+  }
 }

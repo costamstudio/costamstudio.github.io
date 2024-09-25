@@ -60,4 +60,27 @@
     row-gap: 80px;
     column-gap: 20px;
   }
+
+  &.mobile {
+    .project-header-container {
+      max-height: 300px;
+    }
+
+    .project-header-content {
+      bottom: 20px;
+      left: 20px;
+    }
+
+    .project-title {
+      font-size: 60px;
+      line-height: 64px;
+    }
+
+    .project-sections-container {
+      display: flex;
+      flex-direction: column;
+      padding: 60px 12px;
+      gap: 60px;
+    }
+  }
 }

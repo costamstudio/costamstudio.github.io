@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useIntl } from "react-intl";
+import { isMobile } from "react-device-detect";
 
 import { Section } from "../../types/Section";
 import { SectionType } from "../../enums/SectionType";
@@ -30,7 +31,7 @@ export const ProjectSection = ({ projectId, sectionIndex, section }: Props) => {
     }, [sectionPath, intl]);
 
     return (
-        <div className={`section-container ${section.templateId.toLowerCase().replaceAll("_", "-")}`}>
+        <div className={`section-container ${section.templateId.toLowerCase().replaceAll("_", "-")}${isMobile ? " mobile" : ""}`}>
             <div className="section-media">
                 {section.type === SectionType.IMAGE ? (
                     <img className="section-media" src={projectMedia(`./${projectId}/${sectionIndex}.png`)}/>

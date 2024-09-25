@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useIntl } from "react-intl";
+import { isMobile } from "react-device-detect";
 
 import { PROJECTS } from "../../constants/projects";
 import { ProjectSection } from "../ProjectSection/ProjectSection";
@@ -46,7 +47,7 @@ export const Project = ({ setIsHeaderVisible, setHasHeaderBackground, setHasHead
     }, []);
 
     return (
-        <div ref={projectRef} className="project-container" onScroll={onScroll}>
+        <div ref={projectRef} className={`project-container${isMobile ? " mobile" : ""}`} onScroll={onScroll}>
                 <div className="project-header-container">
                     <img className="project-thumbnail" src={projectMedia(`./${id}/preview.png`)}/>
                     <div className="project-header-content">
