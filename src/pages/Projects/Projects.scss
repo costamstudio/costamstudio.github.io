@@ -1,6 +1,5 @@
 .projects {
   position: relative;
-  width: 100%;
   background: #232323;
 
   .projects-title-container {
@@ -37,5 +36,43 @@
     flex-direction: column-reverse;
     gap: 20px;
     padding: 80px 70px 120px;
+  }
+
+  &.mobile {
+    display: flex;
+    flex-direction: column;
+    padding: 80px 12px;
+    gap: 60px;
+    text-align: right;
+
+    .projects-title-container {
+      position: relative;
+      top: auto;
+      right: auto;
+      padding: 0;
+    }
+
+    .projects-title {
+      font-size: 60px;
+      line-height: 64px;
+      max-width: 250px;
+    }
+
+    .projects-title-description {
+      font-size: 20px;
+      line-height: 28px;
+      letter-spacing: -0.04em;
+    }
+
+    .previews-container {
+      gap: 60px;
+      padding: 0;
+    }
+
+    .preview-carousel-container {
+      padding: 0;
+      margin: 0 -10px;
+      flex-direction: column;
+    }
   }
 }

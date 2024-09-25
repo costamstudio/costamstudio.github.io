@@ -1,6 +1,7 @@
 import { useIntl } from "react-intl";
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 
 import { Project } from "../../types/Project";
 import { GlitchContainer } from "../../components/GlitchContainer/GlitchContainer";
@@ -22,7 +23,7 @@ export const Preview = ({ project, isCarouselPreview }: Props) => {
     }, [isCarouselPreview, project]);
 
     return (
-        <div className={`preview-container ${templateClass}`}>
+        <div className={`preview-container ${templateClass}${isMobile ? " mobile" : ""}`}>
             <GlitchContainer>
                 <div className="preview-image-container">
                     <img

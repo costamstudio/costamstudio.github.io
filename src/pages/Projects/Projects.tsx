@@ -1,6 +1,7 @@
 import { useIntl } from "react-intl";
 import { useMemo } from "react";
 import Carousel from 'react-multi-carousel';
+import { isMobile } from "react-device-detect";
 
 import { Preview } from "../Preview/Preview";
 import { PROJECTS } from "../../constants/projects";
@@ -21,7 +22,7 @@ export const Projects = () => {
     }, []);
 
     return (
-        <div className="projects">
+        <div className={`projects${isMobile ? " mobile" : ""}`}>
             <div className="projects-title-container">
                 <div className="projects-title">{formatMessage({ id: "somethingInspiring" })}</div>
                 <div className="projects-title-description">{formatMessage({ id: "ourCreativeProjects" })}</div>

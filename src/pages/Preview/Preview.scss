@@ -47,6 +47,7 @@
     border: 1px solid rgba(255, 255, 255, 0.4);
     white-space: nowrap;
   }
+
   .glitch-container {
     width: 100%;
   }
@@ -270,6 +271,29 @@
       object-fit: cover;
       min-width: 100%;
       min-height: 100%
+    }
+  }
+
+  &.mobile {
+    display: flex;
+    flex-direction: column;
+
+    .preview-text-container {
+      text-align: left;
+    }
+
+    .preview-title {
+      font-size: 48px;
+      line-height: 52px;
+    }
+
+    .preview-description {
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    .preview-tags {
+      margin: 0;
     }
   }
 }
