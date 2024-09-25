@@ -7,11 +7,13 @@ import { About } from "../About/About";
 import { Projects } from "../Projects/Projects";
 import { MenuItem } from "../../enums/MenuItem";
 import { Contact } from "../Contact/Contact";
+import { Language } from "../../enums/Language";
 
 import "./Home.scss";
 
 
 interface Props {
+    locale: Language;
     clickedMenuItem: MenuItem | null;
     setClickedMenuItem: (item: MenuItem | null) => void;
     setIsHeaderVisible: (isHeaderVisible: boolean) => void;
@@ -23,6 +25,7 @@ interface Props {
 }
 
 export const Home = ({
+                         locale,
                          clickedMenuItem,
                          setClickedMenuItem,
                          logoImages,
@@ -145,7 +148,7 @@ export const Home = ({
             </animated.div>
             <animated.div className="bottom-container" style={bottomContainerStyles}>
                 <Projects/>
-                <Contact contactBackground={contactBackground}/>
+                <Contact locale={locale} contactBackground={contactBackground}/>
             </animated.div>
         </animated.div>
     );

@@ -2,16 +2,19 @@ import { useIntl } from "react-intl";
 import { useCallback } from "react";
 
 import { Glass } from "../../components/Glass/Glass";
-import contactVector from "../../assets/images/contact-vector.png";
+import contactPlVector from "../../assets/images/contact-pl-vector.png";
+import contactEnVector from "../../assets/images/contact-en-vector.png";
 import { EMAIL_LINK, FACEBOOK_LINK, LINKEDIN_LINK } from "./constants";
+import { Language } from "../../enums/Language";
 
 import "./Contact.scss";
 
 interface Props {
+    locale: Language;
     contactBackground: HTMLVideoElement | null;
 }
 
-export const Contact = ({ contactBackground }: Props) => {
+export const Contact = ({ locale, contactBackground }: Props) => {
     const { formatMessage } = useIntl();
 
     const openNewTabLink = useCallback((link: string) => {
@@ -28,7 +31,7 @@ export const Contact = ({ contactBackground }: Props) => {
                 muted={true}
             />
             <div className="contact-content-container">
-                <img className="contact-vector" src={contactVector}/>
+                <img className="contact-vector" src={locale === Language.PL ? contactPlVector : contactEnVector}/>
                 <Glass/>
                 <div className="footer">
                     <div className="logo"/>

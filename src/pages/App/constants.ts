@@ -4,7 +4,7 @@ import blue from "../../assets/images/logo-blue.png";
 import salmon from "../../assets/images/logo-salmon.png";
 import grass from "../../assets/images/logo-grass.png";
 import crystal from "../../assets/images/logo-crystal.png";
-import contactVector from "../../assets/images/contact-vector.png";
+import contactVector from "../../assets/images/contact-pl-vector.png";
 
 import logo from "../../assets/images/logo.svg";
 

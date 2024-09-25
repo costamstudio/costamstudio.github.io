@@ -8,15 +8,17 @@ import { ProjectSection } from "../ProjectSection/ProjectSection";
 import { Contact } from "../Contact/Contact";
 
 import "./Project.scss";
+import { Language } from "../../enums/Language";
 
 interface Props {
+    locale: Language;
     setIsHeaderVisible: (isHeaderVisible: boolean) => void;
     setHasHeaderBackground: (hasHeaderBackground: boolean) => void;
     setHasHeaderBigLogo: (hasHeaderBigLogo: boolean) => void;
     contactBackground: HTMLVideoElement | null;
 }
 
-export const Project = ({ setIsHeaderVisible, setHasHeaderBackground, setHasHeaderBigLogo, contactBackground }: Props) => {
+export const Project = ({ locale, setIsHeaderVisible, setHasHeaderBackground, setHasHeaderBigLogo, contactBackground }: Props) => {
     const { id } = useParams();
     const { formatMessage } = useIntl();
     const projectRef = useRef<HTMLDivElement>(null);
@@ -71,7 +73,7 @@ export const Project = ({ setIsHeaderVisible, setHasHeaderBackground, setHasHead
                         />
                     ))}
                 </div>
-                <Contact contactBackground={contactBackground}/>
+                <Contact locale={locale} contactBackground={contactBackground}/>
         </div>
     );
 };

@@ -82,6 +82,7 @@ export const App = () => {
                     <Routes>
                         <Route path="/" element={
                             <Home
+                                locale={locale}
                                 clickedMenuItem={clickedMenuItem}
                                 setClickedMenuItem={setClickedMenuItem}
                                 setIsHeaderVisible={setIsHeaderVisible}
@@ -94,6 +95,7 @@ export const App = () => {
                         }/>
                         <Route path="/project/:id" element={
                             <Project
+                                locale={locale}
                                 setIsHeaderVisible={setIsHeaderVisible}
                                 setHasHeaderBackground={setHasHeaderBackground}
                                 setHasHeaderBigLogo={setHasHeaderBigLogo}
