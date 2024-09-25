@@ -24,11 +24,13 @@ export const Preview = ({ project, isCarouselPreview }: Props) => {
     return (
         <div className={`preview-container ${templateClass}`}>
             <GlitchContainer>
-                <img
-                    className="preview-image"
-                    src={projectMedia(`./${project.id}/preview.png`)}
-                    onClick={() => navigate(`/project/${project.id}`)}
-                />
+                <div className="preview-image-container">
+                    <img
+                        className="preview-image"
+                        src={projectMedia(`./${project.id}/preview.png`)}
+                        onClick={() => navigate(`/project/${project.id}`)}
+                    />
+                </div>
             </GlitchContainer>
             <div className="preview-text-container">
                 <div className="preview-title">{formatMessage({ id: `projectContent.${project.id}.title` })}</div>

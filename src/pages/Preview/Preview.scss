@@ -252,14 +252,24 @@
   }
 
   &.carousel-preview {
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
+    padding: 0 10px;
 
-    .glitch-container {
-      grid-column: 1/25;
+    .preview-image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      aspect-ratio: 1;
+      overflow: hidden;
     }
 
-    .preview-text-container {
-      grid-column: 1/25;
+    .preview-image {
+      object-fit: cover;
+      min-width: 100%;
+      min-height: 100%
     }
   }
 }

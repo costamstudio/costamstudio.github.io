@@ -1,0 +1,45 @@
+.carousel-buttons-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  .carousel-button {
+    $size: 40px;
+    display: flex;
+    height: $size;
+    width: $size;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(#ffffff, 0.4);
+    background-image: url("/assets/images/arrow.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+
+    &.prev {
+      background-image: url("/assets/images/arrow.png");
+      transform: rotate(180deg);
+    }
+
+    &.disabled {
+      border: 1px solid #ffffff;
+      opacity: 0.4;
+      cursor: default;
+    }
+  }
+
+  .carousel-progress-bar {
+    display: flex;
+    width: 100%;
+  }
+
+  .carousel-progress-bar-item {
+    flex: 1;
+    height: 1px;
+    background-color: rgba(#ffffff, 0.2);
+
+    &.active {
+      background-color: #ffffff;
+    }
+  }
+}

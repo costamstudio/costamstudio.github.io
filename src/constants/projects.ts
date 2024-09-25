@@ -49,7 +49,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "38178337-c403-49bd-b848-316eee8a4727",
-    previewType: PreviewTemplateId.FULL_L_IR_TL,
+    previewType: PreviewTemplateId.FULL_S_IR_TL,
     sections: [],
     isShownInMainPreviews: true,
   },
