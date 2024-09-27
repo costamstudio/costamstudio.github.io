@@ -21,6 +21,7 @@
     bottom: 120px;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
+    pointer-events: none;
   }
 
   .about-content-item {
