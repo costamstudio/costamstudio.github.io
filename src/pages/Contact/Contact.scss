@@ -95,10 +95,10 @@
     gap: 12px;
   }
 
-  .contact-content-instagram {
+  .contact-content-instagram-qr {
     width: 132px;
     height: 132px;
-    background-image: url("/assets/images/instagram-qr.png");
+    background-image: url("/assets/images/instagram-qr.svg");
     background-repeat: no-repeat;
     background-size: contain;
   }
@@ -116,6 +116,10 @@
     background-repeat: no-repeat;
     background-size: contain;
     cursor: pointer;
+  }
+
+  .contact-content-instagram {
+    background-image: url("/assets/images/instagram-icon.png");
   }
 
   .contact-content-facebook {
@@ -152,5 +156,52 @@
     line-height: 52px;
     color: #232323;
     letter-spacing: -0.04em;
+  }
+
+  &.mobile {
+    .contact-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0 12px;
+      gap: 20px;
+    }
+
+    .contact-content-value {
+      font-size: 24px;
+      line-height: 28px;
+    }
+
+    .contact-content-social-links {
+      flex-direction: row;
+    }
+
+    .social-link-icon {
+      $social-link-size: 44px;
+      width: $social-link-size;
+      height: $social-link-size;
+    }
+
+    .footer {
+      flex-direction: column;
+      height: 144px;
+      padding: 12px;
+      font-size: 14px;
+      line-height: 16px;
+      white-space: normal;
+      gap: 12px;
+    }
+
+    .footer-policy {
+      text-align: center;
+    }
+
+    .logo {
+      width: 128px;
+      height: 32px;
+      background-image: url("/assets/images/logo-footer.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
   }
 }

@@ -1,10 +1,11 @@
 import { useIntl } from "react-intl";
 import { useCallback } from "react";
+import { isMobile } from "react-device-detect";
 
 import { Glass } from "../../components/Glass/Glass";
 import contactPlVector from "../../assets/images/contact-pl-vector.png";
 import contactEnVector from "../../assets/images/contact-en-vector.png";
-import { EMAIL_LINK, FACEBOOK_LINK, LINKEDIN_LINK } from "./constants";
+import { EMAIL_LINK, FACEBOOK_LINK, INSTAGRAM_LINK, LINKEDIN_LINK } from "./constants";
 import { Language } from "../../enums/Language";
 
 import "./Contact.scss";
@@ -22,7 +23,7 @@ export const Contact = ({ locale, contactBackground }: Props) => {
     }, []);
 
     return (
-        <div className="contact-container">
+        <div className={`contact-container${isMobile ? " mobile" : ""}`}>
             <video
                 className="background-video"
                 src={contactBackground?.src ?? ""}
@@ -52,8 +53,16 @@ export const Contact = ({ locale, contactBackground }: Props) => {
                     <div  className="contact-content-image-container">
                         <div className="contact-content-image-title">/ {formatMessage({ id: "socialMedia" })}</div>
                         <div className="contact-content-image-socials">
-                            <div className="contact-content-instagram"/>
+                            {!isMobile && (
+                                <div className="contact-content-instagram-qr"/>
+                            )}
                             <div className="contact-content-social-links">
+                                {isMobile && (
+                                    <div
+                                        className="contact-content-instagram social-link-icon"
+                                        onClick={() => openNewTabLink(INSTAGRAM_LINK)}
+                                    />
+                                )}
                                 <div
                                     className="contact-content-facebook social-link-icon"
                                     onClick={() => openNewTabLink(FACEBOOK_LINK)}

@@ -69,7 +69,14 @@
 
   &.mobile {
     .project-header-container {
-      max-height: 300px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    .project-thumbnail {
+      height: 75vh;
+      object-fit: cover;
     }
 
     .project-header-content {
@@ -78,8 +85,10 @@
     }
 
     .project-title {
+      height: calc(25vh - 20px);
+      transform: translateY(20px);
       font-size: 60px;
-      line-height: 64px;
+      line-height: 52px;
     }
 
     .project-sections-container {
