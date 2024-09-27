@@ -5,7 +5,7 @@ import { Glass } from "../../components/Glass/Glass";
 
 import "./About.scss";
 import { animated, useSpring } from "react-spring";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface Props {
     isVisible: boolean;
@@ -37,22 +37,22 @@ export const About = ({ isVisible }: Props) => {
     return (
         <div className={`about${isMobile ? " mobile" : ""}`} onTouchStart={onTouchStart} onTouchMove={onTouchMove}>
             <Glass/>
-            <div className="about-content-container">
+            <div className={`about-content-container${isVisible || isMobile ? " visible" : ""}`}>
                 <animated.div style={isMobile ? styles : {}} className="about-content-item left">
-                    <div className="about-title">{formatMessage({ id: "mission" })}</div>
-                    <div className="about-text">{formatMessage({ id: "missionContent" })}</div>
-                    <div className="about-text">{formatMessage({ id: "missionContentTwo" })}</div>
+                    <div className={`about-title${isVisible || isMobile ? " visible" : ""}`}>{formatMessage({ id: "mission" })}</div>
+                    <div className={`about-text${isVisible || isMobile ? " visible" : ""}`}>{formatMessage({ id: "missionContent" })}</div>
+                    <div className={`about-text${isVisible || isMobile ? " visible" : ""}`}>{formatMessage({ id: "missionContentTwo" })}</div>
                 </animated.div>
                 <animated.div style={isMobile ? styles : {}} className="about-content-item right">
-                    <div className="about-title">{formatMessage({ id: "whatDo" })}</div>
-                    <div className="about-tags">
+                    <div className={`about-title${isVisible || isMobile ? " visible" : ""}`}>{formatMessage({ id: "whatDo" })}</div>
+                    <div className={`about-tags${isVisible || isMobile ? " visible" : ""}`}>
                         {formatMessage({ id: "whatDoTags" }).split(",").map((item, index) => (
                             <div key={`tag-${index}`} className="about-tag">
                                 {`/ ${item}`}
                             </div>
                         ))}
                     </div>
-                    <div className="about-text">{formatMessage({ id: "whatDoContent" })}</div>
+                    <div className={`about-text${isVisible || isMobile ? " visible" : ""}`}>{formatMessage({ id: "whatDoContent" })}</div>
                 </animated.div>
             </div>
         </div>

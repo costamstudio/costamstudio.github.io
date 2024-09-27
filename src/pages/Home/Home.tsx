@@ -47,7 +47,8 @@ export const Home = ({
     });
 
     const rightContainerStyles = useSpring({
-        transform: isMobile ? `translateY(${isRightContainerOpened ? "0" : "85"}%)` : `translateX(${isRightContainerOpened ? "0" : "80"}%)`,
+        transform: isMobile ? `translateY(${isRightContainerOpened ? "0" : "85"}%)` : `none`,
+        left: isMobile ? "0%" : `${isRightContainerOpened ? "0%" : "85%"}`
     });
 
     const bottomContainerStyles = useSpring({

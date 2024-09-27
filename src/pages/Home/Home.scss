@@ -1,9 +1,16 @@
-.home, .right-container, .bottom-container {
+.home, .bottom-container {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+}
+.right-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 
 .home, .right-container {

@@ -1,5 +1,5 @@
 import { useIntl } from "react-intl";
-import { useMemo } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import Carousel from 'react-multi-carousel';
 import { isMobile } from "react-device-detect";
 
@@ -9,9 +9,12 @@ import { CAROUSEL_RESPONSIVE_CONFIG } from "./contants";
 import { CarouselButtons } from "../../components/CarouselButtons/CarouselButtons";
 
 import "./Projects.scss";
+import { useOnScreen } from "../../hooks/useOnScreen";
 
 export const Projects = () => {
     const { formatMessage } = useIntl();
+    const ref = useRef<HTMLDivElement>(null);
+    const isOnScreen = useOnScreen(ref);
 
     const projectsToMainPreviews = useMemo(() => {
         return PROJECTS.filter(project => project.isShownInMainPreviews);
@@ -23,7 +26,7 @@ export const Projects = () => {
 
     return (
         <div className={`projects${isMobile ? " mobile" : ""}`}>
-            <div className="projects-title-container">
+            <div ref={ref} className={`projects-title-container${isOnScreen ? " visible" : ""}`}>
                 <div className="projects-title">{formatMessage({ id: "somethingInspiring" })}</div>
                 <div className="projects-title-description">{formatMessage({ id: "ourCreativeProjects" })}</div>
             </div>

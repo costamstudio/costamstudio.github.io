@@ -6,9 +6,10 @@ import { isMobile } from "react-device-detect";
 import { PROJECTS } from "../../constants/projects";
 import { ProjectSection } from "../ProjectSection/ProjectSection";
 import { Contact } from "../Contact/Contact";
+import { Language } from "../../enums/Language";
 
 import "./Project.scss";
-import { Language } from "../../enums/Language";
+import { useOnScreen } from "../../hooks/useOnScreen";
 
 interface Props {
     locale: Language;
@@ -22,6 +23,8 @@ export const Project = ({ locale, setIsHeaderVisible, setHasHeaderBackground, se
     const { id } = useParams();
     const { formatMessage } = useIntl();
     const projectRef = useRef<HTMLDivElement>(null);
+    const ref = useRef<HTMLDivElement>(null);
+    const isOnScreen = useOnScreen(ref);
 
     const [scrollTop, setScrollTop] = useState(0);
 
@@ -50,17 +53,17 @@ export const Project = ({ locale, setIsHeaderVisible, setHasHeaderBackground, se
 
     return (
         <div ref={projectRef} className={`project-container${isMobile ? " mobile" : ""}`} onScroll={onScroll}>
-                <div className="project-header-container">
+                <div ref={ref} className="project-header-container">
                     <img className="project-thumbnail" src={projectMedia(`./${id}/preview.png`)}/>
                     <div className="project-header-content">
-                        <div className="project-tags">
+                        <div className={`project-tags${isOnScreen ? " visible" : ""}`}>
                             {formatMessage({ id: `projectContent.${id}.tags` }).split(",").map((item, index) => (
                                 <div key={`project-tag-${index}`} className="project-tag">
                                     {`/ ${item}`}
                                 </div>
                             ))}
                         </div>
-                        <div className="project-title">{formatMessage({ id: `projectContent.${id}.title` })}</div>
+                        <div className={`project-title${isOnScreen ? " visible" : ""}`}>{formatMessage({ id: `projectContent.${id}.title` })}</div>
                     </div>
                 </div>
                 <div className="project-sections-container">

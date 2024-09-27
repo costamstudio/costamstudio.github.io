@@ -15,3 +15,27 @@
     @content;
   }
 }
+
+@mixin appearance-left-right {
+  mask-image: linear-gradient(90deg, #fff 33.33%, transparent 66.66%);
+  mask-position: 100% 0;
+  mask-size: 300% 100%;
+  transition: none;
+
+  &.visible {
+    mask-position: 0 0;
+    transition: mask-position 2s ease 0s, -webkit-mask-position 2s ease 0s;
+  }
+}
+
+@mixin appearance-bottom-opacity($delay) {
+  opacity: 0;
+  transform: translate3d(0, 60px, 0);
+  transition: none;
+
+  &.visible {
+    opacity: 1;
+    transform: translateZ(0);
+    transition: opacity 0.45s $delay linear, transform 0.7s $delay cubic-bezier(0.32, 0.94, 0.6, 1);
+  }
+}

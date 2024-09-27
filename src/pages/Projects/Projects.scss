@@ -1,3 +1,5 @@
+@import "src/styles/mixins";
+
 .projects {
   position: relative;
   background: #232323;
@@ -10,6 +12,7 @@
     flex-direction: column;
     align-items: flex-end;
     color: #ffffff;
+    @include appearance-left-right;
   }
 
   .projects-title {

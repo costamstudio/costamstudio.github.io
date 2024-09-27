@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { useIntl } from "react-intl";
 import { isMobile } from "react-device-detect";
 
@@ -6,6 +6,7 @@ import { Section } from "../../types/Section";
 import { SectionType } from "../../enums/SectionType";
 
 import "./ProjectSection.scss";
+import { useOnScreen } from "../../hooks/useOnScreen";
 
 interface Props {
     projectId: string;
@@ -17,6 +18,8 @@ export const ProjectSection = ({ projectId, sectionIndex, section }: Props) => {
     const projectMedia = require.context('../../assets/project-media', true);
     const intl = useIntl();
     const { formatMessage } = intl;
+    const ref = useRef<HTMLDivElement>(null);
+    const isOnScreen = useOnScreen(ref);
 
     const sectionPath = useMemo(() => {
         return `projectContent.${projectId}.sections.${sectionIndex}`;
@@ -46,11 +49,11 @@ export const ProjectSection = ({ projectId, sectionIndex, section }: Props) => {
                 )}
             </div>
             {(hasTitle || hasDescription) && (
-                <div className="section-text-container">
+                <div ref={ref} className="section-text-container">
                     {hasTitle &&
-                        <div className="section-title">{formatMessage({ id: `${sectionPath}.title` })}</div>}
+                        <div className={`section-title${isOnScreen ? " visible" : ""}`}>{formatMessage({ id: `${sectionPath}.title` })}</div>}
                     {hasDescription && <div
-                        className="section-description">{formatMessage({ id: `${sectionPath}.description` })}</div>}
+                        className={`section-description${isOnScreen ? " visible" : ""}`}>{formatMessage({ id: `${sectionPath}.description` })}</div>}
                 </div>
             )}
 

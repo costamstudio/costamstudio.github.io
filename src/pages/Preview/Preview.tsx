@@ -1,5 +1,5 @@
 import { useIntl } from "react-intl";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 
@@ -7,6 +7,7 @@ import { Project } from "../../types/Project";
 import { GlitchContainer } from "../../components/GlitchContainer/GlitchContainer";
 
 import "./Preview.scss";
+import { useOnScreen } from "../../hooks/useOnScreen";
 
 interface Props {
     project: Project
@@ -16,6 +17,8 @@ interface Props {
 export const Preview = ({ project, isCarouselPreview }: Props) => {
     const navigate = useNavigate();
     const { formatMessage } = useIntl();
+    const ref = useRef<HTMLDivElement>(null);
+    const isOnScreen = useOnScreen(ref);
     const projectMedia = require.context('../../assets/project-media', true);
 
     const templateClass = useMemo(() => {
@@ -33,10 +36,10 @@ export const Preview = ({ project, isCarouselPreview }: Props) => {
                     />
                 </div>
             </GlitchContainer>
-            <div className="preview-text-container">
-                <div className="preview-title">{formatMessage({ id: `projectContent.${project.id}.title` })}</div>
-                <div className="preview-description">{formatMessage({ id: `projectContent.${project.id}.description` })}</div>
-                <div className="preview-tags">
+            <div ref={ref} className="preview-text-container">
+                <div className={`preview-title${isOnScreen ? " visible" : ""}`}>{formatMessage({ id: `projectContent.${project.id}.title` })}</div>
+                <div className={`preview-description${isOnScreen ? " visible" : ""}`}>{formatMessage({ id: `projectContent.${project.id}.description` })}</div>
+                <div className={`preview-tags${isOnScreen ? " visible" : ""}`}>
                     {formatMessage({ id: `projectContent.${project.id}.tags` }).split(",").map((item, index) => (
                         <div key={`preview-tag-${index}`} className="preview-tag">
                             {`/ ${item}`}
