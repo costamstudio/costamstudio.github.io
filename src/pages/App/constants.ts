@@ -14,4 +14,4 @@ import contactBackground from "../../assets/videos/contact-background.mp4";
 export const LOGO_IMAGES = [drinks, yellow, blue, salmon, grass, crystal];
 export const OTHER_IMAGES = [logo, contactVector];
 export const VIDEOS = [logoArtBackground, contactBackground];
-export const FONTS = ["SigmundPro-Light", "T1Korium"];
+export const FONTS = ["SigmundPro-UltraLight", "T1Korium"];

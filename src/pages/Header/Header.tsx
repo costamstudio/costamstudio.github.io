@@ -1,5 +1,5 @@
 import { animated, useSpring } from "react-spring";
-import { ReactNode, useCallback } from "react";
+import { ReactNode, useCallback, useState } from "react";
 import { useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
 import { isMobile } from "react-device-detect";
@@ -9,6 +9,7 @@ import { LocaleToggle } from "./LocaleToggle/LocaleToggle";
 import { Language } from "../../enums/Language";
 
 import "./Header.scss";
+import { EMAIL_LINK, FACEBOOK_LINK, INSTAGRAM_LINK, LINKEDIN_LINK } from "../Contact/constants";
 
 interface Props {
     locale: Language;
@@ -22,6 +23,7 @@ interface Props {
 export const Header = ({ locale, setLocale, setClickedMenuItem, isVisible, hasBackground, hasBigLogo }: Props) => {
     const { formatMessage } = useIntl();
     const navigate = useNavigate();
+    const [isBurgerMenuOpened, setIsBurgerMenuOpened] = useState(false);
 
     const getMenuItem = useCallback((content: ReactNode) => {
         return (
@@ -37,6 +39,16 @@ export const Header = ({ locale, setLocale, setClickedMenuItem, isVisible, hasBa
     const onMenuItemClicked = useCallback((menuItem: MenuItem) => {
         navigate("/");
         setTimeout(() => setClickedMenuItem(menuItem), 300);
+    }, []);
+
+    const onBurgerMenuItemClicked = useCallback((menuItem: MenuItem) => {
+        navigate("/");
+        setIsBurgerMenuOpened(false);
+        setTimeout(() => setClickedMenuItem(menuItem), 300);
+    }, []);
+
+    const openNewTabLink = useCallback((link: string) => {
+        window.open(link, "_blank");
     }, []);
 
     const styles = useSpring({
@@ -59,16 +71,61 @@ export const Header = ({ locale, setLocale, setClickedMenuItem, isVisible, hasBa
     });
 
     return (
-        <animated.div className={`header${isMobile ? " mobile" : ""}`} style={{...styles, ...backgroundStyles}}>
-            <animated.div style={{...stylesHeaderContent, ...logoStyles}} className="header-logo" onClick={() => onMenuItemClicked(MenuItem.HOME)}/>
-            <animated.div style={stylesHeaderContent} className="header-menu">
-                {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.ABOUT)}>{formatMessage({ id: "about" })}</div>)}
-                {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.PROJECTS)}>{formatMessage({ id: "projects" })}</div>)}
-                {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.CONTACTS)}>{formatMessage({ id: "contacts" })}</div>)}
-                {getMenuItem(<LocaleToggle locale={locale} setLocale={setLocale}/>)}
+        <>
+            <animated.div
+                className={`header${isMobile ? " mobile" : ""}${isBurgerMenuOpened ? " opened-burger-menu" : ""}`}
+                style={{ ...styles, ...backgroundStyles }}>
+                <animated.div style={{ ...stylesHeaderContent, ...logoStyles }} className="header-logo"
+                              onClick={() => onMenuItemClicked(MenuItem.HOME)}/>
+                <animated.div style={stylesHeaderContent} className="header-menu">
+                    {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.ABOUT)}>{formatMessage({ id: "about" })}</div>)}
+                    {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.PROJECTS)}>{formatMessage({ id: "projects" })}</div>)}
+                    {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.CONTACTS)}>{formatMessage({ id: "contacts" })}</div>)}
+                    {getMenuItem(<LocaleToggle locale={locale} setLocale={setLocale}/>)}
+                </animated.div>
+                <animated.div
+                    style={stylesHeaderContent}
+                    className={`header-burger-menu${isBurgerMenuOpened ? " opened" : ""}`}
+                    onClick={() => setIsBurgerMenuOpened(!isBurgerMenuOpened)}
+                />
             </animated.div>
-            <animated.div style={stylesHeaderContent} className="header-burger-menu">
-            </animated.div>
-        </animated.div>
+            {isBurgerMenuOpened && isMobile && (
+                <div className="burger-menu-content-container">
+                    <div className="header-menu">
+                        {getMenuItem(<div
+                            onClick={() => onBurgerMenuItemClicked(MenuItem.ABOUT)}>{formatMessage({ id: "about" })}</div>)}
+                        {getMenuItem(<div
+                            onClick={() => onBurgerMenuItemClicked(MenuItem.PROJECTS)}>{formatMessage({ id: "projects" })}</div>)}
+                        {getMenuItem(<div
+                            onClick={() => onBurgerMenuItemClicked(MenuItem.CONTACTS)}>{formatMessage({ id: "contacts" })}</div>)}
+                        {getMenuItem(<LocaleToggle locale={locale} setLocale={setLocale}/>)}
+                    </div>
+                    <div className="contact-content-image-container">
+                        <div className="contact-content-image-title">/ {formatMessage({ id: "socialMedia" })}</div>
+                        <div className="contact-content-image-socials">
+                            <div className="contact-content-social-links">
+                                <div
+                                    className="contact-content-instagram social-link-icon"
+                                    onClick={() => openNewTabLink(INSTAGRAM_LINK)}
+                                />
+                                <div
+                                    className="contact-content-facebook social-link-icon"
+                                    onClick={() => openNewTabLink(FACEBOOK_LINK)}
+                                />
+                                <div
+                                    className="contact-content-linkedin social-link-icon"
+                                    onClick={() => openNewTabLink(LINKEDIN_LINK)}
+                                />
+                                <div
+                                    className="contact-content-email social-link-icon"
+                                    onClick={() => openNewTabLink(EMAIL_LINK)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </>
     )
-};
+    }
+;

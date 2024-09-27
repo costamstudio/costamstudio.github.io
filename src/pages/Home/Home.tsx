@@ -145,7 +145,7 @@ export const Home = ({
         <animated.div ref={homeRef} className={`home${isMobile ? " mobile" : ""}`} style={styles} onWheel={onWheel} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onScroll={onScroll}>
             <LogoArt logoImages={logoImages} logoArtBackground={logoArtBackground}/>
             <animated.div className="right-container" style={rightContainerStyles}>
-                <About isVisible={isRightContainerOpened}/>
+                <About isVisible={isRightContainerOpened} clickedMenuItem={clickedMenuItem}/>
             </animated.div>
             <animated.div className="bottom-container" style={bottomContainerStyles}>
                 <Projects/>

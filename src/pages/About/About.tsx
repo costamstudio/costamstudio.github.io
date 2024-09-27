@@ -6,12 +6,14 @@ import { Glass } from "../../components/Glass/Glass";
 import "./About.scss";
 import { animated, useSpring } from "react-spring";
 import { useCallback, useEffect, useState } from "react";
+import { MenuItem } from "../../enums/MenuItem";
 
 interface Props {
     isVisible: boolean;
+    clickedMenuItem: MenuItem | null;
 }
 
-export const About = ({ isVisible }: Props) => {
+export const About = ({ isVisible, clickedMenuItem }: Props) => {
     const { formatMessage } = useIntl();
     const [isStart, setIsStart] = useState(true);
     const [toucheStartY, setTouchStartY] = useState(0);
@@ -33,6 +35,10 @@ export const About = ({ isVisible }: Props) => {
             setIsStart(deltaY < 0);
         }
     }, [toucheStartY]);
+
+    useEffect(() => {
+        setIsStart(true);
+    }, [clickedMenuItem]);
 
     return (
         <div className={`about${isMobile ? " mobile" : ""}`} onTouchStart={onTouchStart} onTouchMove={onTouchMove}>
