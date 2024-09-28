@@ -1,3 +1,5 @@
+@import "src/styles/mixins";
+
 .locale-toggle {
   display: flex;
   align-items: center;
@@ -9,14 +11,27 @@
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.4);
 
+  @include uhd {
+    width: 122px;
+    height: 42px;
+    padding: 8px;
+    border-radius: 32px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+  }
+
   .locale-toggle-item {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: center;
     width: 36px;
     height: 24px;
     border-radius: 400px;
     color: #ffffff;
+
+    @include uhd {
+      width: 58px;
+      height: 42px;
+    }
 
     &.selected {
       color: #232323;

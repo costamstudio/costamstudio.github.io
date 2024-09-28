@@ -4,6 +4,7 @@ import { useResizeDetector } from "react-resize-detector";
 import { isMobile } from "react-device-detect";
 
 import { getRandomNumberInRange } from "../../utils/common";
+import { useResponsiveVariable } from "../../hooks/useResponsiveVariable";
 
 import "./LogoArt.scss";
 
@@ -13,7 +14,7 @@ interface Props {
 }
 
 export const LogoArt = ({ logoArtBackground, logoImages }: Props) => {
-    const brashRadius = 40;
+    const brashRadius = useResponsiveVariable(50, 60, 120);
     const { width: canvasWidth = 1, height: canvasHeight = 1, ref } = useResizeDetector();
 
     const { formatMessage } = useIntl();

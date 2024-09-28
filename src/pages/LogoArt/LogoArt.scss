@@ -1,3 +1,5 @@
+@import "src/styles/mixins";
+
 .logo-art {
   width: 100%;
   height: 100%;
@@ -6,6 +8,10 @@
   grid-template-rows: 90px 1fr 40px;
   column-gap: 20px;
   overflow: hidden;
+
+  @include uhd {
+    grid-template-rows: 160px 1fr 76px;
+  }
 
   .background-video {
     position: absolute;
@@ -51,6 +57,11 @@
     grid-row: 3;
     align-self: flex-start;
     text-align: center;
+
+    @include uhd {
+      font-size: 32px;
+      line-height: 36px;
+    }
   }
 
   &.mobile {

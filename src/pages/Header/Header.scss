@@ -1,13 +1,24 @@
+@import "/src/styles/mixins";
+
 .header {
   position: fixed;
   right: 0;
   left: 0;
   height: 68px;
-  padding: 0 80px;
+  padding: 0 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 1;
+
+  @include fhd {
+    padding: 0 80px;
+  }
+
+  @include uhd {
+    height: 120px;
+    padding: 0 120px;
+  }
 
   .header-logo {
     width: 190px;
@@ -16,6 +27,14 @@
     background-repeat: no-repeat;
     background-size: contain;
     cursor: pointer;
+    transform-origin: left;
+    flex: 1;
+    flex-shrink: 0;
+
+    @include uhd {
+      width: 396px;
+      height: 100px;
+    }
   }
 
   .header-menu {
@@ -24,24 +43,30 @@
     font-family: "SigmundPro-UltraLight";
     color: white;
     filter: invert(1);
+    flex: 1;
+    flex-shrink: 0;
+    font-size: 16px;
+    line-height: 20px;
 
-    &:hover .menu-item {
-      opacity: 0.4;
+    @include uhd {
+      font-size: 32px;
+      line-height: 36px;
+    }
+
+    &:hover {
+      .menu-item, .menu-item-divider {
+        opacity: 0.4;
+      }
     }
 
     .menu-item {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       cursor: pointer;
-      font-size: 16px;
       text-transform: uppercase;
 
       &:hover {
         opacity: 1;
-      }
-
-      &:last-of-type .menu-content-container {
-        padding: 0 0 0 85px;
       }
     }
 
@@ -49,7 +74,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 85px;
     }
 
     .menu-item-divider {
@@ -136,6 +160,10 @@
     height: 75vh;
     border-bottom: 1px solid #000000;
 
+    & .menu-item-divider:first-of-type {
+      display: none;
+    }
+
     .menu-item {
       display: flex;
       flex-direction: column;
@@ -144,10 +172,6 @@
       line-height: 28px;
       text-transform: uppercase;
       gap: 20px;
-
-      &:first-of-type .menu-item-divider {
-        display: none;
-      }
     }
 
     .locale-toggle {

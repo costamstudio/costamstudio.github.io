@@ -7,9 +7,10 @@ import { isMobile } from "react-device-detect";
 import { MenuItem } from "../../enums/MenuItem";
 import { LocaleToggle } from "./LocaleToggle/LocaleToggle";
 import { Language } from "../../enums/Language";
+import { EMAIL_LINK, FACEBOOK_LINK, INSTAGRAM_LINK, LINKEDIN_LINK } from "../Contact/constants";
+import { useResponsiveVariable } from "../../hooks/useResponsiveVariable";
 
 import "./Header.scss";
-import { EMAIL_LINK, FACEBOOK_LINK, INSTAGRAM_LINK, LINKEDIN_LINK } from "../Contact/constants";
 
 interface Props {
     locale: Language;
@@ -24,15 +25,19 @@ export const Header = ({ locale, setLocale, setClickedMenuItem, isVisible, hasBa
     const { formatMessage } = useIntl();
     const navigate = useNavigate();
     const [isBurgerMenuOpened, setIsBurgerMenuOpened] = useState(false);
+    const height = useResponsiveVariable(68, 68, 120);
+    const topOffset = useResponsiveVariable(20, 20, 40);
 
     const getMenuItem = useCallback((content: ReactNode) => {
         return (
-            <div className="menu-item">
+            <>
                 <div className="menu-item-divider">/</div>
-                <div className="menu-content-container">
-                    {content}
+                <div className="menu-item">
+                    <div className="menu-content-container">
+                        {content}
+                    </div>
                 </div>
-            </div>
+            </>
         )
     }, []);
 
@@ -52,12 +57,12 @@ export const Header = ({ locale, setLocale, setClickedMenuItem, isVisible, hasBa
     }, []);
 
     const styles = useSpring({
-        transform: `translateY(${isVisible ? 0 : -88}px)`,
+        transform: `translateY(${isVisible ? 0 : -(height + topOffset)}px)`,
     });
 
     const backgroundStyles = useSpring({
         delay: 200,
-        top: hasBackground || isMobile ? "0px" : "20px",
+        top: hasBackground || isMobile ? "0px" : `${topOffset}px`,
         background: hasBackground ? "rgba(255, 255, 255, 0.8)" : "transparent",
         backdropFilter: hasBackground ? "blur(10px)" : "blur(0px)",
     });
