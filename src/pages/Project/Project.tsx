@@ -53,21 +53,22 @@ export const Project = ({ locale, setIsHeaderVisible, setHasHeaderBackground, se
 
     return (
         <div ref={projectRef} className={`project-container${isMobile ? " mobile" : ""}`} onScroll={onScroll}>
-                <div ref={ref} className="project-header-container">
-                    <img className="project-thumbnail" src={projectMedia(`./${id}/preview.png`)}/>
-                    <div className="project-header-content">
-                        <div className={`project-tags${isOnScreen ? " visible" : ""}`}>
-                            {formatMessage({ id: `projectContent.${id}.tags` }).split(",").map((item, index) => (
-                                <div key={`project-tag-${index}`} className="project-tag">
-                                    {`/ ${item}`}
-                                </div>
-                            ))}
-                        </div>
-                        <div className={`project-title${isOnScreen ? " visible" : ""}`}>{formatMessage({ id: `projectContent.${id}.title` })}</div>
+            <div ref={ref} className="project-header-container">
+                <img className="project-thumbnail" src={projectMedia(`./${id}/preview.png`)}/>
+                <div className="project-header-content">
+                    <div className={`project-tags${isOnScreen ? " visible" : ""}`}>
+                        {formatMessage({ id: `projectContent.${id}.tags` }).split(",").map((item, index) => (
+                            <div key={`project-tag-${index}`} className="project-tag">
+                                {`/ ${item}`}
+                            </div>
+                        ))}
                     </div>
+                    <div
+                        className={`project-title${isOnScreen ? " visible" : ""}`}>{formatMessage({ id: `projectContent.${id}.title` })}</div>
                 </div>
-                <div className="project-sections-container">
-                    {project?.sections.map((section, index) => (
+            </div>
+            <div className="project-sections-container">
+                {project?.sections.map((section, index) => (
                         <ProjectSection
                             key={`${id}-${index}`}
                             projectId={id ?? ""}

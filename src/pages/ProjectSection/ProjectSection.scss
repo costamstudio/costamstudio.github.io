@@ -336,9 +336,11 @@
   &.mobile {
     display: flex;
     flex-direction: column;
+    gap: 12px;
 
     .section-text-container {
       text-align: left;
+      gap: 8px;
     }
   }
 }
