@@ -16,23 +16,44 @@
 
   .about-content-container {
     position: fixed;
-    left: 80px;
-    right: 80px;
-    bottom: 120px;
+    left: 40px;
+    right: 40px;
+    bottom: 80px;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
+    column-gap: 20px;
     pointer-events: none;
+
+    @include fhd {
+      left: 80px;
+      right: 80px;
+      bottom: 120px;
+    }
+
+    @include uhd {
+      left: 120px;
+      right: 120px;
+      bottom: 180px;
+    }
   }
 
   .about-content-item {
     color: white;
 
     &.left {
-      grid-column: 1/6;
+      grid-column: 1/7;
+
+      @include fhd {
+        grid-column: 1/6;
+      }
     }
 
     &.right {
-      grid-column: 7/12;
+      grid-column: 7/13;
+
+      @include fhd {
+        grid-column: 7/12;
+      }
     }
   }
 
@@ -41,6 +62,11 @@
     font-size: 94px;
     line-height: 100px;
     margin-bottom: 10px;
+
+    @include uhd {
+      font-size: 200px;
+      line-height: 220px;
+    }
 
     @include appearance-left-right;
   }
@@ -51,6 +77,11 @@
     line-height: 24px;
     white-space: pre-line;
 
+    @include uhd {
+      font-size: 36px;
+      line-height: 40px;
+    }
+
     @include appearance-bottom-opacity(0.5s);
 
     &:nth-of-type(2) {
@@ -59,15 +90,22 @@
 
     &:not(:last-of-type) {
       margin-bottom: 20px;
+
+      @include uhd {
+        margin-bottom: 40px;
+      }
     }
   }
 
   .about-tags {
     display: flex;
     gap: 4px;
-    max-width: 585px;
     flex-wrap: wrap;
     margin-bottom: 20px;
+
+    @include uhd {
+      margin-bottom: 40px;
+    }
 
     @include appearance-bottom-opacity(0.3s)
   }
@@ -81,6 +119,13 @@
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     white-space: nowrap;
+
+    @include uhd {
+      font-size: 36px;
+      line-height: 40px;
+      padding: 12px 24px 16px 24px;
+      border-radius: 40px;
+    }
   }
 
   &.mobile {
