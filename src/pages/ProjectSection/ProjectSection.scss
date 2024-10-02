@@ -21,6 +21,10 @@
     flex-direction: column;
     gap: 12px;
     color: #ffffff;
+
+    @include uhd {
+      gap: 20px;
+    }
   }
 
   .section-title {
