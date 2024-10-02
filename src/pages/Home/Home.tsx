@@ -112,6 +112,7 @@ export const Home = ({
                     setIsBottomContainerOpened(false);
                     setIsRightContainerOpened(false);
                     setClickedMenuItem(null);
+                    setHasHeaderBackground(false);
                     setHasHeaderBigLogo(true);
                     return;
                 case MenuItem.ABOUT:
