@@ -105,6 +105,7 @@
 
     @include uhd {
       margin-bottom: 40px;
+      gap: 8px;
     }
 
     @include appearance-bottom-opacity(0.3s)
@@ -125,6 +126,7 @@
       line-height: 40px;
       padding: 12px 24px 16px 24px;
       border-radius: 40px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
     }
   }
 

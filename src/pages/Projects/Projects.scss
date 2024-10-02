@@ -12,6 +12,15 @@
     flex-direction: column;
     align-items: flex-end;
     color: #ffffff;
+
+    @include fhd {
+      top: 140px;
+    }
+
+    @include uhd {
+      top: 200px;
+    }
+
     @include appearance-left-right;
   }
 
@@ -19,19 +28,38 @@
     font-family: "T1Korium";
     font-size: 94px;
     line-height: 100px;
+
+    @include uhd {
+      font-size: 200px;
+      line-height: 220px;
+    }
   }
 
   .projects-title-description {
     font-family: "SigmundPro-UltraLight";
     font-size: 28px;
     line-height: 32px;
+
+    @include uhd {
+      font-size: 60px;
+      line-height: 68px;
+    }
   }
 
   .previews-container {
     display: flex;
     flex-direction: column;
     gap: 80px;
-    padding-top: 140px;
+    padding-top: 120px;
+
+    @include fhd {
+      padding-top: 140px;
+    }
+
+    @include uhd {
+      padding-top: 200px;
+      gap: 120px;
+    }
   }
 
   .preview-carousel-container {
@@ -39,6 +67,11 @@
     flex-direction: column-reverse;
     gap: 20px;
     padding: 80px 70px 120px;
+
+    @include uhd {
+      gap: 40px;
+      padding: 120px 100px 200px;
+    }
   }
 
   &.mobile {

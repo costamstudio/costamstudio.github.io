@@ -1,3 +1,5 @@
+@import "src/styles/mixins";
+
 .contact-container {
   position: relative;
   display: flex;
@@ -10,6 +12,8 @@
   .background-video {
     filter: invert(1);
     object-fit: cover;
+    width: 100%;
+    height: 100%;
   }
 
   .contact-content-container {
@@ -67,6 +71,10 @@
     padding: 0 80px;
     width: 100%;
     box-sizing: border-box;
+
+    @include uhd {
+      bottom: 272px;
+    }
   }
 
   .contact-content-text {
@@ -88,6 +96,11 @@
     font-size: 16px;
     line-height: 20px;
     color: #232323;
+
+    @include uhd {
+      font-size: 32px;
+      line-height: 36px;
+    }
   }
 
   .contact-content-image-socials {
@@ -101,6 +114,11 @@
     background-image: url("/assets/images/instagram-qr.svg");
     background-repeat: no-repeat;
     background-size: contain;
+
+    @include uhd {
+      width: 400px;
+      height: 400px;
+    }
   }
 
   .contact-content-social-links {
@@ -148,6 +166,11 @@
     font-size: 16px;
     line-height: 20px;
     color: #232323;
+
+    @include uhd {
+      font-size: 32px;
+      line-height: 36px;
+    }
   }
 
   .contact-content-value {
@@ -156,6 +179,11 @@
     line-height: 52px;
     color: #232323;
     letter-spacing: -0.04em;
+
+    @include uhd {
+      font-size: 100px;
+      line-height: 112px;
+    }
   }
 
   &.mobile {

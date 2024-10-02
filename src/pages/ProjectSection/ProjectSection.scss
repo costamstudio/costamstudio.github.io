@@ -29,6 +29,11 @@
     line-height: 32px;
     letter-spacing: -0.04em;
 
+    @include uhd {
+      font-size: 60px;
+      line-height: 68px;
+    }
+
     @include appearance-left-right;
   }
 
@@ -36,6 +41,11 @@
     font-family: "SigmundPro-UltraLight";
     font-size: 16px;
     line-height: 20px;
+
+    @include uhd {
+      font-size: 32px;
+      line-height: 36px;
+    }
 
     @include appearance-bottom-opacity(0.3s);
   }

@@ -1,8 +1,14 @@
+@import "src/styles/mixins";
+
 .carousel-buttons-container {
   display: flex;
   gap: 20px;
   align-items: center;
   padding: 0 10px;
+
+  @include uhd {
+    padding: 0 20px;
+  }
 
   .carousel-button {
     $size: 40px;
