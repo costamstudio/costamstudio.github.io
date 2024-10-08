@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 
 import { Project } from "../../types/Project";
-import { GlitchContainer } from "../../components/GlitchContainer/GlitchContainer";
+import { useOnScreen } from "../../hooks/useOnScreen";
 
 import "./Preview.scss";
-import { useOnScreen } from "../../hooks/useOnScreen";
 
 interface Props {
     project: Project
@@ -27,18 +26,18 @@ export const Preview = ({ project, isCarouselPreview }: Props) => {
 
     return (
         <div className={`preview-container ${templateClass}${isMobile ? " mobile" : ""}`}>
-            <GlitchContainer>
-                <div className="preview-image-container">
-                    <img
-                        className="preview-image"
-                        src={projectMedia(`./${project.id}/preview.png`)}
-                        onClick={() => navigate(`/project/${project.id}`)}
-                    />
-                </div>
-            </GlitchContainer>
+            <div className="preview-image-container">
+                <img
+                    className="preview-image"
+                    src={projectMedia(`./${project.id}/preview.png`)}
+                    onClick={() => navigate(`/project/${project.id}`)}
+                />
+            </div>
             <div ref={ref} className="preview-text-container">
-                <div className={`preview-title${isOnScreen ? " visible" : ""}`}>{formatMessage({ id: `projectContent.${project.id}.title` })}</div>
-                <div className={`preview-description${isOnScreen ? " visible" : ""}`}>{formatMessage({ id: `projectContent.${project.id}.description` })}</div>
+                <div
+                    className={`preview-title${isOnScreen ? " visible" : ""}`}>{formatMessage({ id: `projectContent.${project.id}.title` })}</div>
+                <div
+                    className={`preview-description${isOnScreen ? " visible" : ""}`}>{formatMessage({ id: `projectContent.${project.id}.description` })}</div>
                 <div className={`preview-tags${isOnScreen ? " visible" : ""}`}>
                     {formatMessage({ id: `projectContent.${project.id}.tags` }).split(",").map((item, index) => (
                         <div key={`preview-tag-${index}`} className="preview-tag">
