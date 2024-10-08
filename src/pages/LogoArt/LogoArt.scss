@@ -84,5 +84,17 @@
       text-align: center;
       bottom: 15%;
     }
+
+    @include landscape {
+      display: flex;
+
+      .logo-canvas-container {
+        height: 100vh;
+      }
+
+      .logo-art-hint {
+        bottom: 0;
+      }
+    }
   }
 }

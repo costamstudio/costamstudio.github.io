@@ -277,4 +277,10 @@
   @include tablet-l {
     top: 108px;
   }
+
+  @include landscape {
+    .header-menu {
+      flex-direction: row;
+    }
+  }
 }

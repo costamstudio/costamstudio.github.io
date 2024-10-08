@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { animated, useSpring } from "react-spring";
 import { isMobile } from "react-device-detect";
 
@@ -10,6 +10,7 @@ import { Contact } from "../Contact/Contact";
 import { Language } from "../../enums/Language";
 
 import "./Home.scss";
+import { useMediaQuery } from "react-responsive";
 
 
 interface Props {
@@ -41,13 +42,18 @@ export const Home = ({
     const [scrollTop, setScrollTop] = useState(0);
     const [toucheStartY, setTouchStartY] = useState(0);
     const homeRef = useRef<HTMLDivElement>(null);
+    const isPortrait = useMediaQuery({ query: '(orientation: portrait)' });
 
     const styles = useSpring({
         overflow: isBottomContainerOpened ? "auto" : "hidden",
     });
 
+    const mobileRightContainerClosedTranslate = useMemo(() => {
+        return isPortrait ? 85 : 100;
+    }, [isPortrait]);
+
     const rightContainerStyles = useSpring({
-        transform: isMobile ? `translateY(${isRightContainerOpened ? "0" : "85"}%)` : `none`,
+        transform: isMobile ? `translateY(${isRightContainerOpened ? "0" : mobileRightContainerClosedTranslate}%)` : `none`,
         left: isMobile ? "0%" : `${isRightContainerOpened ? "0%" : "85%"}`
     });
 

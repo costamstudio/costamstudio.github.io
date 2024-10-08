@@ -262,5 +262,27 @@
         text-align: right;
       }
     }
+
+    @include landscape {
+      .contact-vector {
+        display: none;
+      }
+
+      .contact-content {
+        bottom: 100px;
+      }
+
+      .footer {
+        flex-direction: row;
+        height: 56px;
+        padding: 12px 20px;
+        font-size: 14px;
+        line-height: 16px;
+      }
+
+      .footer-policy {
+        text-align: right;
+      }
+    }
   }
 }

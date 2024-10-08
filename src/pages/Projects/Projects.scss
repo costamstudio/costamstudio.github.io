@@ -135,5 +135,11 @@
     @include tablet-l {
       padding: 120px 40px;
     }
+
+    @include landscape {
+      .projects-title {
+        max-width: none;
+      }
+    }
   }
 }

@@ -17,13 +17,19 @@
 }
 
 @mixin tablet-m {
-  @media (min-width: 768px) {
+  @media (min-width: 768px) and (orientation: portrait) {
     @content;
   }
 }
 
 @mixin tablet-l {
-  @media (min-width: 1024px) {
+  @media (min-width: 1024px) and (orientation: portrait) {
+    @content;
+  }
+}
+
+@mixin landscape {
+  @media (max-width: 1024px) and (orientation: landscape) {
     @content;
   }
 }
