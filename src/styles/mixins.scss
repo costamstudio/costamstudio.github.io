@@ -16,6 +16,18 @@
   }
 }
 
+@mixin tablet-m {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tablet-l {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
 @mixin appearance-left-right {
   mask-image: linear-gradient(90deg, #fff 33.33%, transparent 66.66%);
   mask-position: 100% 0;

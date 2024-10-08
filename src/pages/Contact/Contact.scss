@@ -232,5 +232,35 @@
       background-repeat: no-repeat;
       background-size: contain;
     }
+
+    @include tablet-m {
+      .contact-content {
+        padding: 0 40px;
+        gap: 40px;
+      }
+
+      .contact-content-value {
+        font-size: 44px;
+        line-height: 52px;
+      }
+
+      .contact-content-social-links {
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .footer {
+        flex-direction: row;
+        height: 56px;
+        padding: 12px 20px;
+        font-size: 14px;
+        line-height: 16px;
+        white-space: pre-wrap;
+      }
+
+      .footer-policy {
+        text-align: right;
+      }
+    }
   }
 }

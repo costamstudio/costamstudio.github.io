@@ -1,5 +1,5 @@
 import { useIntl } from "react-intl";
-import { isMobile } from "react-device-detect";
+import { isMobile, isMobileOnly } from "react-device-detect";
 
 import { Glass } from "../../components/Glass/Glass";
 
@@ -19,7 +19,7 @@ export const About = ({ isVisible, clickedMenuItem }: Props) => {
     const [toucheStartY, setTouchStartY] = useState(0);
 
     const styles = useSpring({
-        transform: `translateY(${isStart ? "0%" : "-100%"})`,
+        transform: isMobileOnly ? `translateY(${isStart ? "0%" : "-100%"})` : "none",
     });
 
     const onTouchStart = useCallback((event: React.TouchEvent) => {
@@ -27,7 +27,7 @@ export const About = ({ isVisible, clickedMenuItem }: Props) => {
     }, [setTouchStartY]);
 
     const onTouchMove = useCallback((event: React.TouchEvent) => {
-        if (isVisible) {
+        if (isVisible && isMobileOnly) {
             const deltaY = toucheStartY - event.touches[0].pageY;
             if ((isStart && deltaY > 0) || (!isStart && deltaY < 0)) {
                 event.stopPropagation();

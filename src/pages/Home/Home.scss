@@ -1,3 +1,5 @@
+@import "src/styles/mixins";
+
 .home, .bottom-container {
   position: absolute;
   top: 0;
@@ -19,6 +21,10 @@
 
 .home.mobile {
   padding: 0 12px;
+
+  @include tablet-m {
+    padding: 0 40px;
+  }
 }
 
 .home::-webkit-scrollbar {

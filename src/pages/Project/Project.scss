@@ -131,5 +131,15 @@
       padding: 60px 12px;
       gap: 60px;
     }
+
+    @include tablet-m {
+      .project-header-content {
+        left: 40px;
+      }
+
+      .project-sections-container {
+        padding: 60px 40px;
+      }
+    }
   }
 }

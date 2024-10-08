@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import WebFont from "webfontloader";
 import { IntlProvider } from "react-intl";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import { Home } from "../Home/Home";
 import { Header } from "../Header/Header";
@@ -10,10 +11,9 @@ import { flattenMessages, loadImages, loadVideos } from "../../utils/common";
 import { Language } from "../../enums/Language";
 import { pl } from "../../translations/pl";
 import { en } from "../../translations/en";
+import { Project } from "../Project/Project";
 
 import './App.scss';
-import { Navigate, Route, Routes } from "react-router-dom";
-import { Project } from "../Project/Project";
 
 export const App = () => {
     const [locale, setLocale] = useState(Language.PL);

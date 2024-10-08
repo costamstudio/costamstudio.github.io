@@ -176,5 +176,41 @@
     .about-tags {
       margin-bottom: 12px;
     }
+
+    @include tablet-m {
+      .about-content-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .about-content-item {
+        height: auto;
+      }
+
+      .about-title {
+        font-size: 94px;
+        line-height: 100px;
+        margin-bottom: 20px;
+      }
+
+      .about-text {
+        font-size: 20px;
+        line-height: 24px;
+
+        &:not(:last-of-type) {
+          margin-bottom: 20px;
+        }
+      }
+
+      .about-tag {
+        font-size: 20px;
+        line-height: 24px;
+      }
+
+      .about-tags {
+        margin-bottom: 20px;
+      }
+    }
   }
 }

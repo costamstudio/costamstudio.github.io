@@ -1,6 +1,6 @@
 import { useIntl } from "react-intl";
 import { useCallback } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobile, isMobileOnly } from "react-device-detect";
 
 import { Glass } from "../../components/Glass/Glass";
 import contactPlVector from "../../assets/images/contact-pl-vector.png";
@@ -53,11 +53,11 @@ export const Contact = ({ locale, contactBackground }: Props) => {
                     <div  className="contact-content-image-container">
                         <div className="contact-content-image-title">/ {formatMessage({ id: "socialMedia" })}</div>
                         <div className="contact-content-image-socials">
-                            {!isMobile && (
+                            {!isMobileOnly && (
                                 <div className="contact-content-instagram-qr"/>
                             )}
                             <div className="contact-content-social-links">
-                                {isMobile && (
+                                {isMobileOnly && (
                                     <div
                                         className="contact-content-instagram social-link-icon"
                                         onClick={() => openNewTabLink(INSTAGRAM_LINK)}

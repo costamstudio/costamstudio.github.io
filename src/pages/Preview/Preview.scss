@@ -236,5 +236,12 @@
     .preview-tags {
       margin: 0;
     }
+
+    @include tablet-m {
+      .preview-title {
+        font-size: 56px;
+        line-height: 56px;
+      }
+    }
   }
 }

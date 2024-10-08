@@ -87,8 +87,8 @@
   }
 
   &.mobile {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    justify-content: space-between;
     column-gap: 12px;
     padding: 12px 12px 15px;
     height: 40px;
@@ -129,6 +129,26 @@
 
       .header-logo, .header-burger-menu {
         filter: invert(1) !important;
+      }
+    }
+
+    @include tablet-m {
+      height: 52px;
+      padding: 14px 40px;
+
+      .header-burger-menu {
+        height: 48px;
+        width: 48px;
+      }
+    }
+
+    @include tablet-l {
+      height: 68px;
+      padding: 20px 40px;
+
+      .header-burger-menu {
+        height: 48px;
+        width: 48px;
       }
     }
   }
@@ -248,5 +268,13 @@
 
   .contact-content-email {
     background-image: url("/assets/images/email-icon.png");
+  }
+
+  @include tablet-m {
+    top: 80px;
+  }
+
+  @include tablet-l {
+    top: 108px;
   }
 }
