@@ -59,7 +59,7 @@ export const Project = ({ locale, setIsHeaderVisible, setHasHeaderBackground, se
     return loadedProjects[id] ? (
         <div ref={projectRef} className={`project-container${isMobile ? " mobile" : ""}`} onScroll={onScroll}>
             <div className="project-header-container">
-                <img className="project-thumbnail" src={projectMedia(`./${id}/preview.png`)}/>
+                <img className="project-thumbnail" src={projectMedia(`./${id}/thumbnail.png`)}/>
                 <div className="project-header-content">
                     <Reveal {...BOTTOM_OPACITY_ANIMATION_PROPS}>
                         <div className="project-tags">
