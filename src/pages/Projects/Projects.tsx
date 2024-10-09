@@ -1,20 +1,19 @@
 import { useIntl } from "react-intl";
-import { useCallback, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import Carousel from 'react-multi-carousel';
 import { isMobile } from "react-device-detect";
+import { Reveal } from "react-awesome-reveal";
 
 import { Preview } from "../Preview/Preview";
 import { PROJECTS } from "../../constants/projects";
 import { CAROUSEL_RESPONSIVE_CONFIG } from "./contants";
 import { CarouselButtons } from "../../components/CarouselButtons/CarouselButtons";
+import { LEFT_RIGHT_ANIMATION_PROPS } from "../../constants/animations";
 
 import "./Projects.scss";
-import { useOnScreen } from "../../hooks/useOnScreen";
 
 export const Projects = () => {
     const { formatMessage } = useIntl();
-    const ref = useRef<HTMLDivElement>(null);
-    const isOnScreen = useOnScreen(ref);
 
     const projectsToMainPreviews = useMemo(() => {
         return PROJECTS.filter(project => project.isShownInMainPreviews);
@@ -26,9 +25,11 @@ export const Projects = () => {
 
     return (
         <div className={`projects${isMobile ? " mobile" : ""}`}>
-            <div ref={ref} className={`projects-title-container${isOnScreen ? " visible" : ""}`}>
-                <div className="projects-title">{formatMessage({ id: "somethingInspiring" })}</div>
-                <div className="projects-title-description">{formatMessage({ id: "ourCreativeProjects" })}</div>
+            <div className="projects-title-container">
+                <Reveal {...LEFT_RIGHT_ANIMATION_PROPS}>
+                    <div className="projects-title">{formatMessage({ id: "somethingInspiring" })}</div>
+                    <div className="projects-title-description">{formatMessage({ id: "ourCreativeProjects" })}</div>
+                </Reveal>
             </div>
             <div className="previews-container">
                 {projectsToMainPreviews.map(project => <Preview key={project.id} project={project}/>)}

@@ -37,8 +37,6 @@
       font-size: 60px;
       line-height: 68px;
     }
-
-    @include appearance-left-right;
   }
 
   .section-description {
@@ -50,8 +48,6 @@
       font-size: 32px;
       line-height: 36px;
     }
-
-    @include appearance-bottom-opacity(0.3s);
   }
 
   &.full-s-il-tr {

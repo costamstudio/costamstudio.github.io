@@ -1,12 +1,13 @@
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { useIntl } from "react-intl";
 import { isMobile } from "react-device-detect";
+import { Reveal } from "react-awesome-reveal";
 
 import { Section } from "../../types/Section";
 import { SectionType } from "../../enums/SectionType";
+import { BOTTOM_OPACITY_ANIMATION_PROPS, LEFT_RIGHT_ANIMATION_PROPS } from "../../constants/animations";
 
 import "./ProjectSection.scss";
-import { useOnScreen } from "../../hooks/useOnScreen";
 
 interface Props {
     projectId: string;
@@ -18,8 +19,6 @@ export const ProjectSection = ({ projectId, sectionIndex, section }: Props) => {
     const projectMedia = require.context('../../assets/project-media', true);
     const intl = useIntl();
     const { formatMessage } = intl;
-    const ref = useRef<HTMLDivElement>(null);
-    const isOnScreen = useOnScreen(ref);
 
     const sectionPath = useMemo(() => {
         return `projectContent.${projectId}.sections.${sectionIndex}`;
@@ -49,11 +48,13 @@ export const ProjectSection = ({ projectId, sectionIndex, section }: Props) => {
                 )}
             </div>
             {(hasTitle || hasDescription) && (
-                <div ref={ref} className="section-text-container">
-                    {hasTitle &&
-                        <div className={`section-title${isOnScreen ? " visible" : ""}`}>{formatMessage({ id: `${sectionPath}.title` })}</div>}
-                    {hasDescription && <div
-                        className={`section-description${isOnScreen ? " visible" : ""}`}>{formatMessage({ id: `${sectionPath}.description` })}</div>}
+                <div className="section-text-container">
+                    <Reveal {...LEFT_RIGHT_ANIMATION_PROPS}>
+                        {hasTitle && <div className="section-title">{formatMessage({ id: `${sectionPath}.title` })}</div>}
+                    </Reveal>
+                    <Reveal {...BOTTOM_OPACITY_ANIMATION_PROPS}>
+                        {hasDescription && <div className="section-description">{formatMessage({ id: `${sectionPath}.description` })}</div>}
+                    </Reveal>
                 </div>
             )}
 

@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { animated, useSpring } from "react-spring";
 import { isMobile } from "react-device-detect";
+import { useMediaQuery } from "react-responsive";
+import { v4 as uuid } from 'uuid';
 
 import { LogoArt } from "../LogoArt/LogoArt";
 import { About } from "../About/About";
@@ -10,7 +12,6 @@ import { Contact } from "../Contact/Contact";
 import { Language } from "../../enums/Language";
 
 import "./Home.scss";
-import { useMediaQuery } from "react-responsive";
 
 
 interface Props {
@@ -148,13 +149,21 @@ export const Home = ({
         }
     }, [clickedMenuItem, homeRef.current?.scrollHeight]);
 
+    const [bottomContainerKey, setBottomContainerKey] = useState(uuid());
+
+    useEffect(() => {
+        if (isBottomContainerOpened) {
+            setBottomContainerKey(uuid());
+        }
+    }, [isBottomContainerOpened]);
+
     return (
         <animated.div ref={homeRef} className={`home${isMobile ? " mobile" : ""}`} style={styles} onWheel={onWheel} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onScroll={onScroll}>
             <LogoArt logoImages={logoImages} logoArtBackground={logoArtBackground}/>
             <animated.div className="right-container" style={rightContainerStyles}>
                 <About isVisible={isRightContainerOpened} clickedMenuItem={clickedMenuItem}/>
             </animated.div>
-            <animated.div className="bottom-container" style={bottomContainerStyles}>
+            <animated.div key={bottomContainerKey} className="bottom-container" style={bottomContainerStyles}>
                 <Projects/>
                 <Contact locale={locale} contactBackground={contactBackground}/>
             </animated.div>
