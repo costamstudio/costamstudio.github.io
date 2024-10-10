@@ -6,6 +6,7 @@ import { Reveal } from "react-awesome-reveal";
 
 import { Project } from "../../types/Project";
 import { BOTTOM_OPACITY_ANIMATION_PROPS, LEFT_RIGHT_ANIMATION_PROPS } from "../../constants/animations";
+import { ImageDistortionContainer } from "../../components/ImageDistortionContainer/ImageDistortionContainer";
 
 import "./Preview.scss";
 
@@ -25,12 +26,18 @@ export const Preview = ({ project, isCarouselPreview }: Props) => {
 
     return (
         <div className={`preview-container ${templateClass}${isMobile ? " mobile" : ""}`}>
-            <div className="preview-image-container">
-                <img
-                    className="preview-image"
-                    src={projectMedia(`./${project.id}/preview.png`)}
-                    onClick={() => navigate(`/project/${project.id}`)}
-                />
+            <div className="preview-image-container" onClick={() => navigate(`/project/${project.id}`)}>
+                {isMobile ? (
+                    <img
+                        className="preview-image"
+                        src={projectMedia(`./${project.id}/preview.png`)}
+                    />
+                ) : (
+                    <ImageDistortionContainer
+                        src={projectMedia(`./${project.id}/preview.png`)}
+                        isCarouselImage={!!isCarouselPreview}
+                    />
+                )}
             </div>
             <div className="preview-text-container">
                 <Reveal {...LEFT_RIGHT_ANIMATION_PROPS}>

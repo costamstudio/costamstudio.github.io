@@ -163,7 +163,7 @@ export const Home = ({
             <animated.div className="right-container" style={rightContainerStyles}>
                 <About isVisible={isRightContainerOpened} clickedMenuItem={clickedMenuItem}/>
             </animated.div>
-            <animated.div key={bottomContainerKey} className="bottom-container" style={bottomContainerStyles}>
+            <animated.div className="bottom-container" style={bottomContainerStyles}>
                 <Projects/>
                 <Contact locale={locale} contactBackground={contactBackground}/>
             </animated.div>
