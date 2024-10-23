@@ -5,15 +5,15 @@ import { loadImages, loadVideos } from '../utils/common';
 import { PROJECTS } from '../constants/projects';
 import { SectionType } from '../enums/SectionType';
 import { Section } from '../types/Section';
-import { addProject } from '../store/projects';
+import { addProject } from '../store/assets';
 
-export const useInitProject = () => {
+export const useInitProjectAssets = () => {
   const dispatch = useAppDispatch();
-  const { loadedProjects } = useAppSelector(({ projects }) => projects);
+  const { loadedProjects } = useAppSelector(({ assets }) => assets);
 
   const projectMedia = require.context(`../assets/project-media`, true);
 
-  const initProject = useCallback(async(id: string) => {
+  const initProjectAssets = useCallback(async(id: string) => {
     const projectConfig = PROJECTS.find((project) => project.id === id);
     const isProjectLoaded = loadedProjects[id];
     if (!projectConfig || isProjectLoaded) {
@@ -36,5 +36,5 @@ export const useInitProject = () => {
     dispatch(addProject(id));
   }, [projectMedia, loadedProjects]);
 
-  return { initProject };
+  return { initProjectAssets };
 };

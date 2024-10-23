@@ -1,19 +1,26 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useIntl } from "react-intl";
 import { useResizeDetector } from "react-resize-detector";
 import { isMobile } from "react-device-detect";
 
-import { getRandomNumberInRange } from "../../utils/common";
+import { getRandomNumberInRange, loadImages } from "../../utils/common";
 import { useResponsiveVariable } from "../../hooks/useResponsiveVariable";
 
 import "./LogoArt.scss";
+import { setIsLogoArtImagesLoaded, setIsLogoArtVideoLoaded } from "../../store/assets";
+import { useAppDispatch } from "../../store/hooks";
 
-interface Props {
-    logoImages: HTMLImageElement[];
-    logoArtBackground: HTMLVideoElement | null;
-}
+const LOGO_ART_IMAGE_NAMES = [
+    "logo-blue.png",
+    "logo-crystal.png",
+    "logo-drinks.png",
+    "logo-grass.png",
+    "logo-salmon.png",
+    "logo-yellow.png",
+];
 
-export const LogoArt = ({ logoArtBackground, logoImages }: Props) => {
+export const LogoArt = () => {
+    const dispatch = useAppDispatch();
     const brashRadius = useResponsiveVariable(50, 60, 120);
     const { width: canvasWidth = 1, height: canvasHeight = 1, ref } = useResizeDetector();
 
@@ -27,6 +34,14 @@ export const LogoArt = ({ logoArtBackground, logoImages }: Props) => {
     const [brushImageIndex, setBrushImageIndex] = useState(0);
 
     const [drawInterval, setDrawInterval] = useState<ReturnType<typeof setInterval> | null>(null);
+    const [logoImages, setLogoImages] = useState<HTMLImageElement[]>([]);
+
+    const assets = require.context('../../assets', true);
+
+    const loadLogoImages = useCallback(async () => {
+        const images = await loadImages(LOGO_ART_IMAGE_NAMES.map(imageName => assets(`./images/${imageName}`)));
+        setLogoImages(images);
+    }, [logoImages, setLogoImages]);
 
     const clearCircle = useCallback((x: number, y: number , radius: number, canvasContext: CanvasRenderingContext2D) => {
         for (let i = 0 ; i < Math.round(Math.PI * radius); i++) {
@@ -99,6 +114,14 @@ export const LogoArt = ({ logoArtBackground, logoImages }: Props) => {
     }, [brushImageIndex]);
 
     useEffect(() => {
+        loadLogoImages();
+        return () => {
+            dispatch(setIsLogoArtImagesLoaded(false));
+            dispatch(setIsLogoArtVideoLoaded(false));
+        };
+    }, []);
+
+    useEffect(() => {
         setCanvas(canvasRef.current);
         setCanvasContext(canvasRef.current?.getContext("2d") || null);
     }, [canvas, canvasContext]);
@@ -109,6 +132,7 @@ export const LogoArt = ({ logoArtBackground, logoImages }: Props) => {
             canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
             canvasContext.drawImage(logoImages[backgroundLogoIndex], 0, 0, canvasWidth, canvasHeight);
             updateFillStylePattern(backgroundLogoIndex);
+            dispatch(setIsLogoArtImagesLoaded(true));
         }
     }, [canvasContext, logoImages.length, canvasHeight, canvasWidth]);
 
@@ -116,10 +140,11 @@ export const LogoArt = ({ logoArtBackground, logoImages }: Props) => {
       <div className={`logo-art${isMobile ? " mobile" : ""}`}>
           <video
               className="background-video"
-              src={logoArtBackground?.src ?? ""}
+              src={assets("./videos/logo-art-background.mp4")}
               loop={true}
               autoPlay={true}
               muted={true}
+              onCanPlayThrough={() => dispatch(setIsLogoArtVideoLoaded(true))}
           />
           <div ref={ref} className="logo-canvas-container">
               <canvas

@@ -9,7 +9,7 @@ import { ProjectSection } from "../ProjectSection/ProjectSection";
 import { Contact } from "../Contact/Contact";
 import { Language } from "../../enums/Language";
 import { BOTTOM_OPACITY_ANIMATION_PROPS, LEFT_RIGHT_ANIMATION_PROPS } from "../../constants/animations";
-import { useInitProject } from "../../hooks/useInitProject";
+import { useInitProjectAssets } from "../../hooks/useInitProjectAssets";
 import { useAppSelector } from "../../store/hooks";
 import { Spinner } from "../../components/Spinner/Spinner";
 
@@ -20,13 +20,12 @@ interface Props {
     setIsHeaderVisible: (isHeaderVisible: boolean) => void;
     setHasHeaderBackground: (hasHeaderBackground: boolean) => void;
     setHasHeaderBigLogo: (hasHeaderBigLogo: boolean) => void;
-    contactBackground: HTMLVideoElement | null;
 }
 
-export const Project = ({ locale, setIsHeaderVisible, setHasHeaderBackground, setHasHeaderBigLogo, contactBackground }: Props) => {
+export const Project = ({ locale, setIsHeaderVisible, setHasHeaderBackground, setHasHeaderBigLogo }: Props) => {
     const { id = "" } = useParams();
-    const { loadedProjects } = useAppSelector(({ projects }) => projects);
-    const { initProject } = useInitProject();
+    const { loadedProjects, isCommonAssetsLoaded } = useAppSelector(({ assets }) => assets);
+    const { initProjectAssets } = useInitProjectAssets();
     const { formatMessage } = useIntl();
     const projectRef = useRef<HTMLDivElement>(null);
 
@@ -50,13 +49,13 @@ export const Project = ({ locale, setIsHeaderVisible, setHasHeaderBackground, se
     }, [projectRef, scrollTop]);
 
     useEffect(() => {
-        initProject(id);
+        initProjectAssets(id);
         setIsHeaderVisible(true);
         setHasHeaderBackground(false);
         setHasHeaderBigLogo(true);
     }, []);
 
-    return loadedProjects[id] ? (
+    return loadedProjects[id] && isCommonAssetsLoaded ? (
         <div ref={projectRef} className={`project-container${isMobile ? " mobile" : ""}`} onScroll={onScroll}>
             <div className="project-header-container">
                 <img className="project-thumbnail" src={projectMedia(`./${id}/thumbnail.png`)}/>
@@ -85,7 +84,7 @@ export const Project = ({ locale, setIsHeaderVisible, setHasHeaderBackground, se
                         />
                     ))}
                 </div>
-                <Contact locale={locale} contactBackground={contactBackground}/>
+                <Contact locale={locale}/>
         </div>
     ) : <Spinner/>;
 };

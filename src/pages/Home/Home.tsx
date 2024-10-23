@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { animated, useSpring } from "react-spring";
 import { isMobile } from "react-device-detect";
 import { useMediaQuery } from "react-responsive";
-import { v4 as uuid } from 'uuid';
 
 import { LogoArt } from "../LogoArt/LogoArt";
 import { About } from "../About/About";
@@ -10,6 +9,9 @@ import { Projects } from "../Projects/Projects";
 import { MenuItem } from "../../enums/MenuItem";
 import { Contact } from "../Contact/Contact";
 import { Language } from "../../enums/Language";
+import { useAppSelector } from "../../store/hooks";
+import { Spinner } from "../../components/Spinner/Spinner";
+import { useInitHomeAssets } from "../../hooks/useInitHomeAssets";
 
 import "./Home.scss";
 
@@ -21,18 +23,12 @@ interface Props {
     setIsHeaderVisible: (isHeaderVisible: boolean) => void;
     setHasHeaderBackground: (hasHeaderBackground: boolean) => void;
     setHasHeaderBigLogo: (hasHeaderBigLogo: boolean) => void;
-    logoImages: HTMLImageElement[];
-    logoArtBackground: HTMLVideoElement | null;
-    contactBackground: HTMLVideoElement | null;
 }
 
 export const Home = ({
                          locale,
                          clickedMenuItem,
                          setClickedMenuItem,
-                         logoImages,
-                         logoArtBackground,
-                         contactBackground,
                          setIsHeaderVisible,
                          setHasHeaderBackground,
                          setHasHeaderBigLogo
@@ -44,6 +40,8 @@ export const Home = ({
     const [toucheStartY, setTouchStartY] = useState(0);
     const homeRef = useRef<HTMLDivElement>(null);
     const isPortrait = useMediaQuery({ query: '(orientation: portrait)' });
+    const { isHomeAssetsLoaded, isCommonAssetsLoaded, isLogoArtImagesLoaded, isLogoArtVideoLoaded } = useAppSelector(({ assets }) => assets);
+    const { initHomeAssets } = useInitHomeAssets();
 
     const styles = useSpring({
         overflow: isBottomContainerOpened ? "auto" : "hidden",
@@ -149,24 +147,24 @@ export const Home = ({
         }
     }, [clickedMenuItem, homeRef.current?.scrollHeight]);
 
-    const [bottomContainerKey, setBottomContainerKey] = useState(uuid());
-
     useEffect(() => {
-        if (isBottomContainerOpened) {
-            setBottomContainerKey(uuid());
-        }
-    }, [isBottomContainerOpened]);
+        initHomeAssets();
+    }, []);
 
     return (
-        <animated.div ref={homeRef} className={`home${isMobile ? " mobile" : ""}`} style={styles} onWheel={onWheel} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onScroll={onScroll}>
-            <LogoArt logoImages={logoImages} logoArtBackground={logoArtBackground}/>
-            <animated.div className="right-container" style={rightContainerStyles}>
-                <About isVisible={isRightContainerOpened} clickedMenuItem={clickedMenuItem}/>
+        <>
+            <animated.div ref={homeRef} className={`home${isMobile ? " mobile" : ""}`} style={styles} onWheel={onWheel}
+                          onTouchStart={onTouchStart} onTouchMove={onTouchMove} onScroll={onScroll}>
+                <LogoArt/>
+                <animated.div className="right-container" style={rightContainerStyles}>
+                    <About isVisible={isRightContainerOpened} clickedMenuItem={clickedMenuItem}/>
+                </animated.div>
+                <animated.div className="bottom-container" style={bottomContainerStyles}>
+                    <Projects/>
+                    <Contact locale={locale}/>
+                </animated.div>
             </animated.div>
-            <animated.div className="bottom-container" style={bottomContainerStyles}>
-                <Projects/>
-                <Contact locale={locale} contactBackground={contactBackground}/>
-            </animated.div>
-        </animated.div>
-    );
+            {(!isHomeAssetsLoaded || !isCommonAssetsLoaded || !isLogoArtImagesLoaded || !isLogoArtVideoLoaded) && <Spinner/>}
+        </>
+    )
 };

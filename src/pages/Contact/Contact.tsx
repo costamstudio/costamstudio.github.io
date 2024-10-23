@@ -12,11 +12,11 @@ import "./Contact.scss";
 
 interface Props {
     locale: Language;
-    contactBackground: HTMLVideoElement | null;
 }
 
-export const Contact = ({ locale, contactBackground }: Props) => {
+export const Contact = ({ locale }: Props) => {
     const { formatMessage } = useIntl();
+    const assets = require.context('../../assets', true);
 
     const openNewTabLink = useCallback((link: string) => {
         window.open(link, "_blank");
@@ -26,7 +26,7 @@ export const Contact = ({ locale, contactBackground }: Props) => {
         <div className={`contact-container${isMobile ? " mobile" : ""}`}>
             <video
                 className="background-video"
-                src={contactBackground?.src ?? ""}
+                src={assets("./videos/contact-background.mp4")}
                 loop={true}
                 autoPlay={true}
                 muted={true}
