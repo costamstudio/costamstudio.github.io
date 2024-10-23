@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.687e57b0.css",
-    "main.js": "/static/js/main.8c6fd782.js",
+    "main.css": "/static/css/main.022be632.css",
+    "main.js": "/static/js/main.fce8497e.js",
     "static/js/787.e88504ec.chunk.js": "/static/js/787.e88504ec.chunk.js",
     "static/media/4.mp4": "/static/media/4.42664dabb88cdcadfdd7.mp4",
     "static/media/logo-art-background.mp4": "/static/media/logo-art-background.42664dabb88cdcadfdd7.mp4",
@@ -13,6 +13,7 @@
     "static/media/logo-crystal.png": "/static/media/logo-crystal.a2a665fc9f325af094bd.png",
     "static/media/0.png": "/static/media/0.e32ddb367a92e60cb9da.png",
     "static/media/5.png": "/static/media/5.e32ddb367a92e60cb9da.png",
+    "static/media/logo-drinks.png": "/static/media/logo-drinks.9b3dc485515be76f35a8.png",
     "static/media/logo-salmon.png": "/static/media/logo-salmon.d095ae63f3abe1728e9b.png",
     "static/media/logo-blue.png": "/static/media/logo-blue.bcd63abb123cf8ffc3d9.png",
     "static/media/2.png": "/static/media/2.beb03733735e69e046fb.png",
@@ -22,7 +23,7 @@
     "static/media/T1KoriumVF.ttf": "/static/media/T1KoriumVF.79d403d68c1a51cf8c30.ttf",
     "static/media/Sigmund PRO UltraLight.ttf": "/static/media/Sigmund PRO UltraLight.692b3252762651aa75fb.ttf",
     "static/media/Sigmund PRO Regular.ttf": "/static/media/Sigmund PRO Regular.4cf7aa836e72b9193545.ttf",
-    "static/media/logo.svg": "/static/media/logo.a4898f22251234e3ce242f3717485273.svg",
+    "static/media/logo.svg": "/static/media/logo.a4898f22251234e3ce24.svg",
     "static/media/contact-pl-vector.png": "/static/media/contact-pl-vector.3f6e47ebf585615bbe98.png",
     "static/media/contact-en-vector.png": "/static/media/contact-en-vector.c3aa1c823debb2845e99.png",
     "static/media/revicons.eot": "/static/media/revicons.a77de540a38981833f9e.eot",
@@ -30,12 +31,12 @@
     "static/media/revicons.woff": "/static/media/revicons.e8746a624ed098489406.woff",
     "static/media/logo-studio.svg": "/static/media/logo-studio.808db5ffa39630490db8.svg",
     "index.html": "/index.html",
-    "main.687e57b0.css.map": "/static/css/main.687e57b0.css.map",
-    "main.8c6fd782.js.map": "/static/js/main.8c6fd782.js.map",
+    "main.022be632.css.map": "/static/css/main.022be632.css.map",
+    "main.fce8497e.js.map": "/static/js/main.fce8497e.js.map",
     "787.e88504ec.chunk.js.map": "/static/js/787.e88504ec.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.687e57b0.css",
-    "static/js/main.8c6fd782.js"
+    "static/css/main.022be632.css",
+    "static/js/main.fce8497e.js"
   ]
 }
