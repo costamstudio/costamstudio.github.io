@@ -8,39 +8,26 @@ import { About } from "../About/About";
 import { Projects } from "../Projects/Projects";
 import { MenuItem } from "../../enums/MenuItem";
 import { Contact } from "../Contact/Contact";
-import { Language } from "../../enums/Language";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Spinner } from "../../components/Spinner/Spinner";
 import { useInitHomeAssets } from "../../hooks/useInitHomeAssets";
+import { setHasHeaderBackground, setHasHeaderBigLogo, setIsHeaderVisible } from "../../store/header";
+import { setOpenedHomeSection } from "../../store/home";
 
 import "./Home.scss";
 
-
-interface Props {
-    locale: Language;
-    clickedMenuItem: MenuItem | null;
-    setClickedMenuItem: (item: MenuItem | null) => void;
-    setIsHeaderVisible: (isHeaderVisible: boolean) => void;
-    setHasHeaderBackground: (hasHeaderBackground: boolean) => void;
-    setHasHeaderBigLogo: (hasHeaderBigLogo: boolean) => void;
-}
-
-export const Home = ({
-                         locale,
-                         clickedMenuItem,
-                         setClickedMenuItem,
-                         setIsHeaderVisible,
-                         setHasHeaderBackground,
-                         setHasHeaderBigLogo
-                     }: Props) => {
+export const Home = () => {
+    const dispatch = useAppDispatch();
     const [isRightContainerOpened, setIsRightContainerOpened] = useState(false);
     const [isBottomContainerOpened, setIsBottomContainerOpened] = useState(false);
     const [isScrollAbsoluteContainersDisabled, setIsScrollAbsoluteContainersDisabled] = useState(false);
     const [scrollTop, setScrollTop] = useState(0);
     const [toucheStartY, setTouchStartY] = useState(0);
     const homeRef = useRef<HTMLDivElement>(null);
+    const contactRef = useRef<HTMLDivElement>(null);
     const isPortrait = useMediaQuery({ query: '(orientation: portrait)' });
     const { isHomeAssetsLoaded, isCommonAssetsLoaded, isLogoArtImagesLoaded, isLogoArtVideoLoaded } = useAppSelector(({ assets }) => assets);
+    const { openedHomeSection } = useAppSelector(({ home }) => home);
     const { initHomeAssets } = useInitHomeAssets();
 
     const styles = useSpring({
@@ -69,7 +56,7 @@ export const Home = ({
         if (!isScrollAbsoluteContainersDisabled && deltaY > 0 && !isRightContainerOpened) {
             setScrollAbsoluteContainersDelay();
             setIsRightContainerOpened(true);
-            setHasHeaderBigLogo(false);
+            dispatch(setHasHeaderBigLogo(false));
         }
         if (!isScrollAbsoluteContainersDisabled && deltaY > 0 && isRightContainerOpened && !isBottomContainerOpened) {
             setScrollAbsoluteContainersDelay();
@@ -82,7 +69,7 @@ export const Home = ({
         if (!isScrollAbsoluteContainersDisabled && scrollTop === 0 && deltaY < 0 && !isBottomContainerOpened) {
             setScrollAbsoluteContainersDelay();
             setIsRightContainerOpened(false);
-            setHasHeaderBigLogo(true);
+            dispatch(setHasHeaderBigLogo(true));
         }
     }, [isRightContainerOpened, isBottomContainerOpened, scrollTop, isScrollAbsoluteContainersDisabled]);
 
@@ -100,52 +87,48 @@ export const Home = ({
     }, [onScrollAbsoluteContainers]);
 
     const onScroll = useCallback(() => {
-        if (homeRef.current) {
+        dispatch(setOpenedHomeSection(null));
+        if (homeRef.current && contactRef.current) {
             const { scrollTop: newScrollTop } = homeRef.current;
-            const isHeaderVisible = newScrollTop === 0 || scrollTop - newScrollTop > 0;
             setScrollTop(newScrollTop);
-            setIsHeaderVisible(isHeaderVisible);
-            setHasHeaderBackground(newScrollTop !== 0);
+            dispatch(setIsHeaderVisible(newScrollTop === 0 || scrollTop - newScrollTop > 0));
+            dispatch(setHasHeaderBackground(newScrollTop !== 0));
         }
-    }, [homeRef, scrollTop]);
+    }, [homeRef, contactRef, scrollTop]);
 
     useEffect(() => {
-        if (clickedMenuItem && homeRef.current) {
-            switch (clickedMenuItem) {
+        if (openedHomeSection && homeRef.current && contactRef.current) {
+            switch (openedHomeSection) {
                 case MenuItem.HOME:
                     homeRef.current.scrollTo({ top: 0, behavior: 'smooth' });
                     setIsBottomContainerOpened(false);
                     setIsRightContainerOpened(false);
-                    setClickedMenuItem(null);
-                    setHasHeaderBackground(false);
-                    setHasHeaderBigLogo(true);
+                    dispatch(setHasHeaderBackground(false));
+                    dispatch(setHasHeaderBigLogo(true));
                     return;
                 case MenuItem.ABOUT:
                     homeRef.current.scrollTo({ top: 0, behavior: 'smooth' });
                     setIsBottomContainerOpened(false);
                     setIsRightContainerOpened(true);
-                    setClickedMenuItem(null);
-                    setHasHeaderBigLogo(false);
+                    dispatch(setHasHeaderBigLogo(false));
                     return;
                 case MenuItem.PROJECTS:
                     homeRef.current.scrollTo({ top: 0, behavior: 'smooth' });
                     setIsBottomContainerOpened(true);
                     setIsRightContainerOpened(true);
-                    setClickedMenuItem(null);
-                    setHasHeaderBigLogo(false);
+                    dispatch(setHasHeaderBigLogo(false));
                     return;
                 case MenuItem.CONTACTS:
-                    homeRef.current.scrollTo({ top: homeRef.current.scrollHeight, behavior: 'smooth' });
+                    contactRef.current?.scrollIntoView({ behavior: 'smooth' });
                     setIsBottomContainerOpened(true);
                     setIsRightContainerOpened(true);
-                    setClickedMenuItem(null);
-                    setHasHeaderBigLogo(false);
+                    dispatch(setHasHeaderBigLogo(false));
                     return;
                 default:
                     return;
             }
         }
-    }, [clickedMenuItem, homeRef.current?.scrollHeight]);
+    }, [openedHomeSection, homeRef.current?.scrollHeight]);
 
     useEffect(() => {
         initHomeAssets();
@@ -157,11 +140,13 @@ export const Home = ({
                           onTouchStart={onTouchStart} onTouchMove={onTouchMove} onScroll={onScroll}>
                 <LogoArt/>
                 <animated.div className="right-container" style={rightContainerStyles}>
-                    <About isVisible={isRightContainerOpened} clickedMenuItem={clickedMenuItem}/>
+                    <About isVisible={isRightContainerOpened}/>
                 </animated.div>
                 <animated.div className="bottom-container" style={bottomContainerStyles}>
                     <Projects/>
-                    <Contact locale={locale}/>
+                    <div ref={contactRef}>
+                        <Contact/>
+                    </div>
                 </animated.div>
             </animated.div>
             {(!isHomeAssetsLoaded || !isCommonAssetsLoaded || !isLogoArtImagesLoaded || !isLogoArtVideoLoaded) && <Spinner/>}

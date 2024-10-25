@@ -7,14 +7,12 @@ import contactPlVector from "../../assets/images/contact-pl-vector.png";
 import contactEnVector from "../../assets/images/contact-en-vector.png";
 import { EMAIL_LINK, FACEBOOK_LINK, INSTAGRAM_LINK, LINKEDIN_LINK } from "./constants";
 import { Language } from "../../enums/Language";
+import { useAppSelector } from "../../store/hooks";
 
 import "./Contact.scss";
 
-interface Props {
-    locale: Language;
-}
-
-export const Contact = ({ locale }: Props) => {
+export const Contact = () => {
+    const { locale }= useAppSelector(({ common }) => common);
     const { formatMessage } = useIntl();
     const assets = require.context('../../assets', true);
 

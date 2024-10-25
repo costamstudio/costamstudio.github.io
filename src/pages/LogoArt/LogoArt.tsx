@@ -1,14 +1,14 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useIntl } from "react-intl";
 import { useResizeDetector } from "react-resize-detector";
 import { isMobile } from "react-device-detect";
 
 import { getRandomNumberInRange, loadImages } from "../../utils/common";
 import { useResponsiveVariable } from "../../hooks/useResponsiveVariable";
-
-import "./LogoArt.scss";
 import { setIsLogoArtImagesLoaded, setIsLogoArtVideoLoaded } from "../../store/assets";
 import { useAppDispatch } from "../../store/hooks";
+
+import "./LogoArt.scss";
 
 const LOGO_ART_IMAGE_NAMES = [
     "logo-blue.png",

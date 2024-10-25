@@ -6,22 +6,18 @@ import { isMobile } from "react-device-detect";
 
 import { MenuItem } from "../../enums/MenuItem";
 import { LocaleToggle } from "./LocaleToggle/LocaleToggle";
-import { Language } from "../../enums/Language";
 import { EMAIL_LINK, FACEBOOK_LINK, INSTAGRAM_LINK, LINKEDIN_LINK } from "../Contact/constants";
 import { useResponsiveVariable } from "../../hooks/useResponsiveVariable";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setLocale } from "../../store/common";
+import { setOpenedHomeSection } from "../../store/home";
 
 import "./Header.scss";
 
-interface Props {
-    locale: Language;
-    setLocale: (locale: Language) => void;
-    setClickedMenuItem: (item: MenuItem | null) => void;
-    isVisible: boolean;
-    hasBackground: boolean;
-    hasBigLogo: boolean;
-}
-
-export const Header = ({ locale, setLocale, setClickedMenuItem, isVisible, hasBackground, hasBigLogo }: Props) => {
+export const Header = () => {
+    const dispatch = useAppDispatch();
+    const { locale } = useAppSelector(({ common }) => common);
+    const { isHeaderVisible, hasHeaderBackground, hasHeaderBigLogo } = useAppSelector(({ header }) => header);
     const { formatMessage } = useIntl();
     const navigate = useNavigate();
     const [isBurgerMenuOpened, setIsBurgerMenuOpened] = useState(false);
@@ -43,13 +39,13 @@ export const Header = ({ locale, setLocale, setClickedMenuItem, isVisible, hasBa
 
     const onMenuItemClicked = useCallback((menuItem: MenuItem) => {
         navigate("/");
-        setTimeout(() => setClickedMenuItem(menuItem), 300);
+        dispatch(setOpenedHomeSection(menuItem));
     }, []);
 
     const onBurgerMenuItemClicked = useCallback((menuItem: MenuItem) => {
         navigate("/");
         setIsBurgerMenuOpened(false);
-        setTimeout(() => setClickedMenuItem(menuItem), 300);
+        dispatch(setOpenedHomeSection(menuItem));
     }, []);
 
     const openNewTabLink = useCallback((link: string) => {
@@ -57,22 +53,22 @@ export const Header = ({ locale, setLocale, setClickedMenuItem, isVisible, hasBa
     }, []);
 
     const styles = useSpring({
-        transform: `translateY(${isVisible ? 0 : -(height + topOffset)}px)`,
+        transform: `translateY(${isHeaderVisible ? 0 : -(height + topOffset)}px)`,
     });
 
     const backgroundStyles = useSpring({
         delay: 200,
-        top: hasBackground || isMobile ? "0px" : `${topOffset}px`,
-        background: hasBackground ? "rgba(255, 255, 255, 0.8)" : "transparent",
-        backdropFilter: hasBackground ? "blur(10px)" : "blur(0px)",
+        top: hasHeaderBackground || isMobile ? "0px" : `${topOffset}px`,
+        background: hasHeaderBackground ? "rgba(255, 255, 255, 0.8)" : "transparent",
+        backdropFilter: hasHeaderBackground ? "blur(10px)" : "blur(0px)",
     });
 
     const stylesHeaderContent = useSpring({
-        filter: hasBackground ? "invert(1)" : "invert(0)",
+        filter: hasHeaderBackground ? "invert(1)" : "invert(0)",
     });
 
     const logoStyles = useSpring({
-        transform: `scale(${hasBigLogo && !isMobile ? 1.4 : 1})`,
+        transform: `scale(${hasHeaderBigLogo && !isMobile ? 1.4 : 1})`,
     });
 
     return (
@@ -86,7 +82,7 @@ export const Header = ({ locale, setLocale, setClickedMenuItem, isVisible, hasBa
                     {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.ABOUT)}>{formatMessage({ id: "about" })}</div>)}
                     {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.PROJECTS)}>{formatMessage({ id: "projects" })}</div>)}
                     {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.CONTACTS)}>{formatMessage({ id: "contacts" })}</div>)}
-                    {getMenuItem(<LocaleToggle locale={locale} setLocale={setLocale}/>)}
+                    {getMenuItem(<LocaleToggle locale={locale} setLocale={locale => dispatch(setLocale(locale))}/>)}
                 </animated.div>
                 <animated.div
                     style={stylesHeaderContent}
@@ -103,7 +99,7 @@ export const Header = ({ locale, setLocale, setClickedMenuItem, isVisible, hasBa
                             onClick={() => onBurgerMenuItemClicked(MenuItem.PROJECTS)}>{formatMessage({ id: "projects" })}</div>)}
                         {getMenuItem(<div
                             onClick={() => onBurgerMenuItemClicked(MenuItem.CONTACTS)}>{formatMessage({ id: "contacts" })}</div>)}
-                        {getMenuItem(<LocaleToggle locale={locale} setLocale={setLocale}/>)}
+                        {getMenuItem(<LocaleToggle locale={locale} setLocale={locale => dispatch(setLocale(locale))}/>)}
                     </div>
                     <div className="contact-content-image-container">
                         <div className="contact-content-image-title">/ {formatMessage({ id: "socialMedia" })}</div>

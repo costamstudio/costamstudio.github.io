@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { loadImages, loadVideos } from '../utils/common';

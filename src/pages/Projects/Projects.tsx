@@ -1,5 +1,5 @@
 import { useIntl } from "react-intl";
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import Carousel from 'react-multi-carousel';
 import { isMobile } from "react-device-detect";
 import { Reveal } from "react-awesome-reveal";

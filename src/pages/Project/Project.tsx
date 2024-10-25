@@ -7,22 +7,16 @@ import { Reveal } from "react-awesome-reveal";
 import { PROJECTS } from "../../constants/projects";
 import { ProjectSection } from "../ProjectSection/ProjectSection";
 import { Contact } from "../Contact/Contact";
-import { Language } from "../../enums/Language";
 import { BOTTOM_OPACITY_ANIMATION_PROPS, LEFT_RIGHT_ANIMATION_PROPS } from "../../constants/animations";
 import { useInitProjectAssets } from "../../hooks/useInitProjectAssets";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Spinner } from "../../components/Spinner/Spinner";
+import { setHasHeaderBackground, setHasHeaderBigLogo, setIsHeaderVisible } from "../../store/header";
 
 import "./Project.scss";
 
-interface Props {
-    locale: Language;
-    setIsHeaderVisible: (isHeaderVisible: boolean) => void;
-    setHasHeaderBackground: (hasHeaderBackground: boolean) => void;
-    setHasHeaderBigLogo: (hasHeaderBigLogo: boolean) => void;
-}
-
-export const Project = ({ locale, setIsHeaderVisible, setHasHeaderBackground, setHasHeaderBigLogo }: Props) => {
+export const Project = () => {
+    const dispatch = useAppDispatch();
     const { id = "" } = useParams();
     const { loadedProjects, isCommonAssetsLoaded } = useAppSelector(({ assets }) => assets);
     const { initProjectAssets } = useInitProjectAssets();
@@ -40,19 +34,18 @@ export const Project = ({ locale, setIsHeaderVisible, setHasHeaderBackground, se
     const onScroll = useCallback(() => {
         if (projectRef.current) {
             const { scrollTop: newScrollTop } = projectRef.current;
-            const isHeaderVisible = newScrollTop === 0 || scrollTop - newScrollTop > 0;
             setScrollTop(newScrollTop);
-            setIsHeaderVisible(isHeaderVisible);
-            setHasHeaderBackground(newScrollTop !== 0);
-            setHasHeaderBigLogo(newScrollTop === 0);
+            dispatch(setIsHeaderVisible(newScrollTop === 0 || scrollTop - newScrollTop > 0));
+            dispatch(setHasHeaderBackground(newScrollTop !== 0));
+            dispatch(setHasHeaderBigLogo(newScrollTop === 0));
         }
     }, [projectRef, scrollTop]);
 
     useEffect(() => {
         initProjectAssets(id);
-        setIsHeaderVisible(true);
-        setHasHeaderBackground(false);
-        setHasHeaderBigLogo(true);
+        dispatch(setIsHeaderVisible(true));
+        dispatch(setHasHeaderBackground(false));
+        dispatch(setHasHeaderBigLogo(true));
     }, []);
 
     return loadedProjects[id] && isCommonAssetsLoaded ? (
@@ -84,7 +77,7 @@ export const Project = ({ locale, setIsHeaderVisible, setHasHeaderBackground, se
                         />
                     ))}
                 </div>
-                <Contact locale={locale}/>
+                <Contact/>
         </div>
     ) : <Spinner/>;
 };

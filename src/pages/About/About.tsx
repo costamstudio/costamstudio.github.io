@@ -1,22 +1,23 @@
 import { useIntl } from "react-intl";
 import { isMobile, isMobileOnly } from "react-device-detect";
-
-import { Glass } from "../../components/Glass/Glass";
-
-import "./About.scss";
 import { animated, useSpring } from "react-spring";
 import { useCallback, useEffect, useState } from "react";
+
+import { Glass } from "../../components/Glass/Glass";
 import { MenuItem } from "../../enums/MenuItem";
+
+import "./About.scss";
+import { useAppSelector } from "../../store/hooks";
 
 interface Props {
     isVisible: boolean;
-    clickedMenuItem: MenuItem | null;
 }
 
-export const About = ({ isVisible, clickedMenuItem }: Props) => {
+export const About = ({ isVisible }: Props) => {
     const { formatMessage } = useIntl();
     const [isStart, setIsStart] = useState(true);
     const [toucheStartY, setTouchStartY] = useState(0);
+    const { openedHomeSection } = useAppSelector(({ home }) => home);
 
     const styles = useSpring({
         transform: isMobileOnly ? `translateY(${isStart ? "0%" : "-100%"})` : "none",
@@ -38,7 +39,7 @@ export const About = ({ isVisible, clickedMenuItem }: Props) => {
 
     useEffect(() => {
         setIsStart(true);
-    }, [clickedMenuItem]);
+    }, [openedHomeSection]);
 
     return (
         <div className={`about${isMobile ? " mobile" : ""}`} onTouchStart={onTouchStart} onTouchMove={onTouchMove}>
