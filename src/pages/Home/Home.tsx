@@ -101,29 +101,29 @@ export const Home = () => {
         if (openedHomeSection && homeRef.current && contactRef.current) {
             switch (openedHomeSection) {
                 case MenuItem.HOME:
-                    homeRef.current.scrollTo({ top: 0, behavior: 'smooth' });
                     setIsBottomContainerOpened(false);
                     setIsRightContainerOpened(false);
                     dispatch(setHasHeaderBackground(false));
                     dispatch(setHasHeaderBigLogo(true));
+                    homeRef.current.scrollTo({ top: 0 });
                     return;
                 case MenuItem.ABOUT:
-                    homeRef.current.scrollTo({ top: 0, behavior: 'smooth' });
                     setIsBottomContainerOpened(false);
                     setIsRightContainerOpened(true);
                     dispatch(setHasHeaderBigLogo(false));
+                    homeRef.current.scrollTo({ top: 0 });
                     return;
                 case MenuItem.PROJECTS:
-                    homeRef.current.scrollTo({ top: 0, behavior: 'smooth' });
                     setIsBottomContainerOpened(true);
                     setIsRightContainerOpened(true);
                     dispatch(setHasHeaderBigLogo(false));
+                    homeRef.current.scrollTo({ top: 0, behavior: "smooth" });
                     return;
                 case MenuItem.CONTACTS:
-                    contactRef.current?.scrollIntoView({ behavior: 'smooth' });
                     setIsBottomContainerOpened(true);
                     setIsRightContainerOpened(true);
                     dispatch(setHasHeaderBigLogo(false));
+                    contactRef.current?.scrollIntoView({ behavior: "smooth" });
                     return;
                 default:
                     return;
