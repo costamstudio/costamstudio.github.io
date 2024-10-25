@@ -78,6 +78,7 @@ export const Home = () => {
     }, [setTouchStartY]);
 
     const onTouchMove = useCallback((event: React.TouchEvent) => {
+        dispatch(setOpenedHomeSection(null));
         const deltaY = toucheStartY - event.touches[0].pageY;
         onScrollAbsoluteContainers(deltaY);
     }, [toucheStartY, onScrollAbsoluteContainers]);
