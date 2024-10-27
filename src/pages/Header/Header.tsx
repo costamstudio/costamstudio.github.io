@@ -40,13 +40,6 @@ export const Header = () => {
         if (menuItem !== MenuItem.CONTACTS) {
             navigate("/");
         }
-        dispatch(setOpenedSection(menuItem));
-    }, []);
-
-    const onBurgerMenuItemClicked = useCallback((menuItem: MenuItem) => {
-        if (menuItem !== MenuItem.CONTACTS) {
-            navigate("/");
-        }
         setIsBurgerMenuOpened(false);
         dispatch(setOpenedSection(menuItem));
     }, []);
@@ -96,12 +89,9 @@ export const Header = () => {
             {isBurgerMenuOpened && isMobile && (
                 <div className="burger-menu-content-container">
                     <div className="header-menu">
-                        {getMenuItem(<div
-                            onClick={() => onBurgerMenuItemClicked(MenuItem.ABOUT)}>{formatMessage({ id: "about" })}</div>)}
-                        {getMenuItem(<div
-                            onClick={() => onBurgerMenuItemClicked(MenuItem.PROJECTS)}>{formatMessage({ id: "projects" })}</div>)}
-                        {getMenuItem(<div
-                            onClick={() => onBurgerMenuItemClicked(MenuItem.CONTACTS)}>{formatMessage({ id: "contacts" })}</div>)}
+                        {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.ABOUT)}>{formatMessage({ id: "about" })}</div>)}
+                        {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.PROJECTS)}>{formatMessage({ id: "projects" })}</div>)}
+                        {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.CONTACTS)}>{formatMessage({ id: "contacts" })}</div>)}
                         {getMenuItem(<LocaleToggle locale={locale} setLocale={locale => dispatch(setLocale(locale))}/>)}
                     </div>
                     <div className="contact-content-image-container">
