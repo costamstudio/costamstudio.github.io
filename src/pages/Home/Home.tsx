@@ -13,13 +13,12 @@ import { Spinner } from "../../components/Spinner/Spinner";
 import { useInitHomeAssets } from "../../hooks/useInitHomeAssets";
 import { setHasHeaderBackground, setHasHeaderBigLogo, setIsHeaderVisible } from "../../store/header";
 import { setIsBottomContainerOpened, setIsRightContainerOpened } from "../../store/home";
+import { setOpenedSection } from "../../store/common";
 
 import "./Home.scss";
-import { setOpenedSection } from "../../store/common";
 
 export const Home = () => {
     const dispatch = useAppDispatch();
-    const [isScrollAbsoluteContainersDisabled, setIsScrollAbsoluteContainersDisabled] = useState(false);
     const [scrollTop, setScrollTop] = useState(0);
     const [toucheStartY, setTouchStartY] = useState(0);
     const homeRef = useRef<HTMLDivElement>(null);
@@ -38,62 +37,50 @@ export const Home = () => {
 
     const rightContainerStyles = useSpring({
         transform: isMobile ? `translateY(${isRightContainerOpened ? "0" : mobileRightContainerClosedTranslate}%)` : `none`,
-        left: isMobile ? "0%" : `${isRightContainerOpened ? "0%" : "85%"}`
+        left: isMobile ? "0%" : `${isRightContainerOpened ? "0%" : "85%"}`,
     });
 
     const bottomContainerStyles = useSpring({
         marginTop: `${isBottomContainerOpened ? "0" : "100vh"}`,
     });
 
-    const setScrollAbsoluteContainersDelay = useCallback(() => {
-        setIsScrollAbsoluteContainersDisabled(true);
-        setTimeout(() => setIsScrollAbsoluteContainersDisabled(false), 500);
-    }, []);
-
-    const onScrollAbsoluteContainers = useCallback((deltaY: number) => {
-        if (!isScrollAbsoluteContainersDisabled && deltaY > 0 && !isRightContainerOpened) {
-            setScrollAbsoluteContainersDelay();
-            dispatch(setIsRightContainerOpened(true));
-            dispatch(setHasHeaderBigLogo(false));
-        }
-        if (!isScrollAbsoluteContainersDisabled && deltaY > 0 && isRightContainerOpened && !isBottomContainerOpened) {
-            setScrollAbsoluteContainersDelay();
-            dispatch(setIsBottomContainerOpened(true));
-        }
-        if (!isScrollAbsoluteContainersDisabled && scrollTop === 0 && deltaY < 0 && isBottomContainerOpened) {
-            setScrollAbsoluteContainersDelay();
-            dispatch(setIsBottomContainerOpened(false));
-        }
-        if (!isScrollAbsoluteContainersDisabled && scrollTop === 0 && deltaY < 0 && !isBottomContainerOpened) {
-            setScrollAbsoluteContainersDelay();
-            dispatch(setIsRightContainerOpened(false));
-            dispatch(setHasHeaderBigLogo(true));
-        }
-    }, [isRightContainerOpened, isBottomContainerOpened, scrollTop, isScrollAbsoluteContainersDisabled]);
-
     const onTouchStart = useCallback((event: React.TouchEvent) => {
         setTouchStartY(event.touches[0].pageY);
     }, [setTouchStartY]);
 
-    const onTouchMove = useCallback((event: React.TouchEvent) => {
+    const onLogoArtWheel = useCallback((deltaY: number) => {
         dispatch(setOpenedSection(null));
-        const deltaY = toucheStartY - event.touches[0].pageY;
-        onScrollAbsoluteContainers(deltaY);
-    }, [toucheStartY, onScrollAbsoluteContainers]);
+        if (deltaY > 0) {
+            dispatch(setIsRightContainerOpened(true));
+            dispatch(setHasHeaderBigLogo(false));
+        }
+    }, []);
 
-    const onWheel = useCallback((event: React.WheelEvent) => {
+    const onAboutWheel = useCallback((deltaY: number) => {
         dispatch(setOpenedSection(null));
-        onScrollAbsoluteContainers(event.deltaY);
-    }, [onScrollAbsoluteContainers]);
+        if (deltaY < 0) {
+            dispatch(setIsRightContainerOpened(false));
+        }
+        if (deltaY > 0) {
+            dispatch(setIsBottomContainerOpened(true));
+        }
+    }, []);
 
-    const onScroll = useCallback(() => {
+    const onBottomContainerWheel = useCallback((deltaY: number) => {
+        dispatch(setOpenedSection(null));
+        if (deltaY < 0 && scrollTop === 0) {
+            dispatch(setIsBottomContainerOpened(false));
+        }
+    }, [scrollTop]);
+
+    const onBottomContainerScroll = useCallback(() => {
         if (bottomContainerRef.current) {
             const { scrollTop: newScrollTop } = bottomContainerRef.current;
             setScrollTop(newScrollTop);
             dispatch(setIsHeaderVisible(newScrollTop === 0 || scrollTop - newScrollTop > 0));
             dispatch(setHasHeaderBackground(newScrollTop !== 0));
         }
-    }, [onScrollAbsoluteContainers, scrollTop]);
+    }, [scrollTop]);
 
     useEffect(() => {
         switch (openedSection) {
@@ -138,15 +125,31 @@ export const Home = () => {
         <>
             <animated.div ref={homeRef}
                           className={`home${isMobile ? " mobile" : ""}`}
-                          onWheel={onWheel}
                           onTouchStart={onTouchStart}
-                          onTouchMove={onTouchMove}
             >
-                <LogoArt/>
-                <animated.div className="right-container" style={rightContainerStyles}>
+                <div
+                    className="center-container"
+                    onWheel={event => onLogoArtWheel(event.deltaY)}
+                    onTouchMove={event => onLogoArtWheel(toucheStartY - event.touches[0].pageY)}
+                >
+                    <LogoArt/>
+                </div>
+                <animated.div
+                    className="right-container"
+                    style={{...rightContainerStyles, pointerEvents: isRightContainerOpened ? "all" : "none"}}
+                    onWheel={event => onAboutWheel(event.deltaY)}
+                    onTouchMove={event => onAboutWheel(toucheStartY - event.touches[0].pageY)}
+                >
                     <About isVisible={isRightContainerOpened}/>
                 </animated.div>
-                <animated.div ref={bottomContainerRef} className="bottom-container" style={bottomContainerStyles} onScroll={onScroll}>
+                <animated.div
+                    ref={bottomContainerRef}
+                    className="bottom-container"
+                    style={bottomContainerStyles}
+                    onScroll={onBottomContainerScroll}
+                    onWheel={event => onBottomContainerWheel(event.deltaY)}
+                    onTouchMove={event => onBottomContainerWheel(toucheStartY - event.touches[0].pageY)}
+                >
                     <div ref={projectsRef}>
                         <Projects/>
                     </div>
