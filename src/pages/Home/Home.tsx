@@ -58,6 +58,7 @@ export const Home = () => {
     const onAboutWheel = useCallback((deltaY: number) => {
         if (deltaY < 0) {
             dispatch(setIsRightContainerOpened(false));
+            dispatch(setHasHeaderBigLogo(true));
         }
         if (deltaY > 0) {
             dispatch(setIsBottomContainerOpened(true));
