@@ -44,7 +44,9 @@ export const Header = () => {
     }, []);
 
     const onBurgerMenuItemClicked = useCallback((menuItem: MenuItem) => {
-        navigate("/");
+        if (menuItem !== MenuItem.CONTACTS) {
+            navigate("/");
+        }
         setIsBurgerMenuOpened(false);
         dispatch(setOpenedSection(menuItem));
     }, []);
