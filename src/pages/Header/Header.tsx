@@ -9,8 +9,7 @@ import { LocaleToggle } from "./LocaleToggle/LocaleToggle";
 import { EMAIL_LINK, FACEBOOK_LINK, INSTAGRAM_LINK, LINKEDIN_LINK } from "../Contact/constants";
 import { useResponsiveVariable } from "../../hooks/useResponsiveVariable";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { setLocale } from "../../store/common";
-import { setOpenedHomeSection } from "../../store/home";
+import { setLocale, setOpenedSection } from "../../store/common";
 
 import "./Header.scss";
 
@@ -38,14 +37,16 @@ export const Header = () => {
     }, []);
 
     const onMenuItemClicked = useCallback((menuItem: MenuItem) => {
-        navigate("/");
-        dispatch(setOpenedHomeSection(menuItem));
+        if (menuItem !== MenuItem.CONTACTS) {
+            navigate("/");
+        }
+        dispatch(setOpenedSection(menuItem));
     }, []);
 
     const onBurgerMenuItemClicked = useCallback((menuItem: MenuItem) => {
         navigate("/");
         setIsBurgerMenuOpened(false);
-        dispatch(setOpenedHomeSection(menuItem));
+        dispatch(setOpenedSection(menuItem));
     }, []);
 
     const openNewTabLink = useCallback((link: string) => {

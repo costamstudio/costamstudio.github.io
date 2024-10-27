@@ -2,25 +2,33 @@ import { createSlice } from '@reduxjs/toolkit';
 import { MenuItem } from '../enums/MenuItem';
 
 interface HomeState {
-  openedHomeSection: MenuItem | null;
+  isRightContainerOpened: boolean;
+  isBottomContainerOpened: boolean;
 }
 
 const initialState: HomeState = {
-  openedHomeSection: null,
+  isRightContainerOpened: false,
+  isBottomContainerOpened: false,
 };
 
 export const homeSlice = createSlice({
   name: "home",
   initialState,
   reducers: {
-    setOpenedHomeSection: (state, action) => {
-      state.openedHomeSection = action.payload;
-    },
+    setIsRightContainerOpened: (state, action) => ({
+      ...state,
+      isRightContainerOpened: action.payload,
+    }),
+    setIsBottomContainerOpened: (state, action) => ({
+      ...state,
+      isBottomContainerOpened: action.payload,
+    }),
   },
 });
 
 export const {
-  setOpenedHomeSection,
+  setIsRightContainerOpened,
+  setIsBottomContainerOpened,
 } = homeSlice.actions;
 
 export default homeSlice.reducer;

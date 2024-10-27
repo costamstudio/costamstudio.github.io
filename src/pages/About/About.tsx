@@ -17,7 +17,7 @@ export const About = ({ isVisible }: Props) => {
     const { formatMessage } = useIntl();
     const [isStart, setIsStart] = useState(true);
     const [toucheStartY, setTouchStartY] = useState(0);
-    const { openedHomeSection } = useAppSelector(({ home }) => home);
+    const { openedSection } = useAppSelector(({ common }) => common);
 
     const styles = useSpring({
         transform: isMobileOnly ? `translateY(${isStart ? "0%" : "-100%"})` : "none",
@@ -39,7 +39,7 @@ export const About = ({ isVisible }: Props) => {
 
     useEffect(() => {
         setIsStart(true);
-    }, [openedHomeSection]);
+    }, [openedSection]);
 
     return (
         <div className={`about${isMobile ? " mobile" : ""}`} onTouchStart={onTouchStart} onTouchMove={onTouchMove}>

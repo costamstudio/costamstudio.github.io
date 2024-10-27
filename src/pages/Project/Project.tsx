@@ -14,14 +14,18 @@ import { Spinner } from "../../components/Spinner/Spinner";
 import { setHasHeaderBackground, setHasHeaderBigLogo, setIsHeaderVisible } from "../../store/header";
 
 import "./Project.scss";
+import { MenuItem } from "../../enums/MenuItem";
+import { setIsBottomContainerOpened, setIsRightContainerOpened } from "../../store/home";
 
 export const Project = () => {
     const dispatch = useAppDispatch();
     const { id = "" } = useParams();
     const { loadedProjects, isCommonAssetsLoaded } = useAppSelector(({ assets }) => assets);
+    const { openedSection } = useAppSelector(({ common }) => common);
     const { initProjectAssets } = useInitProjectAssets();
     const { formatMessage } = useIntl();
     const projectRef = useRef<HTMLDivElement>(null);
+    const contactRef = useRef<HTMLDivElement>(null);
 
     const [scrollTop, setScrollTop] = useState(0);
 
@@ -40,6 +44,19 @@ export const Project = () => {
             dispatch(setHasHeaderBigLogo(newScrollTop === 0));
         }
     }, [projectRef, scrollTop]);
+
+    useEffect(() => {
+        switch (openedSection) {
+            case MenuItem.CONTACTS:
+                contactRef.current?.scrollIntoView({ behavior: "smooth" });
+                dispatch(setIsBottomContainerOpened(true));
+                dispatch(setIsRightContainerOpened(true));
+                dispatch(setHasHeaderBigLogo(false));
+                return;
+            default:
+                return;
+        }
+    }, [openedSection]);
 
     useEffect(() => {
         initProjectAssets(id);
@@ -77,7 +94,9 @@ export const Project = () => {
                         />
                     ))}
                 </div>
+            <div ref={contactRef}>
                 <Contact/>
+            </div>
         </div>
     ) : <Spinner/>;
 };
