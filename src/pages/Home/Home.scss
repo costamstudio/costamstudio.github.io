@@ -1,18 +1,27 @@
 @import "src/styles/mixins";
 
-.home, .bottom-container, .center-container {
+.home, .center-container {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
 }
+
 .right-container {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   width: 100%;
+}
+
+.bottom-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .bottom-container {
