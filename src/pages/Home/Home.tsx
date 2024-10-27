@@ -49,7 +49,6 @@ export const Home = () => {
     }, [setTouchStartY]);
 
     const onLogoArtWheel = useCallback((deltaY: number) => {
-        dispatch(setOpenedSection(null));
         if (deltaY > 0) {
             dispatch(setIsRightContainerOpened(true));
             dispatch(setHasHeaderBigLogo(false));
@@ -57,7 +56,6 @@ export const Home = () => {
     }, []);
 
     const onAboutWheel = useCallback((deltaY: number) => {
-        dispatch(setOpenedSection(null));
         if (deltaY < 0) {
             dispatch(setIsRightContainerOpened(false));
         }
@@ -67,7 +65,6 @@ export const Home = () => {
     }, []);
 
     const onBottomContainerWheel = useCallback((deltaY: number) => {
-        dispatch(setOpenedSection(null));
         if (deltaY < 0 && scrollTop === 0) {
             dispatch(setIsBottomContainerOpened(false));
         }
@@ -83,6 +80,7 @@ export const Home = () => {
     }, [scrollTop]);
 
     useEffect(() => {
+        dispatch(setOpenedSection(null));
         switch (openedSection) {
             case MenuItem.HOME:
                 projectsRef.current?.scrollIntoView({ behavior: "auto" });
