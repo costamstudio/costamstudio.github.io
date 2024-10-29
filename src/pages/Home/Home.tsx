@@ -32,7 +32,7 @@ export const Home = () => {
     const { initHomeAssets } = useInitHomeAssets();
 
     const mobileRightContainerClosedTranslate = useMemo(() => {
-        return isPortrait ? 85 : 100;
+        return isPortrait ? "97" : "100";
     }, [isPortrait]);
 
     const rightContainerStyles = useSpring({
