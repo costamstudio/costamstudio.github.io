@@ -7,6 +7,8 @@ import { getRandomNumberInRange, loadImages } from "../../utils/common";
 import { useResponsiveVariable } from "../../hooks/useResponsiveVariable";
 import { setIsLogoArtImagesLoaded, setIsLogoArtVideoLoaded } from "../../store/assets";
 import { useAppDispatch } from "../../store/hooks";
+import { setType } from "../../store/cursor";
+import { CursorType } from "../../enums/CursorType";
 
 import "./LogoArt.scss";
 
@@ -111,7 +113,12 @@ export const LogoArt = () => {
 
     const onMouseLeave = useCallback(() => {
         updateFillStylePattern(brushImageIndex);
+        dispatch(setType(CursorType.DEFAULT));
     }, [brushImageIndex]);
+
+    const onMouseEnter = useCallback(() => {
+        dispatch(setType(CursorType.BRUSH));
+    }, []);
 
     useEffect(() => {
         loadLogoImages();
@@ -153,6 +160,7 @@ export const LogoArt = () => {
                   height={canvasHeight}
                   onMouseMove={onMouseMove}
                   onMouseLeave={onMouseLeave}
+                  onMouseEnter={onMouseEnter}
                   onTouchStart={onTouchStart}
                   onTouchEnd={onTouchEnd}
               />

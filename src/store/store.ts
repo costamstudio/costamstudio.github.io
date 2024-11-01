@@ -4,6 +4,7 @@ import assetsReducer from "./assets";
 import headerReducer from "./header";
 import commonReducer from "./common";
 import homeReducer from "./home";
+import cursorReducer from "./cursor";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     header: headerReducer,
     common: commonReducer,
     home: homeReducer,
+    cursor: cursorReducer,
   },
 });
 

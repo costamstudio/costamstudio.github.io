@@ -21,15 +21,18 @@
   }
 
   .header-logo {
-    width: 190px;
-    height: 48px;
-    background-image: url("/assets/images/logo.svg");
-    background-repeat: no-repeat;
-    background-size: contain;
-    cursor: pointer;
     transform-origin: left;
     flex: 1;
     flex-shrink: 0;
+
+    .header-logo-image {
+      width: 190px;
+      height: 48px;
+      background-image: url("/assets/images/logo.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      cursor: pointer;
+    }
 
     @include uhd {
       width: 396px;

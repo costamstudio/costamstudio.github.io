@@ -7,17 +7,28 @@ import contactPlVector from "../../assets/images/contact-pl-vector.png";
 import contactEnVector from "../../assets/images/contact-en-vector.png";
 import { EMAIL_LINK, FACEBOOK_LINK, INSTAGRAM_LINK, LINKEDIN_LINK } from "./constants";
 import { Language } from "../../enums/Language";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { setType } from "../../store/cursor";
+import { CursorType } from "../../enums/CursorType";
 
 import "./Contact.scss";
 
 export const Contact = () => {
+    const dispatch = useAppDispatch();
     const { locale }= useAppSelector(({ common }) => common);
     const { formatMessage } = useIntl();
     const assets = require.context('../../assets', true);
 
     const openNewTabLink = useCallback((link: string) => {
         window.open(link, "_blank");
+    }, []);
+
+    const onMouseEnter = useCallback(() => {
+        dispatch(setType(CursorType.POINTER));
+    }, []);
+
+    const onMouseLeave = useCallback(() => {
+        dispatch(setType(CursorType.DEFAULT));
     }, []);
 
     return (
@@ -63,14 +74,20 @@ export const Contact = () => {
                                 )}
                                 <div
                                     className="contact-content-facebook social-link-icon"
+                                    onMouseEnter={onMouseEnter}
+                                    onMouseLeave={onMouseLeave}
                                     onClick={() => openNewTabLink(FACEBOOK_LINK)}
                                 />
                                 <div
                                     className="contact-content-linkedin social-link-icon"
+                                    onMouseEnter={onMouseEnter}
+                                    onMouseLeave={onMouseLeave}
                                     onClick={() => openNewTabLink(LINKEDIN_LINK)}
                                 />
                                 <div
                                     className="contact-content-email social-link-icon"
+                                    onMouseEnter={onMouseEnter}
+                                    onMouseLeave={onMouseLeave}
                                     onClick={() => openNewTabLink(EMAIL_LINK)}
                                 />
                             </div>

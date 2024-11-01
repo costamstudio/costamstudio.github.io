@@ -2,16 +2,21 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import fx from "glfx";
 import { useResizeDetector } from "react-resize-detector";
 
+import { setType } from "../../store/cursor";
+import { CursorType } from "../../enums/CursorType";
+import { useAppDispatch } from "../../store/hooks";
+
+
 import "./ImageDistortionContainer.scss";
 
 interface Props {
     src: string;
-    isCarouselImage: boolean;
 }
 
 const canvas = fx.canvas();
 
-export const ImageDistortionContainer = ({ src, isCarouselImage }: Props) => {
+export const ImageDistortionContainer = ({ src }: Props) => {
+    const dispatch = useAppDispatch();
     const ref = useRef<HTMLCanvasElement>(null);
     const { width: canvasWidth = 1, height: canvasHeight = 1, ref: containerRef } = useResizeDetector();
 
@@ -98,7 +103,13 @@ export const ImageDistortionContainer = ({ src, isCarouselImage }: Props) => {
         if (isImageLoaded) {
             drawDefaultImage();
         }
+        dispatch(setType(CursorType.DEFAULT));
     }, [isImageLoaded, drawDefaultImage]);
+
+    const onMouseEnter = useCallback(() => {
+        dispatch(setType(CursorType.MORE));
+    }, []);
+
 
     return (
         <div ref={containerRef} className="image-distortion-container" style={{ aspectRatio }}>
@@ -106,6 +117,7 @@ export const ImageDistortionContainer = ({ src, isCarouselImage }: Props) => {
                 ref={ref}
                 onMouseMove={onMouseMove}
                 onMouseLeave={onMouseLeave}
+                onMouseEnter={onMouseEnter}
                 width={canvasWidth}
                 height={canvasHeight}
             />

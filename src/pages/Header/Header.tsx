@@ -10,6 +10,8 @@ import { EMAIL_LINK, FACEBOOK_LINK, INSTAGRAM_LINK, LINKEDIN_LINK } from "../Con
 import { useResponsiveVariable } from "../../hooks/useResponsiveVariable";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setLocale, setOpenedSection } from "../../store/common";
+import { setType } from "../../store/cursor";
+import { CursorType } from "../../enums/CursorType";
 
 import "./Header.scss";
 
@@ -27,7 +29,7 @@ export const Header = () => {
         return (
             <>
                 <div className="menu-item-divider">/</div>
-                <div className="menu-item">
+                <div className="menu-item" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
                     <div className="menu-content-container">
                         {content}
                     </div>
@@ -67,13 +69,30 @@ export const Header = () => {
         transform: `scale(${hasHeaderBigLogo && !isMobile ? 1.4 : 1})`,
     });
 
+    const onMouseEnter = useCallback(() => {
+        dispatch(setType(CursorType.POINTER));
+    }, []);
+
+    const onMouseLeave = useCallback(() => {
+        dispatch(setType(CursorType.DEFAULT));
+    }, []);
+
     return (
         <>
             <animated.div
                 className={`header${isMobile ? " mobile" : ""}${isBurgerMenuOpened ? " opened-burger-menu" : ""}`}
-                style={{ ...styles, ...backgroundStyles }}>
-                <animated.div style={{ ...stylesHeaderContent, ...logoStyles }} className="header-logo"
-                              onClick={() => onMenuItemClicked(MenuItem.HOME)}/>
+                style={{ ...styles, ...backgroundStyles }}
+            >
+                <animated.div
+                    style={{ ...stylesHeaderContent, ...logoStyles }}
+                    className="header-logo"
+                >
+                    <div className="header-logo-image"
+                         onMouseEnter={onMouseEnter}
+                         onMouseLeave={onMouseLeave}
+                         onClick={() => onMenuItemClicked(MenuItem.HOME)}
+                    />
+                </animated.div>
                 <animated.div style={stylesHeaderContent} className="header-menu">
                     {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.ABOUT)}>{formatMessage({ id: "about" })}</div>)}
                     {getMenuItem(<div onClick={() => onMenuItemClicked(MenuItem.PROJECTS)}>{formatMessage({ id: "projects" })}</div>)}
