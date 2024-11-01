@@ -8,6 +8,7 @@ import { useAppDispatch } from "../../store/hooks";
 
 
 import "./ImageDistortionContainer.scss";
+import { useResponsiveVariable } from "../../hooks/useResponsiveVariable";
 
 interface Props {
     src: string;
@@ -17,6 +18,7 @@ const canvas = fx.canvas();
 
 export const ImageDistortionContainer = ({ src }: Props) => {
     const dispatch = useAppDispatch();
+    const distortionDiameter = useResponsiveVariable(180, 200, 400);
     const ref = useRef<HTMLCanvasElement>(null);
     const { width: canvasWidth = 1, height: canvasHeight = 1, ref: containerRef } = useResizeDetector();
 
@@ -92,7 +94,7 @@ export const ImageDistortionContainer = ({ src }: Props) => {
             const canvasRect = displayCanvas.getBoundingClientRect();
             const x = event.clientX - canvasRect.left;
             const y = event.clientY - canvasRect.top;
-            canvas.draw(texture).swirl(x, y, 200, 0.5).update();
+            canvas.draw(texture).swirl(x, y, distortionDiameter, 0.5).update();
             const ctx = displayCanvas.getContext("2d");
             ctx && ctx.clearRect(0, 0, canvasWidth, canvasHeight);
             ctx && drawImageProp(ctx);

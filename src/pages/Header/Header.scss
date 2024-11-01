@@ -32,11 +32,11 @@
       background-repeat: no-repeat;
       background-size: contain;
       cursor: pointer;
-    }
 
-    @include uhd {
-      width: 396px;
-      height: 100px;
+      @include uhd {
+        width: 396px;
+        height: 100px;
+      }
     }
   }
 
