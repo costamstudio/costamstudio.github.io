@@ -157,7 +157,7 @@ export const Home = () => {
                     </div>
                 </animated.div>
             </animated.div>
-            {(!isHomeAssetsLoaded || !isCommonAssetsLoaded || !isLogoArtImagesLoaded || !isLogoArtVideoLoaded) && <Spinner/>}
+            <Spinner isVisible={!isHomeAssetsLoaded || !isCommonAssetsLoaded || !isLogoArtImagesLoaded || !isLogoArtVideoLoaded}/>
         </>
     )
 };

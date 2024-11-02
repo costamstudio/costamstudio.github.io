@@ -10,7 +10,7 @@ interface CursorState {
 const initialState: CursorState = {
   x: 0,
   y: 0,
-  type: CursorType.DEFAULT,
+  type: CursorType.NONE,
 };
 
 export const cursorSlice = createSlice({

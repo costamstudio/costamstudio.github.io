@@ -33,7 +33,7 @@ export const Preview = ({ project, isCarouselPreview }: Props) => {
                         src={projectMedia(`./${project.id}/preview.png`)}
                     />
                 ) : (
-                    <ImageDistortionContainer src={projectMedia(`./${project.id}/preview.png`)}/>
+                    <ImageDistortionContainer src={projectMedia(`./${project.id}/preview.png`)} isCover={isCarouselPreview}/>
                 )}
             </div>
             <div className="preview-text-container">

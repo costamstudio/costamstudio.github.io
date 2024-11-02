@@ -65,27 +65,28 @@ export const Project = () => {
         dispatch(setHasHeaderBigLogo(true));
     }, []);
 
-    return loadedProjects[id] && isCommonAssetsLoaded ? (
-        <div ref={projectRef} className={`project-container${isMobile ? " mobile" : ""}`} onScroll={onScroll}>
-            <div className="project-header-container">
-                <img className="project-thumbnail" src={projectMedia(`./${id}/thumbnail.png`)}/>
-                <div className="project-header-content">
-                    <Reveal {...BOTTOM_OPACITY_ANIMATION_PROPS}>
-                        <div className="project-tags">
-                            {formatMessage({ id: `projectContent.${id}.tags` }).split(",").map((item, index) => (
-                                <div key={`project-tag-${index}`} className="project-tag">
-                                    {`/ ${item}`}
-                                </div>
-                            ))}
-                        </div>
-                    </Reveal>
-                    <Reveal {...LEFT_RIGHT_ANIMATION_PROPS}>
-                        <div className="project-title"> {formatMessage({ id: `projectContent.${id}.title` })}</div>
-                    </Reveal>
+    return (
+        <>
+            <div ref={projectRef} className={`project-container${isMobile ? " mobile" : ""}`} onScroll={onScroll}>
+                <div className="project-header-container">
+                    <img className="project-thumbnail" src={projectMedia(`./${id}/thumbnail.png`)}/>
+                    <div className="project-header-content">
+                        <Reveal {...BOTTOM_OPACITY_ANIMATION_PROPS}>
+                            <div className="project-tags">
+                                {formatMessage({ id: `projectContent.${id}.tags` }).split(",").map((item, index) => (
+                                    <div key={`project-tag-${index}`} className="project-tag">
+                                        {`/ ${item}`}
+                                    </div>
+                                ))}
+                            </div>
+                        </Reveal>
+                        <Reveal {...LEFT_RIGHT_ANIMATION_PROPS}>
+                            <div className="project-title"> {formatMessage({ id: `projectContent.${id}.title` })}</div>
+                        </Reveal>
+                    </div>
                 </div>
-            </div>
-            <div className="project-sections-container">
-                {project?.sections.map((section, index) => (
+                <div className="project-sections-container">
+                    {project?.sections.map((section, index) => (
                         <ProjectSection
                             key={`${id}-${index}`}
                             projectId={id ?? ""}
@@ -94,9 +95,11 @@ export const Project = () => {
                         />
                     ))}
                 </div>
-            <div ref={contactRef}>
-                <Contact/>
+                <div ref={contactRef}>
+                    <Contact/>
+                </div>
             </div>
-        </div>
-    ) : <Spinner/>;
+            <Spinner isVisible={!loadedProjects[id] || !isCommonAssetsLoaded}/>
+        </>
+    );
 };

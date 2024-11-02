@@ -7,6 +7,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
-  z-index: 2;
+  background-color: #232323;
+  z-index: 3;
+  transition: clip-path 0.8s ease-in-out;
+  clip-path: circle(100% at 50% 50%);
+
+  .spinner-logo-container {
+    transform: scale(1);
+    transition: transform 0.4s ease-in-out;
+    transition-delay: 0.5s;
+    mix-blend-mode: difference;
+    image-rendering: crisp-edges;
+    animation: blobAnimation1 1s infinite;
+  }
+
+  .spinner-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &.closed {
+    clip-path: circle(0% at 50% 50%);
+
+    .spinner-logo-container {
+      transform: scale(0);
+    }
+  }
 }
