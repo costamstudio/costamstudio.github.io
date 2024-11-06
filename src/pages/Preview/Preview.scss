@@ -9,20 +9,11 @@
 
   .preview-image-container {
     overflow: hidden;
-  }
-
-  .preview-image-container:hover {
-    .preview-image {
-      transform: scale(1);
-    }
+    cursor: none;
   }
 
   .preview-image {
     width: 100%;
-    cursor: pointer;
-    transition: transform .2s;
-    transform: scale(1.1);
-    transform-origin: center;
   }
 
   .preview-text-container {

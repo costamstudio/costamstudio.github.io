@@ -17,8 +17,6 @@
     transition: transform 0.4s ease-in-out;
     transition-delay: 0.5s;
     mix-blend-mode: difference;
-    image-rendering: crisp-edges;
-    animation: blobAnimation1 1s infinite;
   }
 
   .spinner-canvas {

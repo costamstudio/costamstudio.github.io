@@ -17,6 +17,7 @@ interface Props {
 }
 
 const Filters = withFilters(Container, { twist: TwistFilter });
+const ANGLE = 1;
 
 export const ImageDistortionContainer = memo(({ src, isCover = false }: Props) => {
     const dispatch = useDispatch();
@@ -24,7 +25,7 @@ export const ImageDistortionContainer = memo(({ src, isCover = false }: Props) =
     const { width = 1, ref } = useResizeDetector();
     const [aspectRatio, setAspectRatio] = useState(1);
     const [position, setPosition] = useState({ x: 0, y: 0 });
-    const [angle, setAngle] = useState(0);
+    const [isFilterEnabled, setIsFilterEnabled] = useState(false);
 
     const imageElement = useMemo(() => {
         const image = new Image();
@@ -82,12 +83,12 @@ export const ImageDistortionContainer = memo(({ src, isCover = false }: Props) =
 
     const onMouseEnter = useCallback(() => {
         dispatch(setType(CursorType.MORE));
-        setAngle(1);
+        setIsFilterEnabled(true);
     }, []);
 
     const onMouseLeave = useCallback(() => {
         dispatch(setType(CursorType.DEFAULT));
-        setAngle(0);
+        setIsFilterEnabled(false);
     }, []);
 
     return (
@@ -99,7 +100,18 @@ export const ImageDistortionContainer = memo(({ src, isCover = false }: Props) =
             onMouseLeave={onMouseLeave}
         >
             <Stage width={width} height={height}>
-                <Filters twist={{ angle, radius, offset }}>
+                {isFilterEnabled ? (
+                    <Filters twist={{ angle: ANGLE, radius, offset }}>
+                        <Sprite
+                            image={src}
+                            anchor={0.5}
+                            x={width / 2}
+                            y={height / 2}
+                            width={spriteDimensions.width}
+                            height={spriteDimensions.height}
+                        />
+                    </Filters>
+                ) : (
                     <Sprite
                         image={src}
                         anchor={0.5}
@@ -108,7 +120,7 @@ export const ImageDistortionContainer = memo(({ src, isCover = false }: Props) =
                         width={spriteDimensions.width}
                         height={spriteDimensions.height}
                     />
-                </Filters>
+                )}
             </Stage>
         </div>
     );

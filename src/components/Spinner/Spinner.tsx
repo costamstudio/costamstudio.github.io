@@ -18,6 +18,7 @@ const ROUTE_SMOOTHNESS = 0.2;
 export const Spinner = ({ isVisible }: Props) => {
     const scrollSize = useResponsiveVariable(30, 30, 60);
     const lineWidth = useResponsiveVariable(2, 2, 4);
+    const animationWidth = useResponsiveVariable(300, 300, 600);
 
     const { width = 1, height = 1, ref } = useResizeDetector();
 
@@ -123,6 +124,7 @@ export const Spinner = ({ isVisible }: Props) => {
                 <Lottie
                     animationData={animation}
                     loop={true}
+                    style={{ width: animationWidth }}
                 />
             </div>
         </div>

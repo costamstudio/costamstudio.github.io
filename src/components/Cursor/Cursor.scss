@@ -70,11 +70,8 @@
     width: $size;
     height: $size;
     background-color: #ffffff;
-    background-image: url("/assets/images/eye.svg");
-    background-size: 50px;
-    background-position: center;
-    background-repeat: no-repeat;
     margin: -50px 0 0 -50px;
+    animation: blobAnimation 1s infinite;
 
     @include fhd {
       $size: 120px;
