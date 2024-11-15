@@ -16,9 +16,10 @@ const ROUTE_POINTS_LENGTH = 3000;
 const ROUTE_SMOOTHNESS = 0.2;
 
 export const Spinner = ({ isVisible }: Props) => {
-    const scrollSize = useResponsiveVariable(30, 30, 60);
+    const drawerCircleSize = useResponsiveVariable(30, 30, 60);
     const lineWidth = useResponsiveVariable(2, 2, 4);
     const animationWidth = useResponsiveVariable(300, 300, 600);
+    const requestAnimationFrameIdRef = useRef<number | null>(null);
 
     const { width = 1, height = 1, ref } = useResizeDetector();
 
@@ -74,37 +75,47 @@ export const Spinner = ({ isVisible }: Props) => {
             context.beginPath();
             context2.beginPath();
             context2.moveTo(route[prevIndex].x, route[prevIndex].y);
-            context.arc(route[index].x, route[index].y, scrollSize / 2, 0, 2 * Math.PI);
+            context.arc(route[index].x, route[index].y, drawerCircleSize / 2, 0, 2 * Math.PI);
             context2.lineTo(route[index].x, route[index].y)
             context2.stroke();
             context.fill();
 
             if (route[index + 1]) {
-                setRequestAnimationFrame(requestAnimationFrame(() => draw(route, index + 1)));
+                requestAnimationFrameIdRef.current = requestAnimationFrame(() => draw(route, index + 1));
             }
         }
-    }, [canvasCircleRef.current, canvasLinesRef.current, width, height, scrollSize])
+    }, [canvasCircleRef.current, canvasLinesRef.current, width, height, drawerCircleSize]);
 
-    useEffect(() => {
+    const stopCircleDrawing = useCallback(() => {
         const canvasCircleContext = canvasCircleRef.current?.getContext("2d");
         const canvasLinesContext = canvasLinesRef.current?.getContext("2d");
-        if (width > 1 && height > 1 && isVisible) {
-            const currentScrollCoordinates = { x: width - scrollSize / 2, y: height - scrollSize / 2 };
-            const scrollRoutePoints = [
-                currentScrollCoordinates,
+
+        if (canvasCircleContext && canvasLinesContext && requestAnimationFrameIdRef.current) {
+            canvasCircleContext.clearRect(0, 0, width, height);
+            canvasLinesContext.clearRect(0, 0, width, height);
+            cancelAnimationFrame(requestAnimationFrameIdRef.current);
+            requestAnimationFrameIdRef.current = null;
+        }
+    }, []);
+
+    const startCircleDrawing = useCallback(() => {
+        if (width > 1 && height > 1) {
+            const currentDrawerCoordinates = { x: width - drawerCircleSize / 2, y: height - drawerCircleSize / 2 };
+            const drawerRoutePoints = [
+                currentDrawerCoordinates,
                 ...generateRandomCoordinates(0, 0, width, height),
             ];
-            const route = generateIntermediatePoints(scrollRoutePoints, ROUTE_SMOOTHNESS);
+            const route = generateIntermediatePoints(drawerRoutePoints, ROUTE_SMOOTHNESS);
             draw(route, 1);
         }
-        if (!isVisible && canvasCircleContext && canvasLinesContext && requestAnimationFrameId) {
-            setTimeout(() => {
-                canvasCircleContext.clearRect(0, 0, width, height);
-                canvasLinesContext.clearRect(0, 0, width, height);
-                cancelAnimationFrame(requestAnimationFrameId);
-            }, 1000);
+    }, [width, height, drawerCircleSize]);
+
+    useEffect(() => {
+        stopCircleDrawing();
+        if (isVisible) {
+            startCircleDrawing();
         }
-    }, [isVisible, width, height]);
+    }, [isVisible, startCircleDrawing, stopCircleDrawing]);
 
     return (
         <div ref={ref} className={`spinner-container${isVisible ? "" : " closed"}`}>
