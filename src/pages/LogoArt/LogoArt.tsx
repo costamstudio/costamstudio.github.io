@@ -114,7 +114,7 @@ export const LogoArt = () => {
     const onMouseLeave = useCallback(() => {
         updateFillStylePattern(brushImageIndex);
         dispatch(setType(CursorType.DEFAULT));
-    }, [brushImageIndex]);
+    }, [brushImageIndex, updateFillStylePattern]);
 
     const onMouseEnter = useCallback(() => {
         dispatch(setType(CursorType.BRUSH));
