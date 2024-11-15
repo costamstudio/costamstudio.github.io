@@ -111,9 +111,11 @@ export const Spinner = ({ isVisible }: Props) => {
     }, [width, height, drawerCircleSize]);
 
     useEffect(() => {
-        stopCircleDrawing();
         if (isVisible) {
+            stopCircleDrawing();
             startCircleDrawing();
+        } else {
+            setTimeout(stopCircleDrawing, 1000);
         }
     }, [isVisible, startCircleDrawing, stopCircleDrawing]);
 
